@@ -1,7 +1,9 @@
 const express = require("express");
-const Alumni = require("../models/alumni");
+const { getAlumniData } = require("../controllers/alumniData");
+const { updateAlumniProfile } = require("../controllers/alumniProfile");
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const data = await Alumni();
-});
+router.get("/", getAlumniData);
+router.put("/", updateAlumniProfile);
+
+module.exports = router;

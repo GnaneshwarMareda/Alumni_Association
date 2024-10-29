@@ -10,10 +10,10 @@ app.use(express.json());
 app.use(router);
 
 app.get("/", async (req, res) => {
-  res.status(200).json({ message: "Hello World!.." });
+  return res.status(200).json({ message: "Hello World!.." });
 });
 
-const MongoURL = "mongodb://localhost:27017/";
+const MongoURL = "mongodb://localhost:27017/alumniconnect";
 
 const startServer = () => {
   connectMongoDB(MongoURL);
