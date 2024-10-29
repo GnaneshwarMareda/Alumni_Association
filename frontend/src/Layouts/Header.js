@@ -19,7 +19,7 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6 text-sm font-medium">
-          <a href="/about" className="hover:text-red-400">
+          <a href="/alumni-directory" className="hover:text-red-400">
             Alumni Directory
           </a>
           <a href="/events" className="hover:text-red-400">
@@ -28,10 +28,10 @@ const Header = () => {
           <a href="/careers" className="hover:text-red-400">
             Careers
           </a>
-          <a href="/learn" className="hover:text-red-400">
-            Learn
+          <a href="/networking-hub" className="hover:text-red-400">
+            Networking Hub
           </a>
-          <a href="/volunteer" className="hover:text-red-400">
+          <a href="/donation" className="hover:text-red-400">
             Donation
           </a>
           <a href="/about" className="hover:text-red-400">
@@ -63,7 +63,7 @@ const Header = () => {
       {isOpen && (
         <div className="md:hidden bg-gray-700 text-white">
           <nav className="flex flex-col space-y-4 p-4">
-            <a href="/about" className="hover:text-red-400">
+            <a href="/alumni-directory" className="hover:text-red-400">
               Alumni Directory
             </a>
             <a href="/events" className="hover:text-red-400">
@@ -72,11 +72,11 @@ const Header = () => {
             <a href="/careers" className="hover:text-red-400">
               Careers
             </a>
-            <a href="/learn" className="hover:text-red-400">
-              Learn
+            <a href="/networking-hub" className="hover:text-red-400">
+              Networking Hub
             </a>
-            <a href="/volunteer" className="hover:text-red-400">
-              Volunteer
+            <a href="/donation" className="hover:text-red-400">
+              Donation
             </a>
             <a href="/about" className="hover:text-red-400">
               About

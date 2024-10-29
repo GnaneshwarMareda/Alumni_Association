@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const StudentLogin = () => {
+const Login = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
       <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 space-y-6">
@@ -70,4 +70,4 @@ const StudentLogin = () => {
   );
 };
 
-export default StudentLogin;
+export default Login;
