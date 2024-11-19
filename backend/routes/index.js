@@ -7,6 +7,6 @@ const alumniRouter = require("./alumni");
 router.use("/login", loginRouter);
 router.use("/register", registerRouter);
 router.use("/alumni", alumniRouter);
-router.use("/student", studentProfileRouter);
+// router.use("/student", studentProfileRouter);
 
 module.exports = router;
