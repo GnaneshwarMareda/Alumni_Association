@@ -10,6 +10,7 @@ import Events from "./Routes/Events";
 import Donation from "./Routes/Donation";
 import Careers from "./Routes/Careers";
 import NetworkingHub from "./Routes/NetworkingHub";
+import AlumniDetailSection from "./Routes/AlumniDetailSection";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/donation" element={<Donation />} />
           <Route path="/alumni-directory" element={<AlumniDirectory />} />
+          <Route
+            path="/alumni-directory/:id"
+            element={<AlumniDetailSection />}
+          />
           <Route path="/networking-hub" element={<NetworkingHub />} />
         </Routes>
       </BrowserRouter>

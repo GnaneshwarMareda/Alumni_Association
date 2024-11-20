@@ -15,3 +15,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* Add this to your global styles */
+@layer utilities {
+  .translate-x-full {
+    transform: translateX(100%);
+  }
+  .translate-x-0 {
+    transform: translateX(0);
+  }
+}

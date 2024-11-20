@@ -3,20 +3,20 @@ const data = [
     _id: "1",
     name: "Alice Johnson",
     email: "alice.johnson@example.com",
-    phone: "1234567890",
-    graduation_year: 2015,
+    mobile: "1234567890",
+    graduationYear: 2015,
     degree: "BSc",
-    field_of_study: "Computer Science",
+    fieldOfStudy: "Computer Science",
     location: "New York",
-    job_title: "Software Engineer",
+    jobRole: "Software Engineer",
     company: "TechCorp",
     interests: ["Networking", "Machine Learning"],
     donation_history: [
       { amount: 100, date: "2022-01-15" },
       { amount: 250, date: "2023-04-22" },
     ],
-    profile_picture: "https://randomuser.me/api/portraits/women/1.jpg",
-    success_stories: [
+    profilePicture: "https://randomuser.me/api/portraits/women/1.jpg",
+    successStories: [
       {
         title: "Started a tech blog",
         description:
@@ -28,20 +28,20 @@ const data = [
     _id: "2",
     name: "Bob Smith",
     email: "bob.smith@example.com",
-    phone: "2345678901",
-    graduation_year: 2018,
+    mobile: "2345678901",
+    graduationYear: 2018,
     degree: "MSc",
-    field_of_study: "Electrical Engineering",
+    fieldOfStudy: "Electrical Engineering",
     location: "San Francisco",
-    job_title: "Project Manager",
+    jobRole: "Project Manager",
     company: "GreenEnergy",
     interests: ["Renewable Energy", "Leadership"],
     donation_history: [
       { amount: 500, date: "2021-07-10" },
       { amount: 200, date: "2023-02-05" },
     ],
-    profile_picture: "https://randomuser.me/api/portraits/men/2.jpg",
-    success_stories: [
+    profilePicture: "https://randomuser.me/api/portraits/men/2.jpg",
+    successStories: [
       {
         title: "Led a successful project",
         description:
@@ -53,17 +53,17 @@ const data = [
     _id: "3",
     name: "Clara Davis",
     email: "clara.davis@example.com",
-    phone: "3456789012",
-    graduation_year: 2020,
+    mobile: "3456789012",
+    graduationYear: 2020,
     degree: "BSc",
-    field_of_study: "Business Administration",
+    fieldOfStudy: "Business Administration",
     location: "Chicago",
-    job_title: "Marketing Specialist",
+    jobRole: "Marketing Specialist",
     company: "AdVantage",
     interests: ["Marketing", "Digital Media"],
     donation_history: [{ amount: 150, date: "2023-03-20" }],
-    profile_picture: "https://randomuser.me/api/portraits/women/3.jpg",
-    success_stories: [
+    profilePicture: "https://randomuser.me/api/portraits/women/3.jpg",
+    successStories: [
       {
         title: "Created viral marketing campaign",
         description:
@@ -75,20 +75,20 @@ const data = [
     _id: "4",
     name: "David Wilson",
     email: "david.wilson@example.com",
-    phone: "4567890123",
-    graduation_year: 2016,
+    mobile: "4567890123",
+    graduationYear: 2016,
     degree: "MSc",
-    field_of_study: "Mechanical Engineering",
+    fieldOfStudy: "Mechanical Engineering",
     location: "Boston",
-    job_title: "Mechanical Engineer",
+    jobRole: "Mechanical Engineer",
     company: "AutoMakers",
     interests: ["Automobile Design", "Sustainable Engineering"],
     donation_history: [
       { amount: 300, date: "2021-05-18" },
       { amount: 400, date: "2022-11-27" },
     ],
-    profile_picture: "https://randomuser.me/api/portraits/men/4.jpg",
-    success_stories: [
+    profilePicture: "https://randomuser.me/api/portraits/men/4.jpg",
+    successStories: [
       {
         title: "Innovated a new car design",
         description: "David helped create a more fuel-efficient car model.",
@@ -99,17 +99,17 @@ const data = [
     _id: "5",
     name: "Emma Brown",
     email: "emma.brown@example.com",
-    phone: "5678901234",
-    graduation_year: 2019,
+    mobile: "5678901234",
+    graduationYear: 2019,
     degree: "BSc",
-    field_of_study: "Biology",
+    fieldOfStudy: "Biology",
     location: "Seattle",
-    job_title: "Research Scientist",
+    jobRole: "Research Scientist",
     company: "BioTech Labs",
     interests: ["Genetics", "Environmental Science"],
     donation_history: [{ amount: 120, date: "2020-12-05" }],
-    profile_picture: "https://randomuser.me/api/portraits/women/5.jpg",
-    success_stories: [
+    profilePicture: "https://randomuser.me/api/portraits/women/5.jpg",
+    successStories: [
       {
         title: "Published groundbreaking research",
         description:
