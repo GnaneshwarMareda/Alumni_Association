@@ -1,17 +1,35 @@
-import React, { useState } from "react";
-import alumniData from "./alumniData.js";
-
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAlumniData } from "../Store/Data/FetchData";
 
 function AlumniDirectory() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [alumniData, setAlumniData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
     graduationYear: "",
     degree: "",
     fieldOfStudy: "",
     location: "",
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const retrievedAlumniData = await getAlumniData();
+
+        setAlumniData(retrievedAlumniData);
+      } catch (error) {
+        setError(error.message || "Failed to fetch data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFilterChange = (field, value) => {
     setFilters((prevFilters) => ({
@@ -38,6 +56,14 @@ function AlumniDirectory() {
     return matchesSearch && matchesFilters;
   });
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
+  }
+
   return (
     <div className="container mx-auto p-6">
       {/* Search and Filters Section */}
@@ -62,8 +88,11 @@ function AlumniDirectory() {
             }
           >
             <option value="">All Years</option>
+            <option value="2024">2024</option>
             <option value="2023">2023</option>
             <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
           </select>
 
           {/* Degree Filter */}
@@ -73,8 +102,8 @@ function AlumniDirectory() {
             onChange={(e) => handleFilterChange("degree", e.target.value)}
           >
             <option value="">All Degrees</option>
-            <option value="BSc">BSc</option>
-            <option value="MSc">MSc</option>
+            <option value="B.Tech">B.Tech</option>
+            <option value="M.Tech">M.Tech</option>
           </select>
 
           {/* Field of Study Filter */}
@@ -84,8 +113,13 @@ function AlumniDirectory() {
             onChange={(e) => handleFilterChange("fieldOfStudy", e.target.value)}
           >
             <option value="">All Fields</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Medicine">Medicine</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Civil">Civil</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Chemical">Chemical</option>
+            <option value="Electronics">Electronics</option>
+            <option value="MME">MME</option>
           </select>
 
           {/* Location Filter */}
@@ -95,8 +129,12 @@ function AlumniDirectory() {
             onChange={(e) => handleFilterChange("location", e.target.value)}
           >
             <option value="">All Locations</option>
-            <option value="New York">New York</option>
-            <option value="California">California</option>
+            <option value="New York">Hyderabad</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Pune">Pune</option>
+            <option value="Kerela">Kerela</option>
+            <option value="UP">UP</option>
           </select>
         </div>
       </div>

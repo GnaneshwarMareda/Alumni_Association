@@ -7,7 +7,7 @@ const {
 const router = express.Router();
 
 router.get("/", getAlumniData);
-router.get("/", getAlumniProfile);
+router.get("/profile", getAlumniProfile);
 router.put("/", updateAlumniProfile);
 
 module.exports = router;
