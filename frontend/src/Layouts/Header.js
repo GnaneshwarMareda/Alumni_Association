@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
+import logo from "../images/logo.jpeg";
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -13,7 +15,17 @@ const Header = () => {
     <header className="bg-gray-800 text-white">
       <div className="container mx-auto flex justify-between items-center p-4 md:p-6">
         {/* Logo */}
-        <a href="/" className="text-xl font-bold text-red-600">
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            background: "white",
+            height: "70px",
+            borderRadius: "50%",
+            //marginRight: "16px",
+          }}
+        />
+        <a href="/" className="text-2xl font-bold text-red-600">
           ALUMNICONNECT
         </a>
 
