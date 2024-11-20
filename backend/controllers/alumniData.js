@@ -2,15 +2,15 @@ const Alumni = require("../models/alumni");
 
 const getAlumniData = async (req, res) => {
   try {
-    const { branch, graduationYear, userId, name } = req.query;
+    const { fieldOfStudy, graduationYear, userId, name } = req.query;
 
-    const filter = {};
-    if (branch) filter.branch = branch;
-    if (graduationYear) filter.graduationYear = graduationYear;
-    if (userId) filter.userId = userId;
-    if (name) filter.name = new RegExp(name, "i");
+    // const filter = {};
+    // if (fieldOfStudy) filter.fieldOfStudy = fieldOfStudy;
+    // if (graduationYear) filter.graduationYear = graduationYear;
+    // if (userId) filter.userId = userId;
+    // if (name) filter.name = new RegExp(name, "i");
 
-    const data = await Alumni.find(filter);
+    const data = await Alumni.find();
 
     console.log(data);
     return res
