@@ -4,6 +4,7 @@ import b13_AEE from "../images/success_stories/B13_AEE.jpeg";
 import b14_AEE from "../images/success_stories/B14_AEE.jpeg";
 import b16_AEE from "../images/success_stories/B16_AEE.jpeg";
 import Maruthi_b14 from "../images/success_stories/Maruthi_B14.jpeg";
+
 const Home = () => {
   // Dummy data
   const events = [
@@ -12,18 +13,21 @@ const Home = () => {
       title: "Annual Alumni Meet 2024",
       description: "Reconnect with old friends and celebrate achievements.",
       date: "December 15, 2024",
+      link: "http://localhost:3000/",
     },
     {
       id: 2,
       title: "Webinar: Career Growth Tips",
       description: "Learn from experienced alumni in various industries.",
       date: "November 30, 2024",
+      link: "http://localhost:3000/",
     },
     {
       id: 3,
       title: "Sports Day Reunion",
       description: "Relive the glory of your sporting days with a fun event.",
       date: "January 10, 2025",
+      link: "http://localhost:3000/",
     },
   ];
 
@@ -59,12 +63,12 @@ const Home = () => {
   ];
 
   const photos = [
-    "https://via.placeholder.com/300x200?text=Photo+1",
-    "https://via.placeholder.com/300x200?text=Photo+2",
-    "https://via.placeholder.com/300x200?text=Photo+3",
-    "https://via.placeholder.com/300x200?text=Photo+4",
-    "https://via.placeholder.com/300x200?text=Photo+5",
-    "https://via.placeholder.com/300x200?text=Photo+6",
+    { url: "https://via.placeholder.com/150", alt: "Photo 1" },
+    { url: "https://via.placeholder.com/150", alt: "Photo 2" },
+    { url: "https://via.placeholder.com/150", alt: "Photo 3" },
+    { url: "https://via.placeholder.com/150", alt: "Photo 4" },
+    { url: "https://via.placeholder.com/150", alt: "Photo 5" },
+    { url: "https://via.placeholder.com/150", alt: "Photo 6" },
   ];
 
   return (
@@ -73,7 +77,7 @@ const Home = () => {
       <section className="flex flex-col md:flex-row items-center justify-between bg-blue-600 text-white px-6 py-12">
         <div className="md:w-1/2 text-center md:text-left">
           <h1 className="text-4xl font-bold mb-4">
-            Welcome to the Alumni Association
+            Welcome to the RGUKT Alumni Association
           </h1>
           <p className="text-lg mb-6">
             Stay connected, share your stories, and celebrate success.
@@ -87,54 +91,63 @@ const Home = () => {
           />
         </div>
       </section>
+      <hr className="my-2 border-gray-300" />
 
-      {/* Photos Section */}
       <section className="py-12">
-        <h2 className="text-2xl font-bold text-center mb-8">
-          Memories through Pictures
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6">
-          {photos.map((photo, index) => (
-            <img
-              key={index}
-              src={photo}
-              alt={`Photo ${index + 1}`}
-              className="rounded-lg shadow-md hover:scale-105 transition-transform"
-            />
-          ))}
+        <div className="flex flex-col lg:flex-row lg:space-x-8">
+          {/* Photos Section */}
+          <div className="flex-1 lg:pr-4">
+            <h3 className="text-xl font-bold ml-6 mb-4">Gallery</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4 border rounded-lg shadow-sm">
+              {photos.map((photo, index) => (
+                <img
+                  key={index}
+                  src={photo.url}
+                  alt={photo.alt}
+                  className="w-full h-40 object-cover rounded-lg shadow-md"
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="hidden lg:block w-px bg-gray-300"></div>
+
+          {/* Events Section */}
+          <div className="flex-1 lg:pl-4">
+            <h3 className="text-xl font-bold ml-5 mb-4">Upcoming Events</h3>
+            <ul className="divide-y divide-gray-300">
+              {events.map((event) => (
+                <li key={event.id} className="p-4 hover:bg-gray-50">
+                  <a
+                    href={event.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lg font-medium text-blue-600 hover:underline cursor-pointer"
+                  >
+                    {event.title}
+                  </a>
+                  <p className="text-sm text-gray-600">{event.description}</p>
+                  <p className="text-sm text-gray-500 mt-1">{event.date}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* Events Section */}
-      <section className="py-12 bg-white">
-        <h2 className="text-2xl font-bold text-center mb-8">Upcoming Events</h2>
-        <div className="flex flex-wrap justify-center gap-6 px-6">
-          {events.map((event) => (
-            <div
-              key={event.id}
-              className="bg-gray-50 rounded-lg shadow-lg p-6 w-full sm:w-64 hover:shadow-xl transition-shadow"
-            >
-              <h3 className="font-semibold text-lg mb-2">{event.title}</h3>
-              <p className="text-gray-600 mb-2">{event.description}</p>
-              <p className="text-sm text-gray-500 mb-4">{event.date}</p>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                Learn More
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
+      <hr className="my-2 border-gray-300" />
 
       {/* Success Stories Section */}
-      <section className="py-12 overflow-hidden">
+      <section className="py-2 overflow-hidden">
         <h2 className="text-2xl font-bold text-center mb-8">
-          Alumni Success Stories
+          Success Stories and Achievements
         </h2>
         <div className="relative flex items-center space-x-4 animate-marquee">
           {successStories.map((story) => (
             <div
               key={story.id}
-              className="relative bg-blue-50 rounded-lg shadow-lg p-6 min-w-[16rem] min-h-[20rem] max-w-[18rem] 
+              className="relative bg-blue-50 rounded-lg shadow-lg p-4 min-w-[16rem] min-h-[20rem] max-w-[18rem] 
                     flex-shrink-0 hover:shadow-xl transition-shadow flex flex-col items-center justify-between"
             >
               <img
@@ -152,6 +165,7 @@ const Home = () => {
           ))}
         </div>
       </section>
+      <hr className="my-2 border-gray-300" />
 
       <style jsx>{`
         @keyframes marquee {
