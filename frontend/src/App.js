@@ -11,6 +11,7 @@ import Donation from "./Routes/Donation";
 import Careers from "./Routes/Careers";
 import NetworkingHub from "./Routes/NetworkingHub";
 import AlumniDetailSection from "./Routes/AlumniDetailSection";
+import JobsPortal from "./Routes/JobsPortal";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
-          <Route path="/careers" element={<Careers />} />
+          <Route path="/careers" element={<JobsPortal />} />
           <Route path="/events" element={<Events />} />
           <Route path="/donation" element={<Donation />} />
           <Route path="/alumni-directory" element={<AlumniDirectory />} />
@@ -31,6 +32,7 @@ function App() {
             element={<AlumniDetailSection />}
           />
           <Route path="/networking-hub" element={<NetworkingHub />} />
+          <Route path="/jobs-portal" element={<JobsPortal />} />
         </Routes>
       </BrowserRouter>
     </>
