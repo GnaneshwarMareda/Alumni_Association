@@ -10,4 +10,4 @@ const jobSchema = new mongoose.Schema({
 });
 
 const Jobs = mongoose.model("jobs", jobSchema);
-module.exports = Payment;
+module.exports = Jobs;
