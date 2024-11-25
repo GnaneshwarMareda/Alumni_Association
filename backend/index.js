@@ -9,6 +9,9 @@ app.use(express.json());
 //   return res.status(200).json({ message: "Hello World!.." });
 // });
 
+const routes = require("./routes/index.js");
+app.use("/", routes);
+
 const connectMongoDB = require("./connection");
 const MongoURL = "mongodb://localhost:27017/alumniconnect";
 const startServer = () => {
@@ -16,6 +19,3 @@ const startServer = () => {
   app.listen(8000, () => console.log("Server Running on port NO: 8000"));
 };
 startServer();
-
-const router = require("./routes/index.js");
-app.use(router);

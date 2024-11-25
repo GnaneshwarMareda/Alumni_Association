@@ -21,5 +21,5 @@ const verifyAlumniToken = async (req, res, next) => {
 };
 
 module.exports = {
-  verifyDoctorToken,
+  verifyAlumniToken,
 };

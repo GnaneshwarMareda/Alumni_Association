@@ -1,11 +1,12 @@
 const express = require("express");
+const router = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
+
 const { getAlumniData } = require("../controllers/alumniData");
 const {
   updateAlumniProfile,
   getAlumniProfile,
 } = require("../controllers/alumniProfile");
-const router = express.Router();
 
 router.get("/", getAlumniData);
 router.get("/profile", getAlumniProfile);
