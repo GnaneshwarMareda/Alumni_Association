@@ -1,12 +1,13 @@
 const Jobs = require("../models/jobs.js");
 
-const postJob = (req, res) => {
+const postJob = async (req, res) => {
   try {
+    console.log(req.body);
     const { title, company, location, jobType } = req.body;
     const postedBy = "Anonymous";
     const postedAt = Date.now();
 
-    const newJob = Jobs.create({
+    const newJob = await Jobs.create({
       title,
       company,
       location,
