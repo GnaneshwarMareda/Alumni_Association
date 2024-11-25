@@ -1,10 +1,9 @@
 const jobSchema = new mongoose.Schema({
   title: String,
-  description: String,
-  skillsRequired: [String],
-  jobType: String, // e.g., "Internship" or "Full-time"
+  company: String,
+  skillsRequired: { type: Array, required: false },
   location: String,
-  applicationDeadline: Date,
+  jobType: String, // e.g., "Internship" or "Full-time"
   postedBy: String,
   postedAt: { type: Date, default: Date.now },
 });

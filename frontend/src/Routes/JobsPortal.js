@@ -33,7 +33,7 @@ const JobsPortal = () => {
     company: "",
     location: "",
     type: "",
-    posterName: "",
+    posterBy: "",
     posterProfile: "",
   });
 
@@ -49,15 +49,16 @@ const JobsPortal = () => {
       alert("Please fill in all fields");
       return;
     }
-    setJobs([
-      ...jobs,
-      {
-        id: jobs.length + 1,
-        ...newJob,
-        reactions: { likes: 0, dislikes: 0 },
-      },
-    ]);
-    setNewJob({
+    // setJobs([
+    //   ...jobs,
+    //   {
+    //     id: jobs.length + 1,
+    //     ...newJob,
+    //     reactions: { likes: 0, dislikes: 0 },
+    //   },
+    // ]);
+
+    const url = setNewJob({
       title: "",
       company: "",
       location: "",

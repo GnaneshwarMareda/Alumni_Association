@@ -19,7 +19,7 @@ router.post("/student", async (req, res) => {
       return res.status(201).json({ jwtToken });
     }
 
-    res.status(400).json({ messag: "Invalid credentials" });
+    res.status(400).json({ message: "Invalid credentials" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

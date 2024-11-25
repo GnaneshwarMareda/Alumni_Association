@@ -1,4 +1,5 @@
 const express = require("express");
+const verifyToken = require("../middlewares/verifyToken");
 const { getAlumniData } = require("../controllers/alumniData");
 const {
   updateAlumniProfile,

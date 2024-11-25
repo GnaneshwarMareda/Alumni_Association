@@ -4,8 +4,8 @@ const loginRouter = require("./login");
 const registerRouter = require("./register");
 const alumniRouter = require("./alumni");
 
-router.use("/login", loginRouter);
 router.use("/register", registerRouter);
+router.use("/login", loginRouter);
 router.use("/alumni", alumniRouter);
 // router.use("/student", studentProfileRouter);
 

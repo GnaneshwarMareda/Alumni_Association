@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const verifyDoctorToken = async (req, res, next) => {
+const verifyAlumniToken = async (req, res, next) => {
   const authorization = req.headers["authorization"];
   if (!authorization) {
     return res.status(400).send("Authorization Error");
@@ -10,9 +10,9 @@ const verifyDoctorToken = async (req, res, next) => {
 
   if (!jwtToken) return res.status(400).send("Authentication Error");
   try {
-    const payload = jwt.verify(jwtToken, "Nithin");
+    const payload = jwt.verify(jwtToken, "Gnane");
     const { userId, role } = payload;
-    if (role !== "doctor") return;
+    if (role !== "alumni") return;
     req.userId = userId;
     next();
   } catch (error) {
