@@ -12,6 +12,9 @@ import Careers from "./Routes/Careers";
 import NetworkingHub from "./Routes/NetworkingHub";
 import AlumniDetailSection from "./Routes/AlumniDetailSection";
 import JobsPortal from "./Routes/JobsPortal";
+import CareerResources from "./Routes/CareerResources";
+import CareerEvents from "./Routes/CareerEvents";
+import CareerAdvising from "./Routes/CareerAdvising";
 
 function App() {
   return (
@@ -23,7 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
-          <Route path="/careers" element={<JobsPortal />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/events" element={<Events />} />
           <Route path="/donation" element={<Donation />} />
           <Route path="/alumni-directory" element={<AlumniDirectory />} />
@@ -32,7 +35,10 @@ function App() {
             element={<AlumniDetailSection />}
           />
           <Route path="/networking-hub" element={<NetworkingHub />} />
-          <Route path="/jobs-portal" element={<JobsPortal />} />
+          <Route path="/jobs" element={<JobsPortal />} />
+          <Route path="/career-resources" element={<CareerResources />} />
+          <Route path="/career-events" element={<CareerEvents />} />
+          <Route path="/career-advising" element={<CareerAdvising />} />
         </Routes>
       </BrowserRouter>
     </>
