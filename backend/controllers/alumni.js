@@ -1,5 +1,21 @@
 const Alumni = require("../models/alumni");
 
+const getAlumniData = async (req, res) => {
+  try {
+    const { fieldOfStudy, graduationYear, userId, name } = req.query;
+
+    const data = await Alumni.find();
+    return res
+      .status(200)
+      .json({ message: "Data retrieved successfully.", data });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while retrieving data." });
+  }
+};
+
 const getAlumniProfile = async (req, res) => {
   try {
     const { userId } = req.body;
@@ -10,7 +26,7 @@ const getAlumniProfile = async (req, res) => {
 
     const alumniProfile = await Alumni.findOne({ userId });
 
-    if (!studentData) {
+    if (!alumniProfile) {
       return res.status(404).json({ message: "Student not found." });
     }
 
@@ -55,4 +71,4 @@ const updateAlumniProfile = async (req, res) => {
   }
 };
 
-module.exports = { getAlumniProfile, updateAlumniProfile };
+module.exports = { getAlumniData, getAlumniProfile, updateAlumniProfile };

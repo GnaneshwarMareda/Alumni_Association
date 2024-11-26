@@ -5,8 +5,12 @@ const jobSchema = new mongoose.Schema({
   company: { type: String, required: true },
   location: { type: String, required: true },
   jobType: { type: String, required: true }, // e.g., "Internship" or "Full-time"
-  postedBy: { type: String, required: true },
+  jobLink: { type: String, required: true },
+  postedBy: { type: String, required: true, default: "Anonymous" },
+  posterProfile: { type: String, default: "https://via.placeholder.com/50" },
   postedAt: { type: Date, default: Date.now() },
+  likes: { type: Number, default: 0 },
+  dislikes: { type: Number, default: 0 },
 });
 
 const Jobs = mongoose.model("jobs", jobSchema);

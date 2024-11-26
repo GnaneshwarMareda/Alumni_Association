@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
 
-const { postJob } = require("../controllers/postJob");
+const { getJobs, postJob, updateJob } = require("../controllers/jobs");
 
-router.post("/postjob", postJob);
+router.get("/jobs", getJobs);
+router.post("/jobs/postjob", postJob);
+router.patch("/jobs", updateJob);
 
 module.exports = router;

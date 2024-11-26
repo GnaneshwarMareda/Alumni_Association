@@ -1,11 +1,16 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-const LeftSidebar = ({ data }) => {
+const LeftSidebar = ({ data, title, titleLink }) => {
   return (
     // <aside className="w-full lg:w-1/4 bg-white shadow rounded p-4">
     <aside className="w-full lg:w-1/4 rounded p-4">
-      <ul className="space-y-4">
+      <h1>
+        <Link className="text-3xl font-bold" to={titleLink}>
+          {title}
+        </Link>
+      </h1>
+      <ul className="space-y-4 my-5">
         {data.map((item, index) => (
           <li key={index}>
             <NavLink
