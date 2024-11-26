@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ThumbUpIcon, ThumbDownIcon } from "@heroicons/react/solid";
-import Careers from "./Careers";
+import Careers from "../Routes/Careers";
 
 const initialJobs = [
   {

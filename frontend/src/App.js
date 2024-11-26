@@ -10,11 +10,11 @@ import Events from "./Routes/Events";
 import Donation from "./Routes/Donation";
 import Careers from "./Routes/Careers";
 import NetworkingHub from "./Routes/NetworkingHub";
-import AlumniDetailSection from "./Routes/AlumniDetailSection";
-import JobsPortal from "./Routes/JobsPortal";
-import CareerResources from "./Routes/CareerResources";
-import CareerEvents from "./Routes/CareerEvents";
-import CareerAdvising from "./Routes/CareerAdvising";
+import AlumniDetailSection from "./pages/AlumniDetailSection";
+import JobsPortal from "./pages/JobsPortal";
+import CareerResources from "./pages/CareerResources";
+import CareerEvents from "./pages/CareerEvents";
+import CareerAdvising from "./pages/CareerAdvising";
 
 function App() {
   return (
