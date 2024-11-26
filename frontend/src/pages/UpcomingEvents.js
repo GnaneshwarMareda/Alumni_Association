@@ -18,7 +18,7 @@ const UpcomingEvents = () => {
               You're Invited!
             </h1>
             <p className="text-gray-700">
-              From regional club events to Tech Reunions to volunteer gatherings, the MIT Alumni Association offers a host of events–and endless ways to engage.
+              From regional club events to Tech Reunions to volunteer gatherings, the RGUKT Alumni Association offers a host of events–and endless ways to engage.
             </p>
           </div>
         </section>
