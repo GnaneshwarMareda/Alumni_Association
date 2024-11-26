@@ -1,17 +1,20 @@
 const Jobs = require("../models/jobs.js");
 
+//Retrieve allJobs
 const getJobs = async (req, res) => {
   try {
     const jobs = await Jobs.find({});
+    //console.log(jobs);
     res.status(200).json({ message: "Job posted successfully!", data: jobs });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
+//Post a new Job
 const postJob = async (req, res) => {
   try {
-    const { title, company, location, jobType } = req.body;
+    const { title, company, location, jobType, jobLink } = req.body;
     const newJob = await Jobs.create({
       title,
       company,
@@ -25,6 +28,7 @@ const postJob = async (req, res) => {
   }
 };
 
+//Update Job Reactions (like/dislike)
 const updateJob = async (req, res) => {
   try {
     const { id, reactionType } = req.body;
