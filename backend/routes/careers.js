@@ -5,7 +5,7 @@ const verifyToken = require("../middlewares/verifyToken");
 const { getJobs, postJob, updateJob } = require("../controllers/jobs");
 
 router.get("/jobs", getJobs);
-router.post("jobs/postjob", postJob);
-router.patch("/jobs/", updateJob);
+router.post("/jobs/postjob", postJob);
+router.patch("/jobs", updateJob);
 
 module.exports = router;
