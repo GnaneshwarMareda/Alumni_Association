@@ -6,13 +6,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.get("/", async (req, res) => {
-//   return res.status(200).json({ message: "Hello World!.." });
-// });
-
-const routes = require("./routes/index.js");
-app.use("/", routes);
-
+// Connect to MongoDB and start server
 const connectMongoDB = require("./connection");
 const MongoURL = "mongodb://localhost:27017/alumniconnect";
 const startServer = () => {
@@ -20,3 +14,12 @@ const startServer = () => {
   app.listen(8000, () => console.log("Server Running on port NO: 8000"));
 };
 startServer();
+
+// Test server
+// app.get("/", async (req, res) => {
+//   return res.status(200).json({ message: "Hello World!.." });
+// });
+
+// Routes
+const routes = require("./routes/index.js");
+app.use("/", routes);
