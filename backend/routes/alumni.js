@@ -6,11 +6,13 @@ const {
   getAlumniData,
   getAlumniProfile,
   updateAlumniProfile,
+  getAlumniSimilarMatches,
 } = require("../controllers/alumni");
 
 // Alumni routes
 router.get("/directory", getAlumniData);
 router.get("/profile/:id", getAlumniProfile);
 router.put("/profile/:id", updateAlumniProfile);
+router.get("/similar-matches", getAlumniSimilarMatches);
 
 module.exports = router;
