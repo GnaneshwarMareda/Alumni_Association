@@ -17,7 +17,7 @@ const EventsLeftSidebar = () => {
     <LeftSidebar
       data={data}
       title="Events"
-      titleLink="/events/upcoming-events"
+      titleLink="/events"
     />
   );
 };
