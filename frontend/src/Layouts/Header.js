@@ -34,10 +34,10 @@ const Header = () => {
           <a href="/alumni-directory" className="hover:text-red-400">
             Alumni Directory
           </a>
-          <a href="/events" className="hover:text-red-400">
+          <a href="/events/upcoming-events" className="hover:text-red-400">
             Events
           </a>
-          <a href="/careers" className="hover:text-red-400">
+          <a href="/careers/career-events" className="hover:text-red-400">
             Careers
           </a>
           <a href="/networking-hub" className="hover:text-red-400">
@@ -78,10 +78,10 @@ const Header = () => {
             <a href="/alumni-directory" className="hover:text-red-400">
               Alumni Directory
             </a>
-            <a href="/events" className="hover:text-red-400">
+            <a href="/events/upcoming-events" className="hover:text-red-400">
               Events
             </a>
-            <a href="/careers" className="hover:text-red-400">
+            <a href="/careers/career-events" className="hover:text-red-400">
               Careers
             </a>
             <a href="/networking-hub" className="hover:text-red-400">

@@ -15,6 +15,10 @@ import JobsPortal from "./pages/JobsPortal";
 import CareerResources from "./pages/CareerResources";
 import CareerEvents from "./pages/CareerEvents";
 import CareerAdvising from "./pages/CareerAdvising";
+import UpcomingEvents from "./pages/UpcomingEvents";
+import TechReunions from "./pages/TechReunions";
+import LeadershipConference from "./pages/LeadershipConference";
+import WomensConference from "./pages/WomensConference";
 
 function App() {
   return (
@@ -26,8 +30,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/events" element={<Events />} />
+
           <Route path="/donation" element={<Donation />} />
           <Route path="/alumni-directory" element={<AlumniDirectory />} />
           <Route
@@ -35,10 +38,25 @@ function App() {
             element={<AlumniDetailSection />}
           />
           <Route path="/networking-hub" element={<NetworkingHub />} />
-          <Route path="/jobs" element={<JobsPortal />} />
-          <Route path="/career-resources" element={<CareerResources />} />
-          <Route path="/career-events" element={<CareerEvents />} />
-          <Route path="/career-advising" element={<CareerAdvising />} />
+
+          <Route path="/careers/jobs" element={<JobsPortal />} />
+          <Route
+            path="/careers/career-resources"
+            element={<CareerResources />}
+          />
+          <Route path="/careers/career-events" element={<CareerEvents />} />
+          <Route path="/careers/career-advising" element={<CareerAdvising />} />
+
+          <Route path="/events/upcoming-events" element={<UpcomingEvents />} />
+          <Route path="/events/tech-reunions" element={<TechReunions />} />
+          <Route
+            path="/events/leadership-conference"
+            element={<LeadershipConference />}
+          />
+          <Route
+            path="/events/womens-conference"
+            element={<WomensConference />}
+          />
         </Routes>
       </BrowserRouter>
     </>
