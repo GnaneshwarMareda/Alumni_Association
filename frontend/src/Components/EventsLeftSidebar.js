@@ -1,3 +1,5 @@
+import React from "react";
+
 import LeftSidebar from "./LeftSidebar";
 
 const data = [
@@ -9,8 +11,8 @@ const data = [
   { name: "Online Alumni Directory", path: "/alumni-directory" },
 ];
 
-const CareersLeftSidebar = () => {
+const EventsLeftSidebar = () => {
   return <LeftSidebar data={data} />;
 };
 
-export default CareersLeftSidebar;
+export default EventsLeftSidebar;

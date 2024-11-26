@@ -1,5 +1,5 @@
 import React from "react";
-import Careers from "./Careers";
+import Careers from "../Routes/Careers";
 
 const CareerResources = () => {
   return (
