@@ -16,6 +16,27 @@ const getAlumniData = async (req, res) => {
   }
 };
 
+const getAlumniSimilarMatches = async (req, res) => {
+  try {
+    const { fieldOfStudy, graduationYear, company } = req.query;
+
+    const filter = [];
+    if (fieldOfStudy) filter.push({ fieldOfStudy });
+    if (graduationYear) filter.push({ graduationYear });
+    if (company) filter.push({ company });
+
+    const query = filter.length > 0 ? { $or: filter } : {};
+
+    const data = await Alumni.find(query);
+
+    return res
+      .status(200)
+      .json({ message: "Data retrieved successfully", data });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 const getAlumniProfile = async (req, res) => {
   try {
     const { userId } = req.body;
@@ -71,4 +92,9 @@ const updateAlumniProfile = async (req, res) => {
   }
 };
 
-module.exports = { getAlumniData, getAlumniProfile, updateAlumniProfile };
+module.exports = {
+  getAlumniData,
+  getAlumniProfile,
+  updateAlumniProfile,
+  getAlumniSimilarMatches,
+};
