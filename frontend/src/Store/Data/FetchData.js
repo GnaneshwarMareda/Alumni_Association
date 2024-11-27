@@ -5,7 +5,7 @@ const getAlumniData = async () => {
     const options = {
       method: "GET",
     };
-    const url = `${URL}/alumni`;
+    const url = `${URL}/alumni/directory`;
     const response = await fetch(url, options);
     if (response.ok) {
       const { data, message } = await response.json();
@@ -18,4 +18,24 @@ const getAlumniData = async () => {
   }
 };
 
-module.exports = { getAlumniData };
+const getAlumniSimilarMatches = async ({
+  fieldOfStudy,
+  graduationYear,
+  company,
+}) => {
+  try {
+    const options = {
+      method: "GET",
+    };
+    const url = `${URL}/alumni/simlar-matches?fieldOfStudy=${fieldOfStudy}&graduationYear=${graduationYear}&company=${company}`;
+    const response = await fetch(url, options);
+    if (response.ok) {
+      const { data } = await response.json();
+      return data;
+    }
+  } catch (error) {
+    console.log("Error");
+  }
+};
+
+module.exports = { getAlumniData, getAlumniSimilarMatches };
