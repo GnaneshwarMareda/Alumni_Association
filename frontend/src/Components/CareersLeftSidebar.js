@@ -5,7 +5,6 @@ const data = [
   { name: "Career Advising and Networking", path: "/careers/career-advising" },
   { name: "Jobs", path: "/careers/jobs" },
   { name: "Career Resources", path: "/careers/career-resources" },
-  { name: "Hire MIT Alumni", path: "/hire" },
   { name: "Online Alumni Directory", path: "/alumni-directory" },
 ];
 
