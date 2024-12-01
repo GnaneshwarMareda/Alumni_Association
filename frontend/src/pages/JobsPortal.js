@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { ThumbUpIcon, ThumbDownIcon } from "@heroicons/react/solid";
+import {
+  LocationMarkerIcon,
+  OfficeBuildingIcon,
+} from "@heroicons/react/outline";
 import Careers from "../Routes/Careers";
 
 const initialJobs = [
@@ -8,44 +12,48 @@ const initialJobs = [
     title: "Software Developer",
     company: "ABC Technologies",
     location: "Hyderabad",
-    type: "Full-Time",
-    posterName: "John Doe",
+    jobType: "Full-Time",
+    jobLink: "https://www.linkedin.com",
+    postedBy: "John Doe",
     posterProfile: "https://via.placeholder.com/50",
-    reactions: { likes: 0, dislikes: 0 },
+    postedAt: "2024-11-26T11:09:57.391+00:00",
+    likes: 0,
+    dislikes: 0,
   },
   {
     id: 2,
     title: "Data Analyst",
     company: "XYZ Corp",
     location: "Bangalore",
-    type: "Part-Time",
-    posterName: "Jane Smith",
+    jobType: "Part-Time",
+    jobLink: "https://www.linkedin.com",
+    postedBy: "Jane Smith",
     posterProfile: "https://via.placeholder.com/50",
-    reactions: { likes: 0, dislikes: 0 },
+    postedAt: "2024-11-26T11:09:57.391+00:00",
+    likes: 0,
+    dislikes: 0,
   },
 ];
 
 const JobsPortal = () => {
   const [jobs, setJobs] = useState(initialJobs);
   const [showPostJobForm, setShowPostJobForm] = useState(false);
-
   const [newJob, setNewJob] = useState({
     title: "",
     company: "",
     location: "",
-    type: "",
-    posterName: "",
-    posterProfile: "",
+    jobType: "",
+    jobLink: "",
   });
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handlePostJob = () => {
     if (
       !newJob.title ||
       !newJob.company ||
       !newJob.location ||
-      !newJob.type ||
-      !newJob.posterName ||
-      !newJob.posterProfile
+      !newJob.jobType ||
+      !newJob.jobLink
     ) {
       alert("Please fill in all fields");
       return;
@@ -55,35 +63,33 @@ const JobsPortal = () => {
       {
         id: jobs.length + 1,
         ...newJob,
-        reactions: { likes: 0, dislikes: 0 },
+        likes: 0,
+        dislikes: 0,
+        postedBy: "Anonymous",
+        posterProfile: "https://via.placeholder.com/50",
+        postedAt: new Date().toISOString(),
       },
     ]);
     setNewJob({
       title: "",
       company: "",
       location: "",
-      type: "",
-      posterName: "",
-      posterProfile: "",
+      jobType: "",
+      jobLink: "",
     });
     setShowPostJobForm(false);
   };
 
-  const handleReaction = (id, reactionType) => {
-    setJobs((prevJobs) =>
-      prevJobs.map((job) =>
-        job.id === id
-          ? {
-              ...job,
-              reactions: {
-                ...job.reactions,
-                [reactionType]: job.reactions[reactionType] + 1,
-              },
-            }
-          : job
-      )
-    );
+  const handleProfileClick = (id) => {
+    alert(`Redirecting to profile of user with job ID ${id}`);
   };
+
+  const filteredJobs = jobs.filter(
+    (job) =>
+      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      job.location.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Careers>
@@ -147,9 +153,9 @@ const JobsPortal = () => {
                 <div>
                   <label className="block text-gray-600">Job Type</label>
                   <select
-                    value={newJob.type}
+                    value={newJob.jobType}
                     onChange={(e) =>
-                      setNewJob({ ...newJob, type: e.target.value })
+                      setNewJob({ ...newJob, jobType: e.target.value })
                     }
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
                     required
@@ -159,6 +165,18 @@ const JobsPortal = () => {
                     <option value="Part-Time">Part-Time</option>
                     <option value="Internship">Internship</option>
                   </select>
+                </div>
+                <div>
+                  <label className="block text-gray-600">Job Link</label>
+                  <input
+                    type="url"
+                    value={newJob.jobLink}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, jobLink: e.target.value })
+                    }
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                    required
+                  />
                 </div>
                 <button
                   type="submit"
@@ -170,51 +188,90 @@ const JobsPortal = () => {
             </div>
           )}
 
-          {!showPostJobForm && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {jobs.map((job) => (
-                <div
-                  key={job.id}
-                  className="bg-white shadow-md rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex items-center mb-4">
-                    <img
-                      src={job.posterProfile}
-                      alt={job.posterName}
-                      className="w-12 h-12 rounded-full border border-gray-300"
-                    />
-                    <div className="ml-4">
-                      <h3 className="text-lg font-semibold text-gray-800">
-                        {job.posterName}
-                      </h3>
-                      <p className="text-sm text-gray-500">{job.type}</p>
-                    </div>
-                  </div>
-                  <h2 className="text-xl font-bold text-gray-800 mb-2">
-                    {job.title}
-                  </h2>
-                  <p className="text-gray-600 mb-1">{job.company}</p>
-                  <p className="text-gray-500 mb-3">{job.location}</p>
-                  <div className="mt-4 flex items-center space-x-4">
-                    <button
-                      onClick={() => handleReaction(job.id, "likes")}
-                      className="flex items-center text-blue-500 hover:text-blue-600"
-                    >
-                      <ThumbUpIcon className="w-5 h-5 mr-1" />
-                      <span>{job.reactions.likes}</span>
-                    </button>
-                    <button
-                      onClick={() => handleReaction(job.id, "dislikes")}
-                      className="flex items-center text-red-500 hover:text-red-600"
-                    >
-                      <ThumbDownIcon className="w-5 h-5 mr-1" />
-                      <span>{job.reactions.dislikes}</span>
-                    </button>
-                  </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Search Jobs"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredJobs.map((job) => (
+              <div
+                key={job.id}
+                className="bg-white shadow-md rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+              >
+                <div className="flex items-center mb-4 cursor-pointer">
+                  <img
+                    src={job.posterProfile}
+                    alt="Poster Profile"
+                    className="w-12 h-12 rounded-full mr-4"
+                    onClick={() => handleProfileClick(job.id)}
+                  />
+                  <p
+                    className="font-semibold text-gray-800 hover:underline"
+                    onClick={() => handleProfileClick(job.id)}
+                  >
+                    {job.postedBy}
+                  </p>
                 </div>
-              ))}
-            </div>
-          )}
+                <h2 className="text-xl font-bold text-gray-800 mb-2">
+                  {job.title}
+                </h2>
+                <p className="text-gray-600 mb-1 flex items-center">
+                  <LocationMarkerIcon className="w-5 h-5 mr-2 text-gray-500" />
+                  {job.location}
+                </p>
+                <p className="text-gray-600 mb-1 flex items-center">
+                  <OfficeBuildingIcon className="w-5 h-5 mr-2 text-gray-500" />
+                  {job.company}
+                </p>
+                <p className="text-gray-600 mb-1">{job.jobType}</p>
+                <a
+                  href={job.jobLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-indigo-600 hover:underline"
+                >
+                  Apply Here
+                </a>
+                <hr className="my-4 border-gray-300" />
+                <div className="flex items-center justify-between mt-4">
+                  <button
+                    className="flex items-center text-gray-500 hover:text-indigo-600"
+                    onClick={() =>
+                      setJobs(
+                        jobs.map((j) =>
+                          j.id === job.id ? { ...j, likes: j.likes + 1 } : j
+                        )
+                      )
+                    }
+                  >
+                    <ThumbUpIcon className="w-5 h-5 mr-1" />
+                    <span>{job.likes}</span>
+                  </button>
+                  <button
+                    className="flex items-center text-gray-500 hover:text-red-600"
+                    onClick={() =>
+                      setJobs(
+                        jobs.map((j) =>
+                          j.id === job.id
+                            ? { ...j, dislikes: j.dislikes + 1 }
+                            : j
+                        )
+                      )
+                    }
+                  >
+                    <ThumbDownIcon className="w-5 h-5 mr-1" />
+                    <span>{job.dislikes}</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Careers>
