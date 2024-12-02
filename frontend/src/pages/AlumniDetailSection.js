@@ -30,7 +30,7 @@ function AlumniDetailSection() {
     };
 
     fetchData();
-  }, []);
+  }, [state]);
 
   const alumnus = state?.alumnus;
 
@@ -45,6 +45,8 @@ function AlumniDetailSection() {
   if (!alumnus) {
     return <h1 className="text-center text-gray-500">Alumnus not found.</h1>;
   }
+
+  console.log(similarAlumniData);
 
   return (
     <div className="w-full min-h-screen bg-gray-50 flex flex-col items-center p-6">
