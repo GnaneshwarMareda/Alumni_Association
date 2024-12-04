@@ -93,7 +93,7 @@ const JobsPortal = () => {
 
   return (
     <Careers>
-      <div className="min-h-screen py-8 px-4">
+      <div className="min-h-screen px-4">
         <div className="container mx-auto">
           <button
             onClick={() => setShowPostJobForm(!showPostJobForm)}

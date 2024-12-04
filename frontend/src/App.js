@@ -19,6 +19,7 @@ import UpcomingEvents from "./pages/UpcomingEvents";
 import TechReunions from "./pages/TechReunions";
 import LeadershipConference from "./pages/LeadershipConference";
 import WomensConference from "./pages/WomensConference";
+import VirtualMeet from "./Components/VirtualMeet";
 
 function App() {
   return (
@@ -49,10 +50,7 @@ function App() {
 
           <Route path="/events/upcoming-events" element={<UpcomingEvents />} />
           <Route path="/events/tech-reunions" element={<TechReunions />} />
-          <Route
-            path="/events/leadership-conference"
-            element={<LeadershipConference />}
-          />
+          <Route path="/events/conferences" element={<VirtualMeet />} />
           <Route
             path="/events/womens-conference"
             element={<WomensConference />}

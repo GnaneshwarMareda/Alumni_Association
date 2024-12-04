@@ -9,7 +9,7 @@ const Careers = ({ children }) => {
           {/* Left Sidebar */}
           <CareersLeftSidebar />
           {/* Main Content */}
-          <main className="w-full lg:w-3/4 rounded p-6">{children}</main>
+          <main className="w-full lg:w-3/4 rounded">{children}</main>
         </div>
       </div>
     </div>
