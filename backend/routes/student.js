@@ -1,13 +1,13 @@
-const {
-  getStudentProfile,
-  updateStudentProfile,
-} = require("../controllers/studentProfile");
+// const express = require("express");
+// const router = express.Router();
 
-const express = requrie("express");
-const router = express.Router();
+// const {
+//   getStudentProfile,
+//   updateStudentProfile,
+// } = require("../controllers/studentProfile");
 
-router.get("/", getStudentData);
-router.get("/", getStudentProfile);
-router.put("/", updateStudentProfile);
+// //router.get("/", getStudentData);
+// router.get("/", getStudentProfile);
+// router.put("/", updateStudentProfile);
 
-module.exports = router;
+// module.exports = router;

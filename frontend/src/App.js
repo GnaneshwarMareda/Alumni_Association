@@ -1,25 +1,35 @@
 import "./App.css";
-import Home from "./Routes/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Header from "./Layouts/Header";
-import Login from "./Routes/Login";
+import Footer from "./Layouts/Footer";
+
 import Register from "./Routes/Register";
+import Login from "./Routes/Login";
+import Home from "./Routes/Home";
 import AlumniDirectory from "./Routes/AlumniDirectory";
-import About from "./Routes/About";
-import Events from "./Routes/Events";
-import Donation from "./Routes/Donation";
-import Careers from "./Routes/Careers";
-import NetworkingHub from "./Routes/NetworkingHub";
+
+import AdminControlPanel from "./pages/AdminControlPanel";
+
 import AlumniDetailSection from "./pages/AlumniDetailSection";
+
+import Careers from "./Routes/Careers";
 import JobsPortal from "./pages/JobsPortal";
 import CareerResources from "./pages/CareerResources";
 import CareerEvents from "./pages/CareerEvents";
 import CareerAdvising from "./pages/CareerAdvising";
+
+import Events from "./Routes/Events";
 import UpcomingEvents from "./pages/UpcomingEvents";
 import TechReunions from "./pages/TechReunions";
 import LeadershipConference from "./pages/LeadershipConference";
 import WomensConference from "./pages/WomensConference";
 import VirtualMeet from "./Components/VirtualMeet";
+
+import NetworkingHub from "./Routes/NetworkingHub";
+import Donation from "./Routes/Donation";
+
+import About from "./Routes/About";
 
 function App() {
   return (
@@ -27,6 +37,7 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
+          <Route path="/admin-panel" element={<AdminControlPanel />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

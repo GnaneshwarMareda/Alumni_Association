@@ -6,6 +6,6 @@ const { getJobs, postJob, updateJob } = require("../controllers/jobs");
 
 router.get("/jobs", getJobs);
 router.post("/jobs/postjob", postJob);
-router.patch("/jobs", updateJob);
+router.patch("/jobs:id", updateJob);
 
 module.exports = router;

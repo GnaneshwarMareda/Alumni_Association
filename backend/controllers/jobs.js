@@ -5,7 +5,7 @@ const getJobs = async (req, res) => {
   try {
     const jobs = await Jobs.find({});
     //console.log(jobs);
-    res.status(200).json({ message: "Job posted successfully!", data: jobs });
+    res.status(200).json({ message: "Job posted successfully!", jobs: jobs });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
