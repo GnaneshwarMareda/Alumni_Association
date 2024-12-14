@@ -1,5 +1,5 @@
 import React from "react";
-import Events from "../Routes/Events";
+import Events from "../pages/Events";
 
 const WomensConference = () => {
   return <Events>Leadership Confwncw</Events>;

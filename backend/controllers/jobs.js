@@ -14,6 +14,7 @@ const getJobs = async (req, res) => {
 //Post a new Job
 const postJob = async (req, res) => {
   try {
+    console.log("asdf");
     const { title, company, location, jobType, jobLink } = req.body;
     const newJob = await Jobs.create({
       title,

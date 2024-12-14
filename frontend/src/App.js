@@ -4,32 +4,29 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Layouts/Header";
 import Footer from "./Layouts/Footer";
 
-import Register from "./Routes/Register";
-import Login from "./Routes/Login";
-import Home from "./Routes/Home";
-import AlumniDirectory from "./Routes/AlumniDirectory";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import AlumniDirectory from "./pages/AlumniDirectory";
 
 import AdminControlPanel from "./pages/AdminControlPanel";
 
-import AlumniDetailSection from "./pages/AlumniDetailSection";
+import AlumniDetailSection from "./Components/AlumniDetailSection";
 
-import Careers from "./Routes/Careers";
-import JobsPortal from "./pages/JobsPortal";
-import CareerResources from "./pages/CareerResources";
-import CareerEvents from "./pages/CareerEvents";
-import CareerAdvising from "./pages/CareerAdvising";
+import JobsPortal from "./Components/JobsPortal";
+import CareerResources from "./Components/CareerResources";
+import CareerEvents from "./Components/CareerEvents";
+import CareerAdvising from "./Components/CareerAdvising";
 
-import Events from "./Routes/Events";
-import UpcomingEvents from "./pages/UpcomingEvents";
-import TechReunions from "./pages/TechReunions";
-import LeadershipConference from "./pages/LeadershipConference";
-import WomensConference from "./pages/WomensConference";
+import UpcomingEvents from "./Components/UpcomingEvents";
+import TechReunions from "./Components/TechReunions";
+import WomensConference from "./Components/WomensConference";
 import VirtualMeet from "./Components/VirtualMeet";
 
-import NetworkingHub from "./Routes/NetworkingHub";
-import Donation from "./Routes/Donation";
+import NetworkingHub from "./pages/NetworkingHub";
+import Donation from "./pages/Donation";
 
-import About from "./Routes/About";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -68,6 +65,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

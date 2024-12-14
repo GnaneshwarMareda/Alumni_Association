@@ -38,4 +38,19 @@ const getAlumniSimilarMatches = async ({
   }
 };
 
-module.exports = { getAlumniData, getAlumniSimilarMatches };
+const getJobs = async () => {
+  const url = `${URL}/jobs`;
+  const options = {
+    method: "GET",
+  };
+  const response = await fetch(url, options);
+  if (response.ok) {
+    const { message, data } = await response.json();
+    return { data, message };
+  } else {
+    const { message } = await response.json();
+    return { data: [], message };
+  }
+};
+
+module.exports = { getAlumniData, getAlumniSimilarMatches, getJobs };

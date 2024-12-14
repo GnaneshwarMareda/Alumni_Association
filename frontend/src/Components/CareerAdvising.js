@@ -1,5 +1,5 @@
 import React from "react";
-import Careers from "../Routes/Careers";
+import Careers from "../pages/Careers";
 
 import Undergraduate from "../images/Undergraduate.jpg";
 import Alumni from "../images/Alumni.jpg";

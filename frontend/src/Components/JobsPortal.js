@@ -4,7 +4,8 @@ import {
   LocationMarkerIcon,
   OfficeBuildingIcon,
 } from "@heroicons/react/outline";
-import Careers from "../Routes/Careers";
+import Careers from "../pages/Careers";
+import postJob from "../Store/Data/PostData";
 
 const initialJobs = [
   {
@@ -58,6 +59,9 @@ const JobsPortal = () => {
       alert("Please fill in all fields");
       return;
     }
+    // post job api call
+    const response = postJob(newJob);
+    alert(response);
     setJobs([
       ...jobs,
       {

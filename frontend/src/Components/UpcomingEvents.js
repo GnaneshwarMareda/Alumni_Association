@@ -1,5 +1,5 @@
 import React from "react";
-import Events from "../Routes/Events";
+import Events from "../pages/Events";
 import Gatherings from "../images/gatherings.jpg";
 import Leadership from "../images/leadership.jpg";
 import Reunion from "../images/reunion.jpeg";

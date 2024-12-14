@@ -1,4 +1,4 @@
-import Careers from "../Routes/Careers";
+import Careers from "../pages/Careers";
 import React, { useState } from "react";
 
 const CareerResources = () => {
