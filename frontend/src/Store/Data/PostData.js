@@ -2,9 +2,9 @@ import URL from "../Url";
 
 const postJob = async (newJob) => {
   try {
-    const url = `${URL}/jobs/postjob`;
+    const url = `${URL}/careers/jobs/postjob`;
     const options = {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-type": "application/json",
       },

@@ -39,11 +39,12 @@ const getAlumniSimilarMatches = async ({
 };
 
 const getJobs = async () => {
-  const url = `${URL}/jobs`;
+  const url = `${URL}/careers/jobs`;
   const options = {
     method: "GET",
   };
   const response = await fetch(url, options);
+  //console.log(response);
   if (response.ok) {
     const { message, data } = await response.json();
     return { data, message };

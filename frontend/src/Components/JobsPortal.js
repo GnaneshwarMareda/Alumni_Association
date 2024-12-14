@@ -1,43 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ThumbUpIcon, ThumbDownIcon } from "@heroicons/react/solid";
 import {
   LocationMarkerIcon,
   OfficeBuildingIcon,
 } from "@heroicons/react/outline";
 import Careers from "../pages/Careers";
-import postJob from "../Store/Data/PostData";
 
-const initialJobs = [
-  {
-    id: 1,
-    title: "Software Developer",
-    company: "ABC Technologies",
-    location: "Hyderabad",
-    jobType: "Full-Time",
-    jobLink: "https://www.linkedin.com",
-    postedBy: "John Doe",
-    posterProfile: "https://via.placeholder.com/50",
-    postedAt: "2024-11-26T11:09:57.391+00:00",
-    likes: 0,
-    dislikes: 0,
-  },
-  {
-    id: 2,
-    title: "Data Analyst",
-    company: "XYZ Corp",
-    location: "Bangalore",
-    jobType: "Part-Time",
-    jobLink: "https://www.linkedin.com",
-    postedBy: "Jane Smith",
-    posterProfile: "https://via.placeholder.com/50",
-    postedAt: "2024-11-26T11:09:57.391+00:00",
-    likes: 0,
-    dislikes: 0,
-  },
-];
+import { getJobs } from "../Store/Data/FetchData";
+import postJob from "../Store/Data/PostData";
+import updateJob from "../Store/Data/UpdateData";
 
 const JobsPortal = () => {
-  const [jobs, setJobs] = useState(initialJobs);
+  const [jobs, setJobs] = useState([]);
   const [showPostJobForm, setShowPostJobForm] = useState(false);
   const [newJob, setNewJob] = useState({
     title: "",
@@ -48,11 +22,24 @@ const JobsPortal = () => {
   });
   const [searchQuery, setSearchQuery] = useState("");
 
+  const [trigger, setTrigger] = useState(false);
+  useEffect(() => {
+    // fetch initial jobs from database
+    const fetchJobs = async () => {
+      try {
+        const response = await getJobs();
+        setJobs(response.data);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
+    };
+    fetchJobs();
+  }, [trigger]);
+
   const handlePostJob = () => {
     if (
       !newJob.title ||
       !newJob.company ||
-      !newJob.location ||
       !newJob.jobType ||
       !newJob.jobLink
     ) {
@@ -61,17 +48,11 @@ const JobsPortal = () => {
     }
     // post job api call
     const response = postJob(newJob);
-    alert(response);
+    console.log(response.status);
     setJobs([
       ...jobs,
       {
-        id: jobs.length + 1,
-        ...newJob,
-        likes: 0,
-        dislikes: 0,
-        postedBy: "Anonymous",
-        posterProfile: "https://via.placeholder.com/50",
-        postedAt: new Date().toISOString(),
+        newJob,
       },
     ]);
     setNewJob({
@@ -106,6 +87,7 @@ const JobsPortal = () => {
             {showPostJobForm ? "Back to Job Listings" : "Post a Job"}
           </button>
 
+          {/*Job Post Form*/}
           {showPostJobForm && (
             <div className="bg-white p-6 shadow-lg rounded-lg max-w-md ">
               <h2 className="text-2xl font-bold text-gray-800 mb-4">
@@ -192,6 +174,7 @@ const JobsPortal = () => {
             </div>
           )}
 
+          {/*Jobs Search Bar*/}
           <div className="mb-4">
             <input
               type="text"
@@ -202,10 +185,11 @@ const JobsPortal = () => {
             />
           </div>
 
+          {/*Job Listings*/}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredJobs.map((job) => (
               <div
-                key={job.id}
+                key={job._id}
                 className="bg-white shadow-md rounded-lg p-6 border border-gray-200 hover:shadow-lg transition-shadow"
               >
                 <div className="flex items-center mb-4 cursor-pointer">
@@ -213,11 +197,11 @@ const JobsPortal = () => {
                     src={job.posterProfile}
                     alt="Poster Profile"
                     className="w-12 h-12 rounded-full mr-4"
-                    onClick={() => handleProfileClick(job.id)}
+                    onClick={() => handleProfileClick(job._id)}
                   />
                   <p
                     className="font-semibold text-gray-800 hover:underline"
-                    onClick={() => handleProfileClick(job.id)}
+                    onClick={() => handleProfileClick(job._id)}
                   >
                     {job.postedBy}
                   </p>
@@ -246,28 +230,20 @@ const JobsPortal = () => {
                 <div className="flex items-center justify-between mt-4">
                   <button
                     className="flex items-center text-gray-500 hover:text-indigo-600"
-                    onClick={() =>
-                      setJobs(
-                        jobs.map((j) =>
-                          j.id === job.id ? { ...j, likes: j.likes + 1 } : j
-                        )
-                      )
-                    }
+                    onClick={() => {
+                      updateJob(job._id, "like");
+                      setTrigger((prev) => !prev);
+                    }}
                   >
                     <ThumbUpIcon className="w-5 h-5 mr-1" />
                     <span>{job.likes}</span>
                   </button>
                   <button
                     className="flex items-center text-gray-500 hover:text-red-600"
-                    onClick={() =>
-                      setJobs(
-                        jobs.map((j) =>
-                          j.id === job.id
-                            ? { ...j, dislikes: j.dislikes + 1 }
-                            : j
-                        )
-                      )
-                    }
+                    onClick={() => {
+                      updateJob(job._id, "dislike");
+                      setTrigger((prev) => !prev);
+                    }}
                   >
                     <ThumbDownIcon className="w-5 h-5 mr-1" />
                     <span>{job.dislikes}</span>
