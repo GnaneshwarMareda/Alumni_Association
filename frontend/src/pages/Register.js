@@ -1,10 +1,9 @@
-// src/Register.js
 import React, { useState } from "react";
-//import axios from "axios";
+import { addUser } from "../Store/Data/PostData";
 
 const Register = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
+  const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
     userId: "",
@@ -15,7 +14,7 @@ const Register = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setUserDetails((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -23,10 +22,10 @@ const Register = () => {
 
   const handleNextStep = () => {
     if (
-      formData.firstName &&
-      formData.lastName &&
-      formData.userId &&
-      formData.personalEmail
+      userDetails.firstName &&
+      userDetails.lastName &&
+      userDetails.userId &&
+      userDetails.personalEmail
     ) {
       setStep(2);
     } else {
@@ -34,19 +33,14 @@ const Register = () => {
     }
   };
 
-  const handleRegister = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   const response = await axios.post("/register", formData);
-    //   if (response.status === 200) {
-    //     alert("Registration successful!");
-    //   } else {
-    //     alert("Registration failed. Please try again.");
-    //   }
-    // } catch (error) {
-    //   console.error("Registration error:", error);
-    //   alert("An error occurred during registration.");
-    //}
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    const { message, status } = await addUser(userDetails);
+    if (status) {
+      alert(message);
+    } else {
+      alert(message);
+    }
   };
 
   return (
@@ -75,7 +69,7 @@ const Register = () => {
                     type="text"
                     id="firstName"
                     name="firstName"
-                    value={formData.firstName}
+                    value={userDetails.firstName}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter your first name"
@@ -94,7 +88,7 @@ const Register = () => {
                     type="text"
                     id="lastName"
                     name="lastName"
-                    value={formData.lastName}
+                    value={userDetails.lastName}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter your last name"
@@ -114,7 +108,7 @@ const Register = () => {
                   type="text"
                   id="userId"
                   name="userId"
-                  value={formData.userId}
+                  value={userDetails.userId}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter your 10-digit User ID"
@@ -145,7 +139,7 @@ const Register = () => {
                   type="email"
                   id="personalEmail"
                   name="personalEmail"
-                  value={formData.personalEmail}
+                  value={userDetails.personalEmail}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter your email"
@@ -190,7 +184,7 @@ const Register = () => {
                   type="email"
                   id="universityEmail"
                   name="universityEmail"
-                  value={formData.universityEmail}
+                  value={userDetails.universityEmail}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter your university email"
@@ -209,7 +203,7 @@ const Register = () => {
                   type="text"
                   id="otp"
                   name="otp"
-                  value={formData.otp}
+                  value={userDetails.otp}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter the OTP sent to your university email"

@@ -18,11 +18,12 @@ function AlumniDirectory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const retrievedAlumniData = await getAlumniData();
-
-        setAlumniData(retrievedAlumniData);
-      } catch (error) {
-        setError(error.message || "Failed to fetch data.");
+        const { data } = await getAlumniData();
+        setAlumniData(data);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Unable to load alumni data. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -56,12 +57,19 @@ function AlumniDirectory() {
     return matchesSearch && matchesFilters;
   });
 
+  // Fallback UI for Loading and Error States
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Loading alumni directory...</p>;
   }
 
   if (error) {
-    return <p className="text-red-500">{error}</p>;
+    return (
+      <div className="container mx-auto p-6 text-center text-gray-600">
+        <h2 className="text-xl font-semibold text-red-500">Oops!</h2>
+        <p>{error}</p>
+        <p className="mt-4">Please check your connection or try again later.</p>
+      </div>
+    );
   }
 
   return (
@@ -129,7 +137,7 @@ function AlumniDirectory() {
             onChange={(e) => handleFilterChange("location", e.target.value)}
           >
             <option value="">All Locations</option>
-            <option value="New York">Hyderabad</option>
+            <option value="Hyderabad">Hyderabad</option>
             <option value="Kolkata">Kolkata</option>
             <option value="Mumbai">Mumbai</option>
             <option value="Pune">Pune</option>
