@@ -1,8 +1,13 @@
 // src/Routes/Login.js
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Login = () => {
+  const [userDetails, setUserDetails] = useState({});
+
+  const handleLogin = async () => {};
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
       <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 space-y-6">

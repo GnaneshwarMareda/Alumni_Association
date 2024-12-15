@@ -69,4 +69,36 @@ const addEvent = async (title, description, image, dateOfEvent) => {
   }
 };
 
-module.exports = { postJob, addSuccessStory, addEvent };
+const verifyUser = async (userDetails) => {
+  const url = `${URL}/login/user`;
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userDetails),
+  };
+
+  const response = await fetch(url, options);
+  console.log(response);
+  const { message } = await response.json();
+  return { message, status: response.ok };
+};
+
+const addUser = async (userDetails) => {
+  const url = `${URL}/register/user`;
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userDetails),
+  };
+
+  const response = await fetch(url, options);
+  console.log(response);
+  const { message } = await response.json();
+  return { message, status: response.ok };
+};
+
+module.exports = { postJob, addSuccessStory, addEvent, verifyUser, addUser };
