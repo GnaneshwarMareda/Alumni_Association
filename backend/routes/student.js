@@ -1,13 +1,15 @@
-// const express = require("express");
-// const router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-// const {
-//   getStudentProfile,
-//   updateStudentProfile,
-// } = require("../controllers/studentProfile");
+const { verifyStudentToken } = require("../middlewares/verifyToken");
 
-// //router.get("/", getStudentData);
-// router.get("/", getStudentProfile);
-// router.put("/", updateStudentProfile);
+const {
+  getStudentProfile,
+  updateStudentProfile,
+} = require("../controllers/studentProfile");
 
-// module.exports = router;
+//router.get("/", getStudentData);
+router.get("/", verifyStudentToken, getStudentProfile);
+router.put("/", verifyStudentToken, updateStudentProfile);
+
+module.exports = router;

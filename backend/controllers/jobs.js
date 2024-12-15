@@ -24,7 +24,7 @@ const getUnVerifiedJobs = async (req, res) => {
 const updateJobStatus = async (req, res) => {
   try {
     const { id, status } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     await Jobs.updateOne(
       { _id: id },
       {

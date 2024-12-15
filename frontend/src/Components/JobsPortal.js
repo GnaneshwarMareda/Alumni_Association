@@ -178,7 +178,7 @@ const JobsPortal = () => {
           )}
 
           {/*Jobs Search Bar*/}
-          <div className="mb-4">
+          <div className="mt-4 mb-4">
             <input
               type="text"
               placeholder="Search Jobs"

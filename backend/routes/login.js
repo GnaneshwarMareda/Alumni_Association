@@ -1,12 +1,16 @@
 const express = require("express");
-const { verifyPassword } = require("../utils/passwordHashing");
 const router = express.Router();
 
-router.post("/student", async (req, res) => {
+const { verifyPassword } = require("../utils/passwordHashing");
+const { generateJwtToken } = require("../utils/generateJwtToken");
+
+router.post("/user", async (req, res) => {
   try {
     const { userId, password, role } = req.body;
 
-    const user = await Student.findOne({ userId });
+    const user = null;
+    if (role === "alumni") user = await Alumni.findOne({ userId });
+    else if (role === "student") user = await Student.findOne({ userId });
 
     if (!user) {
       res.status(400).json({ message: "Invalid Login." });
@@ -25,27 +29,27 @@ router.post("/student", async (req, res) => {
   }
 });
 
-router.post("/alumni", async (req, res) => {
-  try {
-    const { userId, password, role } = req.body;
+// router.post("/alumni", async (req, res) => {
+//   try {
+//     const { userId, password, role } = req.body;
 
-    const user = await Alumni.findOne({ userId });
+//     const user = await Alumni.findOne({ userId });
 
-    if (!user) {
-      res.status(400).json({ message: "Invalid Login." });
-      return;
-    }
+//     if (!user) {
+//       res.status(400).json({ message: "Invalid Login." });
+//       return;
+//     }
 
-    const isValidPassword = await verifyPassword(password, user.password);
-    if (isValidPassword) {
-      const jwtToken = generateJwtToken(userId, role);
-      return res.status(201).json({ jwtToken });
-    }
+//     const isValidPassword = await verifyPassword(password, user.password);
+//     if (isValidPassword) {
+//       const jwtToken = generateJwtToken(userId, role);
+//       return res.status(201).json({ jwtToken });
+//     }
 
-    res.status(400).json({ messag: "Invalid credentials" });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
+//     res.status(400).json({ messag: "Invalid credentials" });
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// });
 
 module.exports = router;
