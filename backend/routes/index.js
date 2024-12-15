@@ -5,7 +5,7 @@ const registerRouter = require("./register");
 const loginRouter = require("./login");
 const adminRouter = require("./admin");
 const alumniRouter = require("./alumni");
-const studentProfileRouter = require("./student");
+const studentRouter = require("./student");
 const careersRouter = require("./careers");
 const eventRouter = require("./events");
 const successStoriesRouter = require("./successStories");
@@ -15,7 +15,7 @@ router.use("/login", loginRouter);
 
 //router.use("/admin", adminRouter);
 router.use("/alumni", alumniRouter);
-//router.use("/student", studentProfileRouter);
+router.use("/student", studentRouter);
 
 router.use("/careers", careersRouter);
 

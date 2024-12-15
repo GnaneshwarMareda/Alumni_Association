@@ -39,13 +39,14 @@ const getAlumniSimilarMatches = async (req, res) => {
 
 const getAlumniProfile = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { id } = req.params;
+    //console.log(id);
 
-    if (!userId) {
+    if (!id) {
       return res.status(400).json({ message: "UserId is required." });
     }
 
-    const alumniProfile = await Alumni.findOne({ userId });
+    const alumniProfile = await Alumni.findOne({ _id: id });
 
     if (!alumniProfile) {
       return res.status(404).json({ message: "Alumni not found." });
@@ -56,10 +57,10 @@ const getAlumniProfile = async (req, res) => {
       data: alumniProfile,
     });
   } catch (error) {
-    console.error("Error fetching student profile:", error);
+    //console.error("Error fetching student profile:", error);
     return res
       .status(500)
-      .json({ message: "An error occurred while retrieving student data." });
+      .json({ message: "An error occurred while retrieving  data." });
   }
 };
 

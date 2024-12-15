@@ -1,16 +1,19 @@
+const Alumni = require("../models/alumni");
+const Student = require("../models/students");
+
 const express = require("express");
 const router = express.Router();
 
 const { verifyPassword } = require("../utils/passwordHashing");
-const { generateJwtToken } = require("../utils/generateJwtToken");
+const generateJwtToken = require("../utils/generateJwtToken");
 
 router.post("/user", async (req, res) => {
   try {
-    const { userId, password, role } = req.body;
+    const { userId, password } = req.body;
 
-    const user = null;
-    if (role === "alumni") user = await Alumni.findOne({ userId });
-    else if (role === "student") user = await Student.findOne({ userId });
+    let user = null;
+    user = await Alumni.findOne({ Id: userId });
+    if (!user) user = await Student.findOne({ Id: userId });
 
     if (!user) {
       res.status(400).json({ message: "Invalid Login." });
@@ -19,8 +22,8 @@ router.post("/user", async (req, res) => {
 
     const isValidPassword = await verifyPassword(password, user.password);
     if (isValidPassword) {
-      const jwtToken = generateJwtToken(userId, role);
-      return res.status(201).json({ jwtToken });
+      const jwtToken = generateJwtToken(userId, user.role);
+      return res.status(201).json({ message: "Login Succesfull!", jwtToken });
     }
 
     res.status(400).json({ message: "Invalid credentials" });

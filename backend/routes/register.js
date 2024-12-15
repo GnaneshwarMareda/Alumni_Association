@@ -24,8 +24,8 @@ router.post("/user", async (req, res) => {
     const name = firstName + " " + lastName;
 
     // Check if user already exists in the database
-    const isStudent = await Student.findOne({ userId });
-    const isAlumni = await Alumni.findOne({ userId });
+    const isStudent = await Student.findOne({ Id: userId });
+    const isAlumni = await Alumni.findOne({ Id: userId });
 
     if (isStudent || isAlumni) {
       return res.status(300).json({ message: "User Already Exists." });

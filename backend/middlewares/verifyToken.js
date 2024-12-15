@@ -32,7 +32,9 @@ const verifyStudentToken = async (req, res, next) => {
   try {
     const payload = jwt.verify(jwtToken, "Gnane");
     const { userId, role } = payload;
-    if (role !== "student") return;
+    if (role !== "student") {
+      return res.status(400).send("Authorization Error");
+    }
     req.userId = userId;
     next();
   } catch (error) {
