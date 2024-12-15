@@ -33,7 +33,7 @@ router.post("/user", async (req, res) => {
       const newUser = new Alumni({
         userId,
         name,
-        password,
+        password: hashedPassword,
         email,
         domain_email,
       });
@@ -41,7 +41,7 @@ router.post("/user", async (req, res) => {
     }
 
     // Generate JWT token
-    const token = generateJwtToken(userId, role);
+    const jwtToken = generateJwtToken(userId, role);
 
     res.status(201).json({ message: "User created successfully", jwtToken });
   } catch (error) {
