@@ -9,7 +9,21 @@ const generateJwtToken = require("../utils/generateJwtToken");
 
 router.post("/user", async (req, res) => {
   try {
-    const { userId, name, password, email, domain_email, role } = req.body;
+    const {
+      userId,
+      password,
+      role,
+      firstName,
+      lastName,
+      personalEmail,
+      universityEmail,
+      mobile,
+      graduationYear,
+      fieldOfStudy,
+    } = req.body;
+    const name = firstName + " " + lastName;
+
+    // Check if user already exists in the database
     const isStudent = await Student.findOne({ userId });
     const isAlumni = await Alumni.findOne({ userId });
 
@@ -22,20 +36,28 @@ router.post("/user", async (req, res) => {
 
     if (role === "student") {
       const newUser = new Student({
-        userId,
-        name,
+        Id: userId,
         password: hashedPassword,
-        email,
-        domain_email,
+        role,
+        name,
+        personalEmail,
+        universityEmail,
+        mobile,
+        graduationYear,
+        fieldOfStudy,
       });
       await newUser.save();
     } else if (role === "alumni") {
       const newUser = new Alumni({
-        userId,
-        name,
+        Id: userId,
         password: hashedPassword,
-        email,
-        domain_email,
+        role,
+        name,
+        personalEmail,
+        universityEmail,
+        mobile,
+        graduationYear,
+        fieldOfStudy,
       });
       await newUser.save();
     }

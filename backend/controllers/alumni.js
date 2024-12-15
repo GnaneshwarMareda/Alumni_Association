@@ -48,11 +48,11 @@ const getAlumniProfile = async (req, res) => {
     const alumniProfile = await Alumni.findOne({ userId });
 
     if (!alumniProfile) {
-      return res.status(404).json({ message: "Student not found." });
+      return res.status(404).json({ message: "Alumni not found." });
     }
 
     return res.status(200).json({
-      message: "Student data retrieved successfully.",
+      message: "Alumni data retrieved successfully.",
       data: alumniProfile,
     });
   } catch (error) {
