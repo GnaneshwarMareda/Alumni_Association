@@ -1,4 +1,4 @@
-import URL from "../Url";
+const { default: URL } = require("../Url");
 
 const postJob = async (newJob) => {
   try {
@@ -18,4 +18,4 @@ const postJob = async (newJob) => {
   }
 };
 
-export default postJob;
+module.exports = { postJob };

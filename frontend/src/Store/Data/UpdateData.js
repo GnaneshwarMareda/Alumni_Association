@@ -13,8 +13,26 @@ const updateJob = async (jobId, reactionType) => {
     const response = await fetch(url, options);
     console.log(response);
   } catch (error) {
-    console.error("Error updating job:", error);
+    return { message: error.message };
   }
 };
 
-module.exports = updateJob;
+const updateJobStatus = async (id, status) => {
+  try {
+    const url = `${URL}/careers/jobs/admin`;
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ id, status }),
+    };
+    const response = await fetch(url, options);
+    const { message } = await response.json();
+    return { message };
+  } catch (error) {
+    return { message: error.message };
+  }
+};
+
+module.exports = { updateJob, updateJobStatus };

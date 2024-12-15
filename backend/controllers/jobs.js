@@ -1,22 +1,47 @@
 const Jobs = require("../models/jobs.js");
 
 //Retrieve allJobs
-const getJobs = async (req, res) => {
+const getVerifiedJobs = async (req, res) => {
   try {
-    const jobs = await Jobs.find({});
+    const jobs = await Jobs.find({ status: "VERIFIED" });
     //console.log(jobs);
-    res
-      .status(200)
-      .json({ message: "Job retrieved successfully!", data: jobs });
+    res.status(200).json({ message: "Job posted successfully!", jobs: jobs });
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+};
+
+const getUnVerifiedJobs = async (req, res) => {
+  try {
+    const jobs = await Jobs.find({ status: "PENDING" });
+    //console.log(jobs);
+    res.status(200).json({ message: "Job posted successfully!", jobs: jobs });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+const updateJobStatus = async (req, res) => {
+  try {
+    const { id, status } = req.body;
+    console.log(req.body);
+    await Jobs.updateOne(
+      { _id: id },
+      {
+        $set: {
+          status,
+        },
+      }
+    );
+    return res.status(200).json({ message: "Sucefulyy changed" });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
   }
 };
 
 //Post a new Job
 const postJob = async (req, res) => {
   try {
-    console.log("asdf");
     const { title, company, location, jobType, jobLink } = req.body;
     const newJob = await Jobs.create({
       title,
@@ -34,19 +59,15 @@ const postJob = async (req, res) => {
 //Update Job Reactions (like/dislike)
 const updateJob = async (req, res) => {
   try {
-    const id = req.params.id;
-    const { reactionType } = req.body;
-    //console.log(id, reactionType);
+    const { id, reactionType } = req.body;
     if (reactionType === "like") {
       const updatedJob = await Jobs.findByIdAndUpdate(id, {
         $inc: { likes: 1 },
       });
-      return res.status(200).json({ message: "Job liked successfully!" });
     } else if (reactionType === "dislike") {
       const updatedJob = await Jobs.findByIdAndUpdate(id, {
         $inc: { dislikes: 1 },
       });
-      return res.status(200).json({ message: "Job disliked successfully!" });
     } else {
       return res.status(400).json({ message: "Invalid reaction type." });
     }
@@ -55,4 +76,10 @@ const updateJob = async (req, res) => {
   }
 };
 
-module.exports = { getJobs, postJob, updateJob };
+module.exports = {
+  getVerifiedJobs,
+  getUnVerifiedJobs,
+  postJob,
+  updateJob,
+  updateJobStatus,
+};

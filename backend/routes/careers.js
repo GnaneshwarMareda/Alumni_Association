@@ -2,9 +2,17 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
 
-const { getJobs, postJob, updateJob } = require("../controllers/jobs");
+const {
+  postJob,
+  updateJob,
+  getVerifiedJobs,
+  getUnVerifiedJobs,
+  updateJobStatus,
+} = require("../controllers/jobs");
 
-router.get("/jobs", getJobs);
+router.get("/jobs/admin", getUnVerifiedJobs);
+router.get("/jobs/students", getVerifiedJobs);
+router.put("/jobs/admin", updateJobStatus);
 router.post("/jobs/postjob", postJob);
 router.patch("/jobs:id", updateJob);
 

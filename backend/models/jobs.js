@@ -11,6 +11,7 @@ const jobSchema = new mongoose.Schema({
   postedAt: { type: Date, default: Date.now() },
   likes: { type: Number, default: 0 },
   dislikes: { type: Number, default: 0 },
+  status: { type: String, default: "PENDING" },
 });
 
 const Jobs = mongoose.model("jobs", jobSchema);

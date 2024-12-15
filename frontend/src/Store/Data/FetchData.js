@@ -38,20 +38,41 @@ const getAlumniSimilarMatches = async ({
   }
 };
 
-const getJobs = async () => {
-  const url = `${URL}/careers/jobs`;
+const getVerifiedJobs = async () => {
+  const url = `${URL}/careers/jobs/students`;
   const options = {
     method: "GET",
   };
   const response = await fetch(url, options);
   //console.log(response);
   if (response.ok) {
-    const { message, data } = await response.json();
-    return { data, message };
+    const { message, jobs } = await response.json();
+    return { data: jobs, message };
   } else {
     const { message } = await response.json();
     return { data: [], message };
   }
 };
 
-module.exports = { getAlumniData, getAlumniSimilarMatches, getJobs };
+const getUnverifiedJobs = async () => {
+  const url = `${URL}/careers/jobs/admin`;
+  const options = {
+    method: "GET",
+  };
+  const response = await fetch(url, options);
+  //console.log(response);
+  if (response.ok) {
+    const { message, jobs } = await response.json();
+    return { data: jobs, message };
+  } else {
+    const { message } = await response.json();
+    return { data: [], message };
+  }
+};
+
+module.exports = {
+  getAlumniData,
+  getAlumniSimilarMatches,
+  getVerifiedJobs,
+  getUnverifiedJobs,
+};

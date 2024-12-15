@@ -6,9 +6,9 @@ import {
 } from "@heroicons/react/outline";
 import Careers from "../pages/Careers";
 
-import { getJobs } from "../Store/Data/FetchData";
-import postJob from "../Store/Data/PostData";
-import updateJob from "../Store/Data/UpdateData";
+import { getVerifiedJobs } from "../Store/Data/FetchData";
+import { updateJob } from "../Store/Data/UpdateData";
+import { postJob } from "../Store/Data/PostData";
 
 const JobsPortal = () => {
   const [jobs, setJobs] = useState([]);
@@ -27,7 +27,8 @@ const JobsPortal = () => {
     // fetch initial jobs from database
     const fetchJobs = async () => {
       try {
-        const response = await getJobs();
+        const response = await getVerifiedJobs();
+        console.log(response.data);
         setJobs(response.data);
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -69,12 +70,14 @@ const JobsPortal = () => {
     alert(`Redirecting to profile of user with job ID ${id}`);
   };
 
-  const filteredJobs = jobs.filter(
-    (job) =>
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.location.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // const filteredJobs = jobs.filter(
+  //   (job) =>
+  //     job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     job.location.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
+
+  const filteredJobs = jobs;
 
   return (
     <Careers>

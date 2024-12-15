@@ -1,33 +1,31 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import URL from "../Store/Url";
+import { getUnverifiedJobs } from "../Store/Data/FetchData";
+import { updateJobStatus } from "../Store/Data/UpdateData";
 
 const PendingJobs = () => {
   const [jobs, setJobs] = useState([]);
+
   useEffect(() => {
     fetchJobs();
   }, []);
+
   const fetchJobs = async () => {
     try {
-      const response = await axios.get(`${URL}/careers/jobs`);
-      //console.log(response.data.jobs);
-      setJobs(response.data.jobs);
+      const response = await getUnverifiedJobs();
+      console.log(response.data);
+      setJobs(response.data);
     } catch (error) {
       console.error("Error fetching jobs:", error);
     }
   };
+
   const handleJobVerification = async (id, status) => {
-    try {
-      await axios.patch(`${URL}/jobs/${id}`, { verified: status });
-      setJobs((prevJobs) =>
-        prevJobs.map((job) =>
-          job.id === id ? { ...job, verified: status } : job
-        )
-      );
-    } catch (error) {
-      console.error("Error verifying job:", error);
-    }
+    console.log(id, status);
+    const response = await updateJobStatus(id, status);
+    console.log(response.message);
+    fetchJobs();
   };
 
   return (
@@ -53,13 +51,13 @@ const PendingJobs = () => {
               </div>
               <div className="flex space-x-4">
                 <button
-                  onClick={() => handleJobVerification(job.id, true)}
+                  onClick={() => handleJobVerification(job._id, "VERIFIED")}
                   className="bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-2 rounded-lg shadow"
                 >
                   Approve
                 </button>
                 <button
-                  onClick={() => handleJobVerification(job.id, false)}
+                  onClick={() => handleJobVerification(job._id, "REJECTED")}
                   className="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded-lg shadow"
                 >
                   Reject
