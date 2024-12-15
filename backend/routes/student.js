@@ -6,7 +6,7 @@ const { verifyStudentToken } = require("../middlewares/verifyToken");
 const {
   getStudentProfile,
   updateStudentProfile,
-} = require("../controllers/studentProfile");
+} = require("../controllers/students");
 
 //router.get("/", getStudentData);
 router.get("/", verifyStudentToken, getStudentProfile);
