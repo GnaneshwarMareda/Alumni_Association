@@ -9,7 +9,7 @@ const {
 } = require("../controllers/events");
 
 router.get("/", getEvents);
-router.post("/:id", addEvent);
+router.post("/", addEvent);
 router.put("/:id", editEvent);
 router.delete("/:id", deleteEvent);
 

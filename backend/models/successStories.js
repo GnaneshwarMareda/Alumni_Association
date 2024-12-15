@@ -1,26 +1,23 @@
 const mongoose = require("mongoose");
 
 const successStorySchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true,
-    trim: true,
   },
-  story: {
+  description: {
     type: String,
     required: true,
-    trim: true,
   },
   image: {
     type: String,
     required: true, // URL to the image of the person or their achievement
-    trim: true,
   },
-  createdAt: {
+  createDate: {
     type: Date,
     default: Date.now,
   },
-  updatedAt: {
+  lastUpdateDate: {
     type: Date,
     default: Date.now,
   },

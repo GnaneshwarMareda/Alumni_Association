@@ -16,6 +16,7 @@ const getEvents = async (req, res) => {
 const addEvent = async (req, res) => {
   try {
     const newEvent = new Events(req.body);
+    console.log(req.body);
     const savedEvent = await newEvent.save();
     res
       .status(201)

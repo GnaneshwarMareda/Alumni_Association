@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { getUnverifiedJobs } from "../Store/Data/FetchData";
 import { updateJobStatus } from "../Store/Data/UpdateData";

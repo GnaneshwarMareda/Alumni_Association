@@ -11,15 +11,15 @@ const eventSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  date: {
+  dateOfEvent: {
     type: Date,
     required: true,
   },
-  createdAt: {
+  createDate: {
     type: Date,
     default: Date.now,
   },
-  updatedAt: {
+  lastUpdateDate: {
     type: Date,
     default: Date.now,
   },
