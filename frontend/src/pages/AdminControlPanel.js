@@ -4,10 +4,15 @@ import AdminOverview from "../Components/AdminOverview";
 import PendingJobs from "../Components/PendingJobs";
 import ManageEvents from "../Components/ManageEvents";
 import ManageSuccessStories from "../Components/ManageSuccessStories";
+import AcademicPromotion from "../Components/AcademicPromotion";
+import AlumniRequests from "../Components/AlumniRequests";
+import RaiseFund from "../Components/RaiseFund";
 
 const AdminControlPanel = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+
+  const [slide, setSlide] = useState(1);
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
@@ -26,6 +31,10 @@ const AdminControlPanel = () => {
   const handleLogout = () => {
     // Implement logout functionality here (e.g., clearing session, redirecting to login page)
     console.log("Logging out...");
+  };
+
+  const changeSlide = (id) => {
+    setSlide(id);
   };
 
   return (
@@ -153,10 +162,13 @@ const AdminControlPanel = () => {
       </header>
 
       <div className="container mx-auto px-6 py-8">
-        <AdminOverview />
-        <PendingJobs />
-        <ManageEvents />
-        <ManageSuccessStories />
+        <AdminOverview changeSlide={changeSlide} />
+        {slide === 1 && <PendingJobs />}
+        {slide === 2 && <ManageEvents />}
+        {slide === 3 && <ManageSuccessStories />}
+        {slide === 4 && <AcademicPromotion />}
+        {slide === 5 && <AlumniRequests />}
+        {slide === 6 && <RaiseFund />}
       </div>
     </div>
   );

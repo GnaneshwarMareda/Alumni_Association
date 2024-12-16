@@ -25,6 +25,7 @@ const Register = () => {
   };
 
   const handleNextStep = async () => {
+    console.log(userDetails);
     if (
       userDetails.firstName &&
       userDetails.lastName &&
@@ -40,11 +41,11 @@ const Register = () => {
       userDetails.universityEmail
     ) {
       // sent OTP
-      const { status } = await sendOtp({
-        universityEmail: userDetails.universityEmail,
-      });
-
-      if (status === 200) setStep(3);
+      // const { status } = await sendOtp({
+      //   universityEmail: userDetails.universityEmail,
+      // });
+      //if (status === 200) setStep(3);
+      setStep(3);
     } else {
       alert("Please fill in all required fields.");
     }
@@ -138,7 +139,7 @@ const Register = () => {
                   value={userDetails.userId}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter your 10-digit User ID"
+                  placeholder="Enter your University ID"
                   required
                 />
                 <p className="text-xs text-gray-500 mt-2">
@@ -304,9 +305,9 @@ const Register = () => {
                 </label>
                 <input
                   type="email"
-                  id="personalEmail"
-                  name="personalEmail"
-                  value={userDetails.personalEmail}
+                  id="universityEmail"
+                  name="universityEmail"
+                  value={userDetails.universityEmail}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter your email"
