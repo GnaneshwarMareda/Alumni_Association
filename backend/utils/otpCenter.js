@@ -5,20 +5,26 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "rockygame41@gmail.com",
-    pass: "GSM8314#",
+    pass: "ueaa wozp ypus zggz",
+    //password: "GSM8314#",
+
+    // user: "nithinambati9@gmail.com",
+    // pass: "nshv cokv qdpw pdzi",
   },
 });
 
 const generateOTP = async (req, res) => {
   try {
-    const universityEmail = req.body;
+    const { universityEmail } = req.body;
     if (!universityEmail) {
       return res.status(400).json({ message: "University Email is required." });
     }
 
     const email = universityEmail.toLowerCase().trim();
-    let otp = Math.floor(1000 + Math.random() * 9000).toString();
+    let otp = Math.floor(100000 + Math.random() * 900000).toString();
     otpStore.set(email, otp);
+
+    // console.log(email, otp);
 
     const mailOptions = {
       from: "rockygame41@gmail.com",
@@ -27,16 +33,19 @@ const generateOTP = async (req, res) => {
       text: `Your OTP for sign-in to RGUKT_Alumni is: ${otp}`,
     };
 
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "OTP sent successfully!!" });
+    const response = await transporter.sendMail(mailOptions);
+    res
+      .status(200)
+      .json({ message: "OTP sent successfully!!", response: response });
   } catch (error) {
-    res.status(500).json({ message: "Error sending OTP" });
+    res.status(500).json({ message: "Error sending OTP", error: error });
   }
 };
 
-const verifyOTP = async (req, res) => {
+const verifyOTP = async (req, res, next) => {
   try {
     const { universityEmail, otp } = req.body;
+    //console.log(universityEmail, otp);
 
     if (!universityEmail || !otp) {
       return res
@@ -45,6 +54,7 @@ const verifyOTP = async (req, res) => {
     }
 
     const storedOTP = otpStore.get(universityEmail);
+    //console.log(storedOTP);
 
     if (!storedOTP) {
       return res.status(400).json({ message: "Invalid OTP." });
