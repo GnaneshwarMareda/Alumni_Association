@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { addUser } from "../Store/Data/PostData";
-import sendOtp from "../Store/Data/Otp";
+import { sendOtp } from "../Store/Data/Otp";
 
 const Register = () => {
   const [step, setStep] = useState(1);

@@ -27,6 +27,7 @@ import NetworkingHub from "./pages/NetworkingHub";
 import Donation from "./pages/Donation";
 
 import About from "./pages/About";
+import RequestRegister from "./pages/RequestRegister";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
             path="/events/womens-conference"
             element={<WomensConference />}
           />
+          <Route path="/request-register" element={<RequestRegister />} />
         </Routes>
       </BrowserRouter>
       <Footer />

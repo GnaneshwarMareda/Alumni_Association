@@ -1,4 +1,4 @@
-import URL from "../Url";
+const URL = require("../Url");
 
 const sendOtp = async (userDetails) => {
   try {
@@ -11,17 +11,12 @@ const sendOtp = async (userDetails) => {
       body: JSON.stringify(userDetails),
     };
 
-    const response = fetch(url, options);
-
-    const status = (await response).status;
+    const response = await fetch(url, options);
+    const status = response.status;
     return { status };
   } catch (error) {
     return { status: 400, message: error.message };
   }
 };
 
-export default sendOtp;
-
-module.exports = {
-  sendOtp,
-};
+module.exports = sendOtp;
