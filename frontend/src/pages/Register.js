@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addUser } from "../Store/Data/PostData";
+import sendOtp from "../Store/Data/Otp";
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -9,6 +10,9 @@ const Register = () => {
     userId: "",
     personalEmail: "",
     universityEmail: "",
+    graduationYear: "",
+    mobile: "",
+    fieldOfStudy: "",
     otp: "",
   });
 
@@ -20,14 +24,27 @@ const Register = () => {
     }));
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = async () => {
     if (
       userDetails.firstName &&
       userDetails.lastName &&
       userDetails.userId &&
-      userDetails.personalEmail
+      userDetails.personalEmail &&
+      step === 1
     ) {
       setStep(2);
+    } else if (
+      userDetails.yearOfStudy &&
+      userDetails.fieldOfStudy &&
+      userDetails.mobile &&
+      userDetails.universityEmail
+    ) {
+      // sent OTP
+      const { status } = await sendOtp({
+        universityEmail: userDetails.universityEmail,
+      });
+
+      if (status === 200) setStep(3);
     } else {
       alert("Please fill in all required fields.");
     }
@@ -49,10 +66,20 @@ const Register = () => {
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
           Create Account
         </h1>
-        <p className="text-center text-gray-600 mb-8">
-          Please use the form below to create an account. Fields marked with{" "}
-          <span className="text-red-500">*</span> are required.
-        </p>
+        {step !== 3 && (
+          <p className="text-center text-gray-600 mb-8">
+            Please use the form below to create an account. Fields marked with{" "}
+            <span className="text-red-500">*</span> are required.
+          </p>
+        )}
+
+        {step === 3 && (
+          <p className="text-center text-gray-600 mb-8">
+            OTP has been sent to you University Email, Please Enter the OTP to
+            complete the Registration.
+            <span className="text-red-500">*</span> are required.
+          </p>
+        )}
 
         <form onSubmit={handleRegister} className="space-y-6">
           {step === 1 && (
@@ -116,14 +143,7 @@ const Register = () => {
                 />
                 <p className="text-xs text-gray-500 mt-2">
                   The user ID is a 6-digit number followed by 'B' assigned by
-                  the RGUKT University.{" "}
-                  <a
-                    href="#"
-                    className="text-blue-600 underline hover:text-blue-800"
-                  >
-                    try a different form
-                  </a>{" "}
-                  to create your account.
+                  the RGUKT University.
                 </p>
               </div>
 
@@ -168,55 +188,174 @@ const Register = () => {
                   Agree and Continue
                 </button>
               </div>
+
+              <div>
+                <p className="text-red-600">
+                  <span className="font-bold">NOTE : </span>The Registration
+                  process requires OTP send to University email. So if you are a
+                  Alumni{" "}
+                  <span className="text-blue-400 underline">
+                    try different form.
+                  </span>
+                </p>
+              </div>
             </>
           )}
 
           {step === 2 && (
             <>
-              <div>
-                <label
-                  htmlFor="universityEmail"
-                  className="block font-medium text-gray-700"
-                >
-                  University Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="universityEmail"
-                  name="universityEmail"
-                  value={userDetails.universityEmail}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter your university email"
-                  required
-                />
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="graduationYear"
+                    className="block font-medium text-gray-700"
+                  >
+                    Graduation Year <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="graduationYear"
+                    name="graduationYear"
+                    value={userDetails.graduationYear}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter your Graduation Year"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="mobile"
+                    className="block font-medium text-gray-700"
+                  >
+                    Mobile <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="mobile"
+                    name="mobile"
+                    value={userDetails.mobile}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter your last name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="yearOfStudy"
+                    className="block font-medium text-gray-700"
+                  >
+                    Year of Study <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="yearOfStudy"
+                    name="yearOfStudy"
+                    value={userDetails.yearOfStudy}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="" disabled>
+                      Select your year
+                    </option>
+                    <option value="1st year">1st year</option>
+                    <option value="2nd year">2nd year</option>
+                    <option value="3rd year">3rd year</option>
+                    <option value="4th year">4th year</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="fieldOfStudy"
+                    className="block font-medium text-gray-700"
+                  >
+                    Field of Study <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="fieldOfStudy"
+                    name="fieldOfStudy"
+                    value={userDetails.fieldOfStudy}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="" disabled>
+                      Select your field
+                    </option>
+                    <option value="ComputerScience">Computer Science</option>
+                    <option value="ECE">ECE</option>
+                  </select>
+                </div>
               </div>
 
               <div>
                 <label
-                  htmlFor="otp"
+                  htmlFor="personalEmail"
                   className="block font-medium text-gray-700"
                 >
-                  OTP <span className="text-red-500">*</span>
+                  University Email Address
+                  <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="text"
-                  id="otp"
-                  name="otp"
-                  value={userDetails.otp}
+                  type="email"
+                  id="personalEmail"
+                  name="personalEmail"
+                  value={userDetails.personalEmail}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter the OTP sent to your university email"
+                  placeholder="Enter your email"
                   required
                 />
               </div>
 
               <div className="mt-8">
                 <button
-                  type="submit"
-                  className="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50"
+                  type="button"
+                  onClick={handleNextStep}
+                  className="w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50"
                 >
-                  Submit
+                  Continue
+                </button>
+              </div>
+            </>
+          )}
+
+          {step === 3 && (
+            <>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="lastName"
+                    className="block font-medium text-gray-700"
+                  >
+                    OTP <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="otp"
+                    name="otp"
+                    value={userDetails.otp}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter OTP"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <button
+                  type="button"
+                  onClick={handleRegister}
+                  className="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300 focus:outline-none focus:ring-4 focus:ring-red-500 focus:ring-opacity-50"
+                >
+                  Register
                 </button>
               </div>
             </>

@@ -101,4 +101,31 @@ const addUser = async (userDetails) => {
   return { message, status: response.ok };
 };
 
-module.exports = { postJob, addSuccessStory, addEvent, verifyUser, addUser };
+const loginUser = async (userDetails) => {
+  try {
+    const url = `${URL}/login/user`;
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDetails),
+    };
+
+    const response = await fetch(url, options);
+    const { message } = await response.json();
+    const status = response.status;
+    return { message, status };
+  } catch (error) {
+    return { status: 400, message: error.message };
+  }
+};
+
+module.exports = {
+  postJob,
+  addSuccessStory,
+  addEvent,
+  verifyUser,
+  addUser,
+  loginUser,
+};
