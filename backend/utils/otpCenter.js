@@ -44,7 +44,8 @@ const generateOTP = async (req, res) => {
 
 const verifyOTP = async (req, res, next) => {
   try {
-    const { universityEmail, otp } = req.body;
+    const { userDetails } = req.body;
+    const { universityEmail, otp } = userDetails;
     //console.log(universityEmail, otp);
 
     if (!universityEmail || !otp) {
@@ -54,6 +55,8 @@ const verifyOTP = async (req, res, next) => {
     }
 
     const storedOTP = otpStore.get(universityEmail);
+    console.log(otpStore);
+    console.log(storedOTP);
     //console.log(storedOTP);
 
     if (!storedOTP) {
@@ -64,9 +67,7 @@ const verifyOTP = async (req, res, next) => {
       return res.status(400).json({ message: "Invalid OTP." });
     }
 
-    otpStore.delete(userId);
-
-    res.status(200).json({ message: "OTP verified successfully!!." });
+    otpStore.delete(universityEmail);
     next();
   } catch (error) {
     res.status(500).json({ message: "Error verifying OTP" });

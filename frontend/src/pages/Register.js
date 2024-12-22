@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { addUser } from "../Store/Data/PostData";
-import { sendOtp } from "../Store/Data/Otp";
+import sendOtp from "../Store/Data/Otp";
+import Cookie from "js-cookie";
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -8,6 +9,7 @@ const Register = () => {
     firstName: "",
     lastName: "",
     userId: "",
+    password: "",
     personalEmail: "",
     universityEmail: "",
     graduationYear: "",
@@ -15,6 +17,8 @@ const Register = () => {
     fieldOfStudy: "",
     otp: "",
   });
+
+  const [showPassword, setShowPassword] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,11 +45,8 @@ const Register = () => {
       userDetails.universityEmail
     ) {
       // sent OTP
-      // const { status } = await sendOtp({
-      //   universityEmail: userDetails.universityEmail,
-      // });
-      //if (status === 200) setStep(3);
-      setStep(3);
+      const { status } = await sendOtp(userDetails);
+      if (status === 200) setStep(3);
     } else {
       alert("Please fill in all required fields.");
     }
@@ -168,15 +169,40 @@ const Register = () => {
                 />
               </div>
 
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block font-medium text-gray-700"
+                >
+                  Password <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={userDetails.password}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="set your own password"
+                  required
+                />
+                <p className="text-xs text-gray-500 mt-2">
+                  Set a strong password.
+                </p>
+              </div>
+
               <div className="flex items-center mt-4">
                 <input
                   type="checkbox"
-                  id="captcha"
+                  id="showPassword"
+                  onChange={() => {
+                    setShowPassword(!showPassword);
+                  }}
                   className="mr-3 h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500 rounded"
                   required
                 />
-                <label htmlFor="captcha" className="text-gray-700">
-                  I am human
+                <label htmlFor="showPassword" className="text-gray-700">
+                  Show password
                 </label>
               </div>
 

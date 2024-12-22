@@ -8,9 +8,12 @@ const generateJwtToken = require("../utils/generateJwtToken");
 const { generateOTP } = require("../utils/otpCenter.js");
 const { verifyOTP } = require("../utils/otpCenter.js");
 
-router.post("/generateotp", generateOTP);
+router.post("/generate-otp", generateOTP);
+
 router.post("/user", verifyOTP, async (req, res) => {
   try {
+    console.log(req.body);
+    const { userDetails } = req.body;
     const {
       universityEmail,
       userId,
@@ -22,9 +25,16 @@ router.post("/user", verifyOTP, async (req, res) => {
       yearOfStudy,
       graduationYear,
       fieldOfStudy,
-    } = req.body;
+    } = userDetails;
 
-    const name = firstName + " " + lastName;
+    // Log the received password
+    console.log("Password received:", password);
+
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
+    }
+
+    const name = `${firstName} ${lastName}`;
 
     // Check if user already exists in the database
     const isExistingUser = await Student.findOne({ Id: userId });
@@ -35,10 +45,10 @@ router.post("/user", verifyOTP, async (req, res) => {
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = new Student({
       Id: userId,
       password: hashedPassword,
-      role,
       name,
       personalEmail,
       universityEmail,
@@ -47,13 +57,15 @@ router.post("/user", verifyOTP, async (req, res) => {
       graduationYear,
       fieldOfStudy,
     });
+
     await newUser.save();
 
     // Generate JWT token
-    const jwtToken = generateJwtToken(userId, role);
+    const jwtToken = generateJwtToken(userId, "student");
 
     res.status(201).json({ message: "User created successfully", jwtToken });
   } catch (error) {
+    console.error("Error:", error.message);
     res.status(400).json({ message: error.message });
   }
 });

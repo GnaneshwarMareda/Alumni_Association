@@ -1,4 +1,4 @@
-const URL = require("../Url");
+const { default: URL } = require("../Url");
 
 const sendOtp = async (userDetails) => {
   try {

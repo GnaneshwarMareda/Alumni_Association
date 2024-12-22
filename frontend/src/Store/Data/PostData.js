@@ -92,7 +92,7 @@ const addUser = async (userDetails) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(userDetails),
+    body: JSON.stringify({ userDetails }),
   };
 
   const response = await fetch(url, options);
