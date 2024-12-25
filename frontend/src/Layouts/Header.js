@@ -1,4 +1,3 @@
-// src/components/Header.js
 import React, { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
@@ -50,8 +49,15 @@ const Header = () => {
             About
           </a>
         </nav>
+        {/* Give Now Button */}
+        <a
+          href="#give"
+          className="hidden md:inline-block bg-red-600 px-4 py-2 rounded-md font-semibold hover:bg-red-700 transition duration-300"
+        >
+          Give Now
+        </a>
 
-        {/* "Give Now" Button */}
+        {/* Login Button */}
         <a
           href="/login"
           className="hidden md:inline-block bg-red-600 px-4 py-2 rounded-md font-semibold hover:bg-red-700 transition duration-300"
@@ -98,6 +104,12 @@ const Header = () => {
               className="bg-red-600 px-4 py-2 mt-2 text-center rounded-md font-semibold hover:bg-red-700 transition duration-300"
             >
               Give Now
+            </a>
+            <a
+              href="/login"
+              className="bg-red-600 px-4 py-2 mt-2 text-center rounded-md font-semibold hover:bg-red-700 transition duration-300"
+            >
+              Login
             </a>
           </nav>
         </div>

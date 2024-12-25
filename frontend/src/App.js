@@ -7,10 +7,11 @@ import Footer from "./Layouts/Footer";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import AlumniDirectory from "./pages/AlumniDirectory";
 
 import AdminControlPanel from "./pages/AdminControlPanel";
+import RequestRegister from "./pages/RequestRegister";
 
+import AlumniDirectory from "./pages/AlumniDirectory";
 import AlumniDetailSection from "./Components/AlumniDetailSection";
 
 import JobsPortal from "./Components/JobsPortal";
@@ -25,9 +26,8 @@ import VirtualMeet from "./Components/VirtualMeet";
 
 import NetworkingHub from "./pages/NetworkingHub";
 import Donation from "./pages/Donation";
-
 import About from "./pages/About";
-import RequestRegister from "./pages/RequestRegister";
+
 import ProtectedRoute from "./Protected/ProtectedRoute";
 import CheckAlreadyLogged from "./Protected/CheckAlreadyLogged";
 
@@ -37,6 +37,7 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
+          {/* Admin Panel */}
           <Route
             path="/admin-panel"
             element={
@@ -46,23 +47,17 @@ function App() {
               />
             }
           />
+          <Route path="/request-register" element={<RequestRegister />} />
+
+          {/* Home */}
           <Route path="/" element={<Home />} />
           <Route
             path="/login"
             element={<CheckAlreadyLogged component={Login} />}
           />
           <Route path="/register" element={<Register />} />
-          <Route path="/about" element={<About />} />
 
-          <Route
-            path="/donation"
-            element={
-              <ProtectedRoute
-                component={Donation}
-                requiredRoles={["student, alumni"]}
-              />
-            }
-          />
+          {/* Alumni Directory */}
           <Route
             path="/alumni-directory"
             element={
@@ -72,6 +67,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="/alumni-directory/:id"
             element={
@@ -81,16 +77,8 @@ function App() {
               />
             }
           />
-          <Route
-            path="/networking-hub"
-            element={
-              <ProtectedRoute
-                component={NetworkingHub}
-                requiredRoles={["student, alumni"]}
-              />
-            }
-          />
 
+          {/* Careers */}
           <Route
             path="/careers/jobs"
             element={
@@ -128,6 +116,7 @@ function App() {
             }
           />
 
+          {/* Events */}
           <Route
             path="/events/upcoming-events"
             element={
@@ -159,7 +148,31 @@ function App() {
             path="/events/womens-conference"
             element={<WomensConference />}
           />
-          <Route path="/request-register" element={<RequestRegister />} />
+
+          {/* Networking Hub */}
+          <Route
+            path="/networking-hub"
+            element={
+              <ProtectedRoute
+                component={NetworkingHub}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
+
+          {/* Donation */}
+          <Route
+            path="/donation"
+            element={
+              <ProtectedRoute
+                component={Donation}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
+
+          {/* About */}
+          <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
       <Footer />
