@@ -113,9 +113,13 @@ const loginUser = async (userDetails) => {
     };
 
     const response = await fetch(url, options);
-    const { message } = await response.json();
     const status = response.status;
-    return { message, status };
+    if (response.ok) {
+      const { message, jwtToken } = await response.json();
+      return { message, jwtToken, status };
+    }
+    const { message } = await response.json();
+    return { status, message };
   } catch (error) {
     return { status: 400, message: error.message };
   }

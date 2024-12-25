@@ -1,12 +1,14 @@
 // src/Routes/Login.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { loginUser } from "../Store/Data/PostData";
+import Cookie from "js-cookie";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({
-    email: "",
+    userId: "",
     password: "",
     role: "",
   });
@@ -21,10 +23,15 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Add logic to handle login (e.g., API call)
-
-    const { status, message } = loginUser(userDetails);
-    console.log(message, status);
+    const response = await loginUser(userDetails);
+    if (response.status === 201) {
+      const { jwtToken } = response;
+      Cookie.set("jwtToken", jwtToken, { expires: 1 });
+      navigate("/");
+    } else {
+      const { message } = response;
+      alert(message);
+    }
   };
 
   return (
@@ -38,14 +45,14 @@ const Login = () => {
           {/* Email Input */}
           <div>
             <label className="block text-sm font-medium text-gray-600">
-              Email Address (Personal)
+              UserId (University Id)
             </label>
             <input
-              type="email"
-              name="email"
-              value={userDetails.email}
+              type="text"
+              name="userId"
+              value={userDetails.userId}
               onChange={handleChange}
-              placeholder="Enter your email"
+              placeholder="Enter your UserId"
               className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:ring focus:ring-red-400 focus:outline-none"
               required
             />

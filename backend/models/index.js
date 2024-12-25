@@ -1,5 +1,6 @@
 const Alumni = require("./alumni");
 const Payment = require("./payments");
 const Student = require("./students");
+const Admin = require("./admin");
 
-modules.export = { Alumni, Student, Payment };
+module.exports = { Alumni, Student, Payment, Admin };

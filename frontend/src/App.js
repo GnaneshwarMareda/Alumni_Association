@@ -28,6 +28,8 @@ import Donation from "./pages/Donation";
 
 import About from "./pages/About";
 import RequestRegister from "./pages/RequestRegister";
+import ProtectedRoute from "./Protected/ProtectedRoute";
+import CheckAlreadyLogged from "./Protected/CheckAlreadyLogged";
 
 function App() {
   return (
@@ -35,31 +37,124 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
-          <Route path="/admin-panel" element={<AdminControlPanel />} />
+          <Route
+            path="/admin-panel"
+            element={
+              <ProtectedRoute
+                component={AdminControlPanel}
+                requiredRoles={["admin"]}
+              />
+            }
+          />
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<CheckAlreadyLogged component={Login} />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
 
-          <Route path="/donation" element={<Donation />} />
-          <Route path="/alumni-directory" element={<AlumniDirectory />} />
+          <Route
+            path="/donation"
+            element={
+              <ProtectedRoute
+                component={Donation}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
+          <Route
+            path="/alumni-directory"
+            element={
+              <ProtectedRoute
+                component={AlumniDirectory}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
           <Route
             path="/alumni-directory/:id"
-            element={<AlumniDetailSection />}
+            element={
+              <ProtectedRoute
+                component={AlumniDetailSection}
+                requiredRoles={["student, alumni"]}
+              />
+            }
           />
-          <Route path="/networking-hub" element={<NetworkingHub />} />
+          <Route
+            path="/networking-hub"
+            element={
+              <ProtectedRoute
+                component={NetworkingHub}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
 
-          <Route path="/careers/jobs" element={<JobsPortal />} />
+          <Route
+            path="/careers/jobs"
+            element={
+              <ProtectedRoute
+                component={JobsPortal}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
           <Route
             path="/careers/career-resources"
-            element={<CareerResources />}
+            element={
+              <ProtectedRoute
+                component={CareerResources}
+                requiredRoles={["student, alumni"]}
+              />
+            }
           />
-          <Route path="/careers/career-events" element={<CareerEvents />} />
-          <Route path="/careers/career-advising" element={<CareerAdvising />} />
+          <Route
+            path="/careers/career-events"
+            element={
+              <ProtectedRoute
+                component={CareerEvents}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
+          <Route
+            path="/careers/career-advising"
+            element={
+              <ProtectedRoute
+                component={CareerAdvising}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
 
-          <Route path="/events/upcoming-events" element={<UpcomingEvents />} />
-          <Route path="/events/tech-reunions" element={<TechReunions />} />
-          <Route path="/events/conferences" element={<VirtualMeet />} />
+          <Route
+            path="/events/upcoming-events"
+            element={
+              <ProtectedRoute
+                component={UpcomingEvents}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
+          <Route
+            path="/events/tech-reunions"
+            element={
+              <ProtectedRoute
+                component={TechReunions}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
+          <Route
+            path="/events/conferences"
+            element={
+              <ProtectedRoute
+                component={VirtualMeet}
+                requiredRoles={["student, alumni"]}
+              />
+            }
+          />
           <Route
             path="/events/womens-conference"
             element={<WomensConference />}
