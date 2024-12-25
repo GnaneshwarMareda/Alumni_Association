@@ -4,6 +4,7 @@ const generateJwtToken = (userId, role) => {
     userId,
     role,
   };
+  console.log(payload);
   const jwtToken = jwt.sign(payload, "Gnane");
   return jwtToken;
 };

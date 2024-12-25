@@ -25,7 +25,7 @@ router.post("/user", async (req, res) => {
     const isValidPassword = await verifyPassword(password, user.password);
 
     if (isValidPassword) {
-      const jwtToken = generateJwtToken(userId, user.role);
+      const jwtToken = generateJwtToken(userId, role);
       return res.status(201).json({ message: "Login Succesfull!", jwtToken });
     }
 

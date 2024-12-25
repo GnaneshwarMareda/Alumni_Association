@@ -10,13 +10,17 @@ const ProtectedRoute = ({ component: Component, requiredRoles, ...rest }) => {
     return <Navigate to="/login" />;
   }
 
-  const user = jwtDecode(jwtToken);
-  const isFound = requiredRoles.find(user.role);
-  if (isFound) {
-    return <Navigate to="/unauthorized" />;
-  }
+  try {
+    const user = jwtDecode(jwtToken);
 
-  return <Component {...rest} />;
+    if (user.role === requiredRoles[0] || user.role === requiredRoles[1]) {
+      return <Component {...rest} />;
+    }
+    return <Navigate to="/unauthorized" />;
+  } catch (error) {
+    console.error("Invalid JWT Token", error);
+    return <Navigate to="/login" />;
+  }
 };
 
 export default ProtectedRoute;

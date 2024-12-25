@@ -30,6 +30,7 @@ import About from "./pages/About";
 
 import ProtectedRoute from "./Protected/ProtectedRoute";
 import CheckAlreadyLogged from "./Protected/CheckAlreadyLogged";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -57,13 +58,21 @@ function App() {
           />
           <Route path="/register" element={<Register />} />
 
-          {/* Alumni Directory */}
+          <Route
+            path="/donation"
+            element={
+              <ProtectedRoute
+                component={Donation}
+                requiredRoles={["student", "alumni"]}
+              />
+            }
+          />
           <Route
             path="/alumni-directory"
             element={
               <ProtectedRoute
                 component={AlumniDirectory}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
@@ -73,18 +82,26 @@ function App() {
             element={
               <ProtectedRoute
                 component={AlumniDetailSection}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
-
+          <Route
+            path="/networking-hub"
+            element={
+              <ProtectedRoute
+                component={NetworkingHub}
+                requiredRoles={["student", "alumni"]}
+              />
+            }
+          />
           {/* Careers */}
           <Route
             path="/careers/jobs"
             element={
               <ProtectedRoute
                 component={JobsPortal}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
@@ -93,7 +110,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={CareerResources}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
@@ -102,7 +119,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={CareerEvents}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
@@ -111,7 +128,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={CareerAdvising}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
@@ -122,7 +139,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={UpcomingEvents}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
@@ -131,7 +148,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={TechReunions}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
@@ -140,7 +157,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={VirtualMeet}
-                requiredRoles={["student, alumni"]}
+                requiredRoles={["student", "alumni"]}
               />
             }
           />
@@ -173,6 +190,8 @@ function App() {
 
           {/* About */}
           <Route path="/about" element={<About />} />
+          <Route path="/request-register" element={<RequestRegister />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
       <Footer />
