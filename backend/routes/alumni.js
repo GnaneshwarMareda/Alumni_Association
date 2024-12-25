@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { verifyAlumniToken } = require("../middlewares/verifyToken");
+const {
+  verifyAlumniToken,
+  verifyStudentToken,
+} = require("../middlewares/verifyToken");
 
 const {
   getAlumniData,
@@ -10,7 +13,7 @@ const {
 } = require("../controllers/alumni");
 
 // Alumni routes
-router.get("/directory", verifyAlumniToken, getAlumniData);
+router.get("/directory", verifyStudentToken, getAlumniData);
 router.get("/profile/:id", verifyAlumniToken, getAlumniProfile);
 router.put("/profile/:id", verifyAlumniToken, updateAlumniProfile);
 router.get("/similar-matches", verifyAlumniToken, getAlumniSimilarMatches);

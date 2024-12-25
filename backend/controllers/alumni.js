@@ -2,9 +2,10 @@ const Alumni = require("../models/alumni");
 
 const getAlumniData = async (req, res) => {
   try {
-    const { fieldOfStudy, graduationYear, userId, name } = req.query;
+    // const { fieldOfStudy, graduationYear, userId, name } = req.query;
 
     const data = await Alumni.find();
+    //console.log(data);
     return res
       .status(200)
       .json({ message: "Data retrieved successfully.", data });

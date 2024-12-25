@@ -28,7 +28,6 @@ const JobsPortal = () => {
     const fetchJobs = async () => {
       try {
         const response = await getVerifiedJobs();
-        console.log(response.data);
         setJobs(response.data);
       } catch (error) {
         console.error("Error fetching jobs:", error);

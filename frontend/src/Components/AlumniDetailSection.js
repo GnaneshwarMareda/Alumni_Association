@@ -12,16 +12,12 @@ function AlumniDetailSection() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(state);
         const response = await getAlumniSimilarMatches({
           graduationYear: state.graduationYear,
           company: state.company,
           fieldOfStudy: state.fieldOfStudy,
         });
-
-        console.log(response);
-        const data = response;
-        setSimilarAlumniData(data || []);
+        setSimilarAlumniData(response || []);
       } catch (error) {
         setError(error.message || "Failed to fetch data.");
       } finally {
@@ -35,50 +31,69 @@ function AlumniDetailSection() {
   const alumnus = state?.alumnus;
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-lg text-gray-600">Loading...</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <p className="text-red-500">{error}</p>;
+    return <p className="text-red-500 text-center mt-10">{error}</p>;
   }
 
   if (!alumnus) {
-    return <h1 className="text-center text-gray-500">Alumnus not found.</h1>;
+    return (
+      <h1 className="text-center text-gray-500 mt-10">
+        Alumnus information not available.
+      </h1>
+    );
   }
-
-  console.log(similarAlumniData);
 
   return (
     <div className="w-full min-h-screen bg-gray-50 flex flex-col items-center p-6">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+        className="self-start bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full hover:shadow-lg mb-4"
       >
         Back
       </button>
 
-      {/* Profile Card */}
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md text-center mt-20">
+      {/* Profile Section */}
+      <div className="w-full max-w-4xl text-center">
         <img
           src={alumnus.profilePicture || "/placeholder-profile.jpg"}
           alt={alumnus.name}
-          className="rounded-full w-32 h-32 mx-auto"
+          className="rounded-full w-32 h-32 mx-auto border-4 border-blue-500"
         />
-        <h1 className="font-bold text-2xl mt-4">{alumnus.name}</h1>
-        <p className="text-gray-500">
+        <h1 className="font-extrabold text-3xl mt-4 text-gray-800">
+          {alumnus.name}
+        </h1>
+        <p className="text-indigo-600 text-lg font-medium mt-2">
           {alumnus.jobRole} at {alumnus.company}
         </p>
-        <div className="mt-4 text-gray-600 text-sm">
-          <p>Location: {alumnus.location}</p>
-          <p>Graduation Year: {alumnus.graduationYear}</p>
-          <p>Degree: {alumnus.degree}</p>
-          <p>Field of Study: {alumnus.fieldOfStudy}</p>
+        <div className="mt-6 text-gray-600 text-base space-y-2">
+          <p>
+            <span className="font-semibold">Location:</span> {alumnus.location}
+          </p>
+          <p>
+            <span className="font-semibold">Graduation Year:</span>{" "}
+            {alumnus.graduationYear}
+          </p>
+          <p>
+            <span className="font-semibold">Degree:</span> {alumnus.degree}
+          </p>
+          <p>
+            <span className="font-semibold">Field of Study:</span>{" "}
+            {alumnus.fieldOfStudy}
+          </p>
         </div>
+        <hr className="my-4 border-gray-300" />
       </div>
 
       {/* Similar Alumni Section */}
-      <div className="mt-12 w-full">
+      <div className="mt-8 w-full">
         <h2 className="text-xl font-semibold mb-4 text-center">
           Similar Alumni
         </h2>

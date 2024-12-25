@@ -5,7 +5,9 @@ const getVerifiedJobs = async (req, res) => {
   try {
     const jobs = await Jobs.find({ status: "VERIFIED" });
     //console.log(jobs);
-    res.status(200).json({ message: "Job posted successfully!", jobs: jobs });
+    res
+      .status(200)
+      .json({ message: "Jobs retrieved successfully!", jobs: jobs });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -15,7 +17,9 @@ const getUnVerifiedJobs = async (req, res) => {
   try {
     const jobs = await Jobs.find({ status: "PENDING" });
     //console.log(jobs);
-    res.status(200).json({ message: "Job posted successfully!", jobs: jobs });
+    res
+      .status(200)
+      .json({ message: "Jobs retrieved successfully!", jobs: jobs });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -33,7 +37,7 @@ const updateJobStatus = async (req, res) => {
         },
       }
     );
-    return res.status(200).json({ message: "Sucefulyy changed" });
+    return res.status(200).json({ message: "Successfully changed" });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }

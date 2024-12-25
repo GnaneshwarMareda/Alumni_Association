@@ -1,9 +1,14 @@
+import Cookie from "js-cookie";
 const { default: URL } = require("../Url");
 
-const getAlumniData = async () => {
+export const getAlumniData = async () => {
   try {
     const options = {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${Cookie.get("jwtToken")}`,
+      },
     };
     const url = `${URL}/alumni/directory`;
     const response = await fetch(url, options);
@@ -16,7 +21,7 @@ const getAlumniData = async () => {
   }
 };
 
-const getAlumniSimilarMatches = async ({
+export const getAlumniSimilarMatches = async ({
   fieldOfStudy,
   graduationYear,
   company,
@@ -24,6 +29,10 @@ const getAlumniSimilarMatches = async ({
   try {
     const options = {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${Cookie.get("jwtToken")}`,
+      },
     };
     const url = `${URL}/alumni/simlar-matches?fieldOfStudy=${fieldOfStudy}&graduationYear=${graduationYear}&company=${company}`;
     const response = await fetch(url, options);
@@ -36,10 +45,14 @@ const getAlumniSimilarMatches = async ({
   }
 };
 
-const getVerifiedJobs = async () => {
+export const getVerifiedJobs = async () => {
   const url = `${URL}/careers/jobs/students`;
   const options = {
     method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${Cookie.get("jwtToken")}`,
+    },
   };
   const response = await fetch(url, options);
   //console.log(response);
@@ -52,10 +65,14 @@ const getVerifiedJobs = async () => {
   }
 };
 
-const getUnverifiedJobs = async () => {
+export const getUnverifiedJobs = async () => {
   const url = `${URL}/careers/jobs/admin`;
   const options = {
     method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${Cookie.get("jwtToken")}`,
+    },
   };
   const response = await fetch(url, options);
   //console.log(response);
@@ -68,9 +85,9 @@ const getUnverifiedJobs = async () => {
   }
 };
 
-module.exports = {
-  getAlumniData,
-  getAlumniSimilarMatches,
-  getVerifiedJobs,
-  getUnverifiedJobs,
-};
+// module.exports = {
+//   getAlumniData,
+//   getAlumniSimilarMatches,
+//   getVerifiedJobs,
+//   getUnverifiedJobs,
+// };

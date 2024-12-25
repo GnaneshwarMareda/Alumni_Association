@@ -78,7 +78,7 @@ function App() {
           />
 
           <Route
-            path="/alumni-directory/:id"
+            path="/alumni/profile/:id"
             element={
               <ProtectedRoute
                 component={AlumniDetailSection}

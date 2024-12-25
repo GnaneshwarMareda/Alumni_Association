@@ -138,11 +138,11 @@ function AlumniDirectory() {
           >
             <option value="">All Locations</option>
             <option value="Hyderabad">Hyderabad</option>
-            <option value="Kolkata">Kolkata</option>
+            <option value="Kolkata">Bengalore</option>
             <option value="Mumbai">Mumbai</option>
             <option value="Pune">Pune</option>
-            <option value="Kerela">Kerela</option>
-            <option value="UP">UP</option>
+            <option value="Kerela">Chennai</option>
+            <option value="UP">Noida</option>
           </select>
         </div>
       </div>
@@ -176,7 +176,7 @@ function AlumniDirectory() {
               <button
                 className="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600"
                 onClick={() =>
-                  navigate(`/alumni-directory/${alumnus._id}`, {
+                  navigate(`/alumni/profile/${alumnus._id}`, {
                     state: { alumnus },
                   })
                 }
