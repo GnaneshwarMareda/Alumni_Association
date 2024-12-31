@@ -1,6 +1,14 @@
 import Cookie from "js-cookie";
 const { default: URL } = require("../Url");
 
+const options = {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    authorization: `Bearer ${Cookie.get("jwtToken")}`,
+  },
+};
+
 export const getAlumniData = async () => {
   try {
     const options = {
@@ -82,6 +90,35 @@ export const getUnverifiedJobs = async () => {
   } else {
     const { message } = await response.json();
     return { data: [], message };
+  }
+};
+
+export const getEvents = async () => {
+  try {
+    const url = `${URL}/events`;
+    const response = await fetch(url, options);
+    const { message, events } = await response.json();
+    return { message, events };
+  } catch (error) {
+    return { message: error.message };
+  }
+};
+
+export const getUpcomingEvents = async () => {
+  try {
+    const url = `${URL}/events/upcoming-events`;
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${Cookie.get("jwtToken")}`,
+      },
+    };
+    const response = fetch(url, options);
+    const { message, data } = (await response).json();
+    return { message, data };
+  } catch (error) {
+    return { message: error.message };
   }
 };
 

@@ -58,4 +58,42 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-module.exports = { getEvents, addEvent, editEvent, deleteEvent };
+const getUpcomingEvents = async (req, res) => {
+  try {
+    const currentDate = new Date();
+
+    // Query to fetch events where the event date is in the future
+    const upcomingEvents = await Events.find({
+      eventDate: { $gte: currentDate },
+    })
+      .sort({ eventDate: 1 }) // Sort events by date (ascending)
+      .limit(10); // Limit the number of events to 10 (optional)
+
+    // Check if events are found
+    if (!upcomingEvents || upcomingEvents.length === 0) {
+      return res.status(404).json({ message: "No upcoming events found." });
+    }
+
+    // Send the events as a response
+    res.status(200).json({
+      success: true,
+      message: "Upcoming events fetched successfully.",
+      events: upcomingEvents,
+    });
+  } catch (error) {
+    console.error("Error fetching upcoming events:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch upcoming events.",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = {
+  getEvents,
+  addEvent,
+  editEvent,
+  deleteEvent,
+  getUpcomingEvents,
+};

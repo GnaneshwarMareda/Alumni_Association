@@ -43,7 +43,7 @@ const addSuccessStory = async (title, image, description) => {
   }
 };
 
-const addEvent = async (title, description, image, dateOfEvent) => {
+const addEvent = async ({ title, description, image, dateOfEvent }) => {
   try {
     const url = `${URL}/events`;
     const options = {

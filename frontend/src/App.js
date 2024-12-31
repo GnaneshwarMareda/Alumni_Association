@@ -22,7 +22,6 @@ import CareerAdvising from "./Components/CareerAdvising";
 import UpcomingEvents from "./Components/UpcomingEvents";
 import TechReunions from "./Components/TechReunions";
 import WomensConference from "./Components/WomensConference";
-import VirtualMeet from "./Components/VirtualMeet";
 
 import NetworkingHub from "./pages/NetworkingHub";
 import Donation from "./pages/Donation";
@@ -31,6 +30,7 @@ import About from "./pages/About";
 import ProtectedRoute from "./Protected/ProtectedRoute";
 import CheckAlreadyLogged from "./Protected/CheckAlreadyLogged";
 import NotFound from "./pages/NotFound";
+import Conferences from "./Components/Conferences";
 
 function App() {
   return (
@@ -156,7 +156,7 @@ function App() {
             path="/events/conferences"
             element={
               <ProtectedRoute
-                component={VirtualMeet}
+                component={Conferences}
                 requiredRoles={["student", "alumni"]}
               />
             }

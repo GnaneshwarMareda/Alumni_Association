@@ -15,6 +15,10 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  timeOfEvent: {
+    type: String,
+    required: true,
+  },
   createDate: {
     type: Date,
     default: Date.now,
@@ -22,6 +26,19 @@ const eventSchema = new mongoose.Schema({
   lastUpdateDate: {
     type: Date,
     default: Date.now,
+  },
+  image: {
+    type: String,
+    required: false,
+  },
+  link: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  eventType: {
+    type: String,
+    required: true,
   },
 });
 

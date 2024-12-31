@@ -16,7 +16,6 @@ const AdminControlPanel = () => {
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
-    // You can implement additional logic to toggle the theme in your app (e.g., add/remove classes, update localStorage).
     if (darkMode) {
       document.documentElement.classList.remove("dark");
     } else {
@@ -29,7 +28,6 @@ const AdminControlPanel = () => {
   };
 
   const handleLogout = () => {
-    // Implement logout functionality here (e.g., clearing session, redirecting to login page)
     console.log("Logging out...");
   };
 

@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Events from "../pages/Events";
 import Gatherings from "../images/gatherings.jpg";
 import Leadership from "../images/leadership.jpg";
 import Reunion from "../images/reunion.jpeg";
 import Upcoming from "../images/upcoming.jpg";
 import Event from "../images/events.jpg";
+import { getUpcomingEvents } from "../Store/Data/FetchData";
 
 const UpcomingEvents = () => {
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+
+  useEffect(() => {
+    const { data } = getUpcomingEvents();
+    setUpcomingEvents(data);
+  }, []);
+
+  console.log(upcomingEvents);
+
   return (
     <Events>
       <div className="px-6">
