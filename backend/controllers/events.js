@@ -15,7 +15,9 @@ const getEvents = async (req, res) => {
 // Post a new event
 const addEvent = async (req, res) => {
   try {
+    console.log(req.body);
     const newEvent = new Events(req.body);
+
     console.log(req.body);
     const savedEvent = await newEvent.save();
     res
@@ -64,9 +66,9 @@ const getUpcomingEvents = async (req, res) => {
 
     // Query to fetch events where the event date is in the future
     const upcomingEvents = await Events.find({
-      eventDate: { $gte: currentDate },
+      dateOfEvent: { $gte: currentDate },
     })
-      .sort({ eventDate: 1 }) // Sort events by date (ascending)
+      .sort({ dateOfEvent: 1 }) // Sort events by date (ascending)
       .limit(10); // Limit the number of events to 10 (optional)
 
     // Check if events are found
@@ -90,10 +92,60 @@ const getUpcomingEvents = async (req, res) => {
   }
 };
 
+const getConferences = async (req, res) => {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+
+    const upcomingData = await Events.find({
+      eventType: "Conference",
+      dateOfEvent: { $gte: today },
+    });
+
+    const pastData = await Events.find({
+      eventType: "Conference",
+      dateOfEvent: { $lt: today },
+    });
+
+    return res.status(200).json({
+      message: "Data Retrieved Successfully",
+      upcomingData,
+      pastData,
+    });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+const getTechReunions = async (req, res) => {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+
+    const upcomingData = await Events.find({
+      eventType: "TechReunion",
+      dateOfEvent: { $gte: today },
+    });
+
+    const pastData = await Events.find({
+      eventType: "TechReunion",
+      dateOfEvent: { $lt: today },
+    });
+
+    return res.status(200).json({
+      message: "Data Retrieved Successfully",
+      upcomingData,
+      pastData,
+    });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getEvents,
   addEvent,
   editEvent,
   deleteEvent,
   getUpcomingEvents,
+  getConferences,
+  getTechReunions,
 };

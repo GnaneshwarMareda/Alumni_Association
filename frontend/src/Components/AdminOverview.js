@@ -6,7 +6,7 @@ const AdminOverview = ({ changeSlide }) => {
   };
 
   const overviewData = [
-    { id: 1, title: "Total Jobs", count: 124, color: "bg-blue-500" },
+    { id: 1, title: "Jobs to be Approved", count: 124, color: "bg-blue-500" },
     { id: 2, title: "Pending Events", count: 7, color: "bg-green-500" },
     { id: 3, title: "Success Stories", count: 15, color: "bg-red-500" },
     {

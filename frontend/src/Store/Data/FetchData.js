@@ -11,13 +11,6 @@ const options = {
 
 export const getAlumniData = async () => {
   try {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${Cookie.get("jwtToken")}`,
-      },
-    };
     const url = `${URL}/alumni/directory`;
     const response = await fetch(url, options);
     if (response.ok) {
@@ -35,13 +28,6 @@ export const getAlumniSimilarMatches = async ({
   company,
 }) => {
   try {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${Cookie.get("jwtToken")}`,
-      },
-    };
     const url = `${URL}/alumni/simlar-matches?fieldOfStudy=${fieldOfStudy}&graduationYear=${graduationYear}&company=${company}`;
     const response = await fetch(url, options);
     if (response.ok) {
@@ -55,13 +41,6 @@ export const getAlumniSimilarMatches = async ({
 
 export const getVerifiedJobs = async () => {
   const url = `${URL}/careers/jobs/students`;
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${Cookie.get("jwtToken")}`,
-    },
-  };
   const response = await fetch(url, options);
   //console.log(response);
   if (response.ok) {
@@ -75,13 +54,7 @@ export const getVerifiedJobs = async () => {
 
 export const getUnverifiedJobs = async () => {
   const url = `${URL}/careers/jobs/admin`;
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${Cookie.get("jwtToken")}`,
-    },
-  };
+
   const response = await fetch(url, options);
   //console.log(response);
   if (response.ok) {
@@ -107,16 +80,32 @@ export const getEvents = async () => {
 export const getUpcomingEvents = async () => {
   try {
     const url = `${URL}/events/upcoming-events`;
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${Cookie.get("jwtToken")}`,
-      },
-    };
-    const response = fetch(url, options);
-    const { message, data } = (await response).json();
-    return { message, data };
+
+    const response = await fetch(url, options);
+    const { message, events } = await response.json();
+    return { message, data: events };
+  } catch (error) {
+    return { message: error.message };
+  }
+};
+
+export const getConferences = async () => {
+  try {
+    const url = `${URL}/events/conferences`;
+    const response = await fetch(url, options);
+    const { message, upcomingData, pastData } = await response.json();
+    return { message, upcomingData, pastData };
+  } catch (error) {
+    return { message: error.message };
+  }
+};
+
+export const getTechReunions = async () => {
+  try {
+    const url = `${URL}/events/conferences`;
+    const response = await fetch(url, options);
+    const { message, upcomingData, pastData } = await response.json();
+    return { message, upcomingData, pastData };
   } catch (error) {
     return { message: error.message };
   }

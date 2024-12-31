@@ -27,7 +27,7 @@ const Conferences = () => {
             />
           </div>
 
-          <h1 className="font-bold text-xl">Upcoming Tech Reunions</h1>
+          <h1 className="font-bold text-xl">Upcoming Workshops</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {upcomingTechReunions &&
               upcomingTechReunions.map((event) => (
@@ -47,7 +47,7 @@ const Conferences = () => {
           </div>
 
           <hr />
-          <h1 className="font-bold text-xl">Past Tech Reunions</h1>
+          <h1 className="font-bold text-xl">Past Workshops</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {pastTechReunioins &&
               pastTechReunioins.map((event) => (

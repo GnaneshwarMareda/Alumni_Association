@@ -191,7 +191,7 @@ const ManageEvents = () => {
                   Select Category
                 </option>
                 <option value="Conference">Conference</option>
-                <option value="Tech Reunion">Tech Reunion</option>
+                <option value="TechReunion">Tech Reunion</option>
                 <option value="Workshops">Workshops</option>
                 <option value="Others">Others</option>
               </select>
@@ -217,6 +217,7 @@ const ManageEvents = () => {
           <ul className="space-y-4">
             {events.map((event, index) => (
               <li key={index} className="p-4 bg-white rounded-lg shadow-md">
+                <img src={event.image} className="" alt={event.title} />
                 <h4 className="text-lg font-semibold text-gray-800">
                   {event.title}
                 </h4>

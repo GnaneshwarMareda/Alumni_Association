@@ -21,7 +21,6 @@ import CareerAdvising from "./Components/CareerAdvising";
 
 import UpcomingEvents from "./Components/UpcomingEvents";
 import TechReunions from "./Components/TechReunions";
-import WomensConference from "./Components/WomensConference";
 
 import NetworkingHub from "./pages/NetworkingHub";
 import Donation from "./pages/Donation";
@@ -31,6 +30,7 @@ import ProtectedRoute from "./Protected/ProtectedRoute";
 import CheckAlreadyLogged from "./Protected/CheckAlreadyLogged";
 import NotFound from "./pages/NotFound";
 import Conferences from "./Components/Conferences";
+import WorkShops from "./Components/WorkShops";
 
 function App() {
   return (
@@ -161,10 +161,7 @@ function App() {
               />
             }
           />
-          <Route
-            path="/events/womens-conference"
-            element={<WomensConference />}
-          />
+          <Route path="/events/workshops" element={<WorkShops />} />
 
           {/* Networking Hub */}
           <Route

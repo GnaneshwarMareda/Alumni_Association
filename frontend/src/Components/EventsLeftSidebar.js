@@ -9,7 +9,7 @@ const data = [
     path: "/events/conferences",
   },
   { name: "Tech Reunions", path: "/events/tech-reunions" },
-  { name: "Women's Conference", path: "/events/womens-conference" },
+  { name: "Workshops", path: "/events/workshops" },
 ];
 
 const EventsLeftSidebar = () => {
