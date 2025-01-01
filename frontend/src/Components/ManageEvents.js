@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getEvents } from "../Store/Data/FetchData";
 import { addEvent } from "../Store/Data/PostData";
+import DateFormater from "../Store/DateFormater";
 
 const ManageEvents = () => {
   const [events, setEvents] = useState([]); // To hold existing events
@@ -13,6 +14,7 @@ const ManageEvents = () => {
     dateOfEvent: "",
     timeOfEvent: "",
     eventType: "",
+    directUrl: "",
   });
 
   // Fetch existing events from the database
@@ -28,29 +30,35 @@ const ManageEvents = () => {
     e.preventDefault();
 
     try {
+      let eventData;
       let imageUrl = "";
 
-      if (newEvent.image) {
-        const formData = new FormData();
-        formData.append("file", newEvent.image);
-        formData.append("upload_preset", "image_preset");
-        formData.append("cloud_name", "dqztnamkx"); // Replace with your Cloudinary cloud name
+      if (newEvent.directUrl && newEvent.directUrl.length > 0) {
+        eventData = {
+          ...newEvent,
+          image: newEvent.directUrl,
+        };
+      } else {
+        if (newEvent.image) {
+          const formData = new FormData();
+          formData.append("file", newEvent.image);
+          formData.append("upload_preset", "image_preset");
+          formData.append("cloud_name", "dqztnamkx"); // Replace with your Cloudinary cloud name
 
-        const response = await axios.post(
-          "https://api.cloudinary.com/v1_1/dqztnamkx/image/upload",
-          formData
-        );
+          const response = await axios.post(
+            "https://api.cloudinary.com/v1_1/dqztnamkx/image/upload",
+            formData
+          );
 
-        imageUrl = response.data.secure_url; // Get the uploaded image URL
+          imageUrl = response.data.secure_url; // Get the uploaded image URL
+        }
+
+        eventData = {
+          ...newEvent,
+          image: imageUrl,
+        };
       }
 
-      // Prepare event data
-      const eventData = {
-        ...newEvent,
-        image: imageUrl, // Set the Cloudinary image URL
-      };
-
-      // Send the event data to the backend
       const { message } = await addEvent(eventData);
       alert(message);
 
@@ -73,7 +81,7 @@ const ManageEvents = () => {
   };
 
   return (
-    <section className="bg-gradient-to-r from-blue-50 to-indigo-100 shadow-lg rounded-xl p-8 mb-10">
+    <section className="bg-gradient-to-r from-blue-0 to-indigo-100 shadow-lg rounded-xl p-8 mb-10">
       <div className="flex justify-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           🎉 Manage Events
@@ -138,7 +146,15 @@ const ManageEvents = () => {
                   setNewEvent({ ...newEvent, image: e.target.files[0] })
                 }
                 className="peer w-full px-4 py-3  border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                required
+              />
+              or give Image URL
+              <input
+                type="text"
+                value={newEvent.directUrl}
+                onChange={(e) =>
+                  setNewEvent({ ...newEvent, directUrl: e.target.value })
+                }
+                className="peer w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
@@ -213,17 +229,24 @@ const ManageEvents = () => {
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Existing Events
         </h3>
-        {events ? (
-          <ul className="space-y-4">
+        {events.length > 0 ? (
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {events.map((event, index) => (
-              <li key={index} className="p-4 bg-white rounded-lg shadow-md">
-                <img src={event.image} className="" alt={event.title} />
-                <h4 className="text-lg font-semibold text-gray-800">
+              <li
+                key={index}
+                className="p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105"
+              >
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="w-full h-48 object-cover rounded-t-lg mb-4"
+                />
+                <h4 className="text-lg font-semibold text-gray-800 mb-2">
                   {event.title}
                 </h4>
-                <p className="text-gray-600">{event.description}</p>
+                <p className="text-gray-600 mb-2">{event.description}</p>
                 <span className="text-sm text-gray-500">
-                  {event.dateOfEvent} at {event.timeOfEvent} | {event.category}
+                  {DateFormater(event.dateOfEvent)} at {event.timeOfEvent}
                 </span>
               </li>
             ))}

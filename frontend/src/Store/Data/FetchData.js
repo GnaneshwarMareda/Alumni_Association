@@ -111,6 +111,17 @@ export const getTechReunions = async () => {
   }
 };
 
+export const getSuccessStories = async () => {
+  try {
+    const url = `${URL}/success-stories`;
+    const response = await fetch(url, options);
+    const { message, data } = await response.json();
+    return { message, data };
+  } catch (error) {
+    return { message: error.message };
+  }
+};
+
 // module.exports = {
 //   getAlumniData,
 //   getAlumniSimilarMatches,

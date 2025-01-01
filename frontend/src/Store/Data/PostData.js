@@ -18,7 +18,7 @@ const postJob = async (newJob) => {
   }
 };
 
-const addSuccessStory = async (title, image, description) => {
+const addSuccessStory = async ({ title, image, description }) => {
   try {
     const url = `${URL}/success-stories`;
     const options = {

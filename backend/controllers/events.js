@@ -3,7 +3,7 @@ const Events = require("../models/events");
 // Retrieve all events
 const getEvents = async (req, res) => {
   try {
-    const events = await Events.find({});
+    const events = await Events.find({}).sort({ dateOfEvent: 1 });
     res
       .status(200)
       .json({ message: "Events retrieved successfully!", events: events });

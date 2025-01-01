@@ -8,7 +8,7 @@ const getSuccessStories = async (req, res) => {
       .limit(3);
     res.status(200).json({
       message: "Success stories retrieved successfully!",
-      successStories: successStories,
+      data: successStories,
     });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -25,6 +25,7 @@ const addSuccessStory = async (req, res) => {
       data: savedStory,
     });
   } catch (err) {
+    console.log(err.message);
     res.status(400).json({ message: err.message });
   }
 };

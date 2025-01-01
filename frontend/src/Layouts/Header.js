@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-
+import Cookies from "js-cookie";
 import logo from "../images/logo.jpeg";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const jwtToken = Cookies.get("jwtToken");
+  //const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    Cookies.remove("jwtToken");
+    // navigate("/login");
   };
 
   return (
@@ -49,22 +58,23 @@ const Header = () => {
             About
           </a>
         </nav>
-        {/* Give Now Button */}
-        <a
-          href="#give"
-          className="hidden md:inline-block bg-red-600 px-4 py-2 rounded-md font-semibold hover:bg-red-700 transition duration-300"
-        >
-          Give Now
-        </a>
 
         {/* Login Button */}
-        <a
-          href="/login"
-          className="hidden md:inline-block bg-red-600 px-4 py-2 rounded-md font-semibold hover:bg-red-700 transition duration-300"
-        >
-          Login
-        </a>
-
+        {jwtToken ? (
+          <button
+            onClick={handleLogout}
+            className="hidden md:inline-block bg-red-600 px-4 py-2 rounded-md font-semibold hover:bg-red-700 transition duration-300"
+          >
+            Logout
+          </button>
+        ) : (
+          <a
+            href="/login"
+            className="hidden md:inline-block bg-red-600 px-4 py-2 rounded-md font-semibold hover:bg-red-700 transition duration-300"
+          >
+            Login
+          </a>
+        )}
         {/* Mobile Menu Icon */}
         <div className="md:hidden">
           <button onClick={toggleMenu} aria-label="Toggle Menu">
@@ -98,12 +108,6 @@ const Header = () => {
             </a>
             <a href="/about" className="hover:text-red-400">
               About
-            </a>
-            <a
-              href="#give"
-              className="bg-red-600 px-4 py-2 mt-2 text-center rounded-md font-semibold hover:bg-red-700 transition duration-300"
-            >
-              Give Now
             </a>
             <a
               href="/login"

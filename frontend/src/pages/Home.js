@@ -1,11 +1,27 @@
 import React from "react";
+import { useEffect, useState } from "react";
 
 import b13_AEE from "../images/success_stories/B13_AEE.jpeg";
 import b14_AEE from "../images/success_stories/B14_AEE.jpeg";
 import b16_AEE from "../images/success_stories/B16_AEE.jpeg";
 import Maruthi_b14 from "../images/success_stories/Maruthi_B14.jpeg";
+import { getSuccessStories } from "../Store/Data/FetchData";
 
 const Home = () => {
+  const [stories, setStories] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await getSuccessStories();
+        setStories(data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   // Dummy data
   const events = [
     {
@@ -31,39 +47,11 @@ const Home = () => {
     },
   ];
 
-  const successStories = [
-    {
-      id: 1,
-      name: "B13 Batch",
-      story:
-        "Congratulations to all the alumni from the B13 batch selected for AEE positions in Telangana State",
-      image: b13_AEE,
-    },
-    {
-      id: 2,
-      name: "B14 Batch",
-      story:
-        "Congratulations to all the alumni from the B14 batch selected for AEE positions in Telangana State",
-      image: b14_AEE,
-    },
-    {
-      id: 3,
-      name: "B16 Batch",
-      story:
-        "Congratulations to all the alumni from the B16 batch selected for AEE positions in Telangana State",
-      image: b16_AEE,
-    },
-    {
-      id: 4,
-      name: "Mr. Maruthi",
-      story:
-        "Congratulations, Mr. Maruthi from the B14 Batch of Mechanical Engineering, for your incredible achievement of conquering the highest peak in Europe, Mt. Elbrus at 5,642 meters!",
-      image: Maruthi_b14,
-    },
-  ];
-
   const photos = [
-    { url: "https://via.placeholder.com/150", alt: "Photo 1" },
+    {
+      url: "https://scontent.fhyd14-2.fna.fbcdn.net/v/t39.30808-6/324232721_1009332513359590_7648773565822675696_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=2285d6&_nc_ohc=aay6sj9sHnQQ7kNvgFI6Jr4&_nc_zt=23&_nc_ht=scontent.fhyd14-2.fna&_nc_gid=Ayv46tWpvXBts5jdPrNTQyD&oh=00_AYC1h3UjvLs-dn6Vv7E4Z73UlTx4E3ZsdMPkO1T9sqn9RQ&oe=677A6CB9",
+      alt: "Photo 1",
+    },
     { url: "https://via.placeholder.com/150", alt: "Photo 2" },
     { url: "https://via.placeholder.com/150", alt: "Photo 3" },
     { url: "https://via.placeholder.com/150", alt: "Photo 4" },
@@ -143,26 +131,29 @@ const Home = () => {
         <h2 className="text-2xl font-bold text-center mb-8">
           Success Stories and Achievements
         </h2>
-        <div className="relative flex items-center space-x-4 animate-marquee">
-          {successStories.map((story) => (
-            <div
-              key={story.id}
-              className="relative bg-blue-50 rounded-lg shadow-lg p-4 min-w-[16rem] min-h-[20rem] max-w-[18rem] 
-                    flex-shrink-0 hover:shadow-xl transition-shadow flex flex-col items-center justify-between"
-            >
-              <img
-                src={story.image}
-                alt={story.name}
-                className="w-70 h-40 object-cover  mb-4"
-              />
-              <h3 className="text-lg font-semibold text-center">
-                {story.name}
-              </h3>
-              <p className="text-gray-600 text-center text-sm mt-2">
-                {story.story}
-              </p>
-            </div>
-          ))}
+        <div className="mb-8">
+          {stories && stories.length > 0 ? (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 animate-marquee">
+              {stories.map((event, index) => (
+                <li
+                  key={index}
+                  className="p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                >
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-48 object-cover rounded-t-lg mb-4"
+                  />
+                  <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                    {event.title}
+                  </h4>
+                  <p className="text-gray-600 mb-2">{event.description}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-600">No events available. Add one now!</p>
+          )}
         </div>
       </section>
       <hr className="my-2 border-gray-300" />
