@@ -1,7 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Header from "./Layouts/Header";
 import Footer from "./Layouts/Footer";
 
 import Register from "./pages/Register";
@@ -31,12 +30,13 @@ import CheckAlreadyLogged from "./Protected/CheckAlreadyLogged";
 import NotFound from "./pages/NotFound";
 import Conferences from "./Components/Conferences";
 import WorkShops from "./Components/WorkShops";
+import ProtectedHeader from "./Protected/ProtectedHeader";
 
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <ProtectedHeader />
         <Routes>
           {/* Admin Panel */}
           <Route

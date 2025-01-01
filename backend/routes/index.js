@@ -23,4 +23,6 @@ router.use("/events", eventRouter);
 
 router.use("/success-stories", successStoriesRouter);
 
+router.use("/admin", adminRouter);
+
 module.exports = router;

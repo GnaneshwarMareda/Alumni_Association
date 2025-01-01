@@ -35,4 +35,22 @@ const updateJobStatus = async (id, status) => {
   }
 };
 
-module.exports = { updateJob, updateJobStatus };
+const promoteStudents = async (year) => {
+  try {
+    const url = `${URL}/admin/promote-students`;
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ year }),
+    };
+    const response = await fetch(url, options);
+    const { message } = await response.json();
+    return { message };
+  } catch (error) {
+    return { message: error.message };
+  }
+};
+
+module.exports = { updateJob, updateJobStatus, promoteStudents };

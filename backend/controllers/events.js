@@ -63,13 +63,13 @@ const deleteEvent = async (req, res) => {
 const getUpcomingEvents = async (req, res) => {
   try {
     const currentDate = new Date();
+    console.log(currentDate);
 
-    // Query to fetch events where the event date is in the future
     const upcomingEvents = await Events.find({
       dateOfEvent: { $gte: currentDate },
     })
-      .sort({ dateOfEvent: 1 }) // Sort events by date (ascending)
-      .limit(10); // Limit the number of events to 10 (optional)
+      .sort({ dateOfEvent: 1 })
+      .limit(10);
 
     // Check if events are found
     if (!upcomingEvents || upcomingEvents.length === 0) {

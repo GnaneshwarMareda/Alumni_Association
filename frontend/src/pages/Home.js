@@ -1,17 +1,15 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
-import b13_AEE from "../images/success_stories/B13_AEE.jpeg";
-import b14_AEE from "../images/success_stories/B14_AEE.jpeg";
-import b16_AEE from "../images/success_stories/B16_AEE.jpeg";
-import Maruthi_b14 from "../images/success_stories/Maruthi_B14.jpeg";
-import { getSuccessStories } from "../Store/Data/FetchData";
+import { getSuccessStories, getUpcomingEvents } from "../Store/Data/FetchData";
+import DateFormater from "../Store/DateFormater";
+import photos from "../Store/HomeData";
 
 const Home = () => {
   const [stories, setStories] = useState([]);
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchSuccessStories = async () => {
       try {
         const { data } = await getSuccessStories();
         setStories(data);
@@ -19,60 +17,19 @@ const Home = () => {
         console.error("Error fetching events:", error);
       }
     };
-    fetchData();
+
+    const fetchUpComingEvents = async () => {
+      try {
+        const { data } = await getUpcomingEvents();
+        setUpcomingEvents(data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchSuccessStories();
+    fetchUpComingEvents();
   }, []);
-
-  // Dummy data
-  const events = [
-    {
-      id: 1,
-      title: "Annual Alumni Meet 2024",
-      description: "Reconnect with old friends and celebrate achievements.",
-      date: "December 15, 2024",
-      link: "http://localhost:3000/",
-    },
-    {
-      id: 2,
-      title: "Webinar: Career Growth Tips",
-      description: "Learn from experienced alumni in various industries.",
-      date: "November 30, 2024",
-      link: "http://localhost:3000/",
-    },
-    {
-      id: 3,
-      title: "Sports Day Reunion",
-      description: "Relive the glory of your sporting days with a fun event.",
-      date: "January 10, 2025",
-      link: "http://localhost:3000/",
-    },
-  ];
-
-  const photos = [
-    {
-      url: "https://scontent.fhyd14-2.fna.fbcdn.net/v/t39.30808-6/324232721_1009332513359590_7648773565822675696_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=2285d6&_nc_ohc=aay6sj9sHnQQ7kNvgFI6Jr4&_nc_zt=23&_nc_ht=scontent.fhyd14-2.fna&_nc_gid=Ayv46tWpvXBts5jdPrNTQyD&oh=00_AYC1h3UjvLs-dn6Vv7E4Z73UlTx4E3ZsdMPkO1T9sqn9RQ&oe=677A6CB9",
-      alt: "Photo 1",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdFmbfxkPfDVc-OE5fTKqzPBk9_5SWgb9SEA&s",
-      alt: "Photo 2",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWZdoAfPdJPweq8w7Zbgb9oiHNgyMOSDPTEPgPpjpKn8hzzcSbX5VI6RlULYNkSqRvVcs&usqp=CAU",
-      alt: "Photo 3",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpwmqapc2J4Dtq7XahnOtvCBdfYqz4JOsBHA&s",
-      alt: "Photo 4",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp5OxI9qwPpuzeOoH6HqaysQwUIn2KOAjPOw&s",
-      alt: "Photo 5",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3M8QHxcZzLQCGsXTuE9kPb27OOBISry6d_J0zP7gVdUpm4BKFjlLrhD_b_CSOop8Yt70&usqp=CAU",
-      alt: "Photo 6",
-    },
-  ];
 
   return (
     <div className="bg-gray-100">
@@ -120,8 +77,8 @@ const Home = () => {
           <div className="flex-1 lg:pl-4">
             <h3 className="text-xl font-bold ml-5 mb-4">Upcoming Events</h3>
             <ul className="divide-y divide-gray-300">
-              {events.map((event) => (
-                <li key={event.id} className="p-4 hover:bg-gray-50">
+              {upcomingEvents.map((event) => (
+                <li key={event._id} className="p-4 hover:bg-gray-50">
                   <a
                     href={event.link}
                     target="_blank"
@@ -131,7 +88,9 @@ const Home = () => {
                     {event.title}
                   </a>
                   <p className="text-sm text-gray-600">{event.description}</p>
-                  <p className="text-sm text-gray-500 mt-1">{event.date}</p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {DateFormater(event.dateOfEvent)}
+                  </p>
                 </li>
               ))}
             </ul>

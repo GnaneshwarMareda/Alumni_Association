@@ -15,16 +15,20 @@ const UpcomingEvents = () => {
     fetchData();
   }, []);
 
+  const remainingEvents = upcomingEvents.filter(
+    (item) => item._id !== upcomingEvents[0]._id
+  );
+
   return (
     <Events>
       <div className="px-6">
         <section className="flex-1 py-6 text-center">
           {upcomingEvents.length > 0 && (
-            <div className="bg-white p-6 shadow rounded">
+            <div className="bg-white p-6 h-[450px] shadow rounded flex flex-col">
               <img
                 src={upcomingEvents[0].image}
                 alt={upcomingEvents[0].title}
-                class="max-w-full h-auto p-2"
+                class="max-w-fullh-auto"
               />
               <h1 className="text-4xl text-red-500 font-bold mb-4">
                 {upcomingEvents[0].title}
@@ -36,8 +40,8 @@ const UpcomingEvents = () => {
         {/* <h1 className="text-center text-2xl font-bold mb-6">CAREER EVENTS & PROGRAMS</h1> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Column 1 */}
-          {upcomingEvents &&
-            upcomingEvents.map((event) => (
+          {remainingEvents &&
+            remainingEvents.map((event) => (
               <div className="bg-white p-6 rounded shadow">
                 <img
                   src={event.image}
