@@ -28,7 +28,7 @@ const Login = () => {
       const { jwtToken } = response;
       Cookie.set("jwtToken", jwtToken, { expires: 1 });
       if (userDetails.role === "admin") navigate("/admin-panel");
-      navigate("/");
+      else navigate("/");
     } else {
       const { message } = response;
       alert(message);

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Cookies from "js-cookie";
 import logo from "../images/logo.jpeg";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
