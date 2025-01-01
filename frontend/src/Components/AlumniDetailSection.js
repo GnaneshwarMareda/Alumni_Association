@@ -30,6 +30,8 @@ function AlumniDetailSection() {
 
   const alumnus = state?.alumnus;
 
+  console.log(similarAlumniData);
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">

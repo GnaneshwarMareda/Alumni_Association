@@ -31,6 +31,7 @@ import NotFound from "./pages/NotFound";
 import Conferences from "./Components/Conferences";
 import WorkShops from "./Components/WorkShops";
 import ProtectedHeader from "./Protected/ProtectedHeader";
+import OtherEvents from "./Components/OtherEvents";
 
 function App() {
   return (
@@ -161,7 +162,24 @@ function App() {
               />
             }
           />
-          <Route path="/events/workshops" element={<WorkShops />} />
+          <Route
+            path="/events/workshops"
+            element={
+              <ProtectedRoute
+                component={WorkShops}
+                requiredRoles={["student", "alumni"]}
+              />
+            }
+          />
+          <Route
+            path="/events/others"
+            element={
+              <ProtectedRoute
+                component={OtherEvents}
+                requiredRoles={["student", "alumni"]}
+              />
+            }
+          />
 
           {/* Networking Hub */}
           <Route

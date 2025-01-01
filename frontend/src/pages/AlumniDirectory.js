@@ -57,7 +57,6 @@ function AlumniDirectory() {
     return matchesSearch && matchesFilters;
   });
 
-  // Fallback UI for Loading and Error States
   if (loading) {
     return <p>Loading alumni directory...</p>;
   }
@@ -74,7 +73,6 @@ function AlumniDirectory() {
 
   return (
     <div className="container mx-auto p-6">
-      {/* Search and Filters Section */}
       <div className="flex flex-col lg:flex-row justify-between items-center mb-6 space-y-4 lg:space-y-0">
         {/* Search Input */}
         <input
@@ -155,11 +153,18 @@ function AlumniDirectory() {
               key={alumnus._id}
               className="bg-white shadow-lg rounded-lg p-4"
             >
-              <img
-                src={alumnus.profilePicture}
-                alt={`${alumnus.name}`}
-                className="rounded-full w-20 h-20 mx-auto"
-              />
+              {alumnus.profilePicture ? (
+                <img
+                  src={alumnus.profilePicture}
+                  alt={`${alumnus.name}`}
+                  className="rounded-full w-20 h-20 mx-auto"
+                />
+              ) : (
+                <div className="flex items-center justify-center rounded-full bg-gray-300 w-20 h-20 mx-auto text-gray-700">
+                  No Profile
+                </div>
+              )}
+
               <h2 className="text-center font-semibold text-xl mt-2">
                 {alumnus.name}
               </h2>

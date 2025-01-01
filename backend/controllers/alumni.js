@@ -21,6 +21,7 @@ const getAlumniSimilarMatches = async (req, res) => {
   try {
     const { fieldOfStudy, graduationYear, company } = req.query;
 
+    console.log(req.body);
     const filter = [];
     if (fieldOfStudy) filter.push({ fieldOfStudy });
     if (graduationYear) filter.push({ graduationYear });
@@ -28,7 +29,7 @@ const getAlumniSimilarMatches = async (req, res) => {
 
     const query = filter.length > 0 ? { $or: filter } : {};
 
-    const data = await Alumni.find(query);
+    const data = await Alumni.find(query).limit(10);
 
     return res
       .status(200)
