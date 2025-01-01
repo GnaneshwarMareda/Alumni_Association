@@ -22,19 +22,13 @@ export const getAlumniData = async () => {
   }
 };
 
-export const getAlumniSimilarMatches = async ({
-  fieldOfStudy,
-  graduationYear,
-  company,
-}) => {
+export const getAlumniSimilarMatches = async ({ graduationYear, company }) => {
   try {
-    const url = `${URL}/alumni/simlar-matches?fieldOfStudy=${fieldOfStudy}&graduationYear=${graduationYear}&company=${company}`;
-    console.log(url);
+    const url = `${URL}/alumni/similar-matches?graduationYear=${graduationYear}&company=${company}`;
     const response = await fetch(url, options);
     if (response.ok) {
-      const { data } = await response.json();
-      console.log(data);
-      return { data, message: "Data Retreived successfully" };
+      const { data, message } = await response.json();
+      return { data, message };
     }
   } catch (error) {
     return { message: error.message };

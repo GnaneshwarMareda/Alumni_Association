@@ -16,6 +16,9 @@ const ProtectedRoute = ({ component: Component, requiredRoles, ...rest }) => {
     if (user.role === requiredRoles[0] || user.role === requiredRoles[1]) {
       return <Component {...rest} />;
     }
+    if (requiredRoles.length === 3 && user.role === requiredRoles[2]) {
+      return <Component {...rest} />;
+    }
     return <Navigate to="/unauthorized" />;
   } catch (error) {
     console.error("Invalid JWT Token", error);

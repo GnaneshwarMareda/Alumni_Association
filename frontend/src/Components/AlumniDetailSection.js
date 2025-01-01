@@ -9,22 +9,20 @@ function AlumniDetailSection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Ensure state is defined and has required properties
-  const graduationYear = state?.graduationYear;
-  const company = state?.company;
-  const fieldOfStudy = state?.fieldOfStudy;
+  const company = state?.alumnus.company;
+  const fieldOfStudy = state?.alumnus.fieldOfStudy;
+
+  //console.log(graduationYear, company, fieldOfStudy);
 
   useEffect(() => {
-    if (!graduationYear || !company || !fieldOfStudy) {
+    if (!company || !fieldOfStudy) {
       setError("Missing required parameters for fetching similar alumni.");
       setLoading(false);
       return;
     }
-
     const fetchData = async () => {
       try {
         const { data, message } = await getAlumniSimilarMatches({
-          graduationYear,
           company,
           fieldOfStudy,
         });
@@ -39,11 +37,13 @@ function AlumniDetailSection() {
     };
 
     fetchData();
-  }, [graduationYear, company, fieldOfStudy]);
+  }, [company, fieldOfStudy]);
 
   // Debugging logs
-  // console.log("State:", state);
-  // console.log("Similar Alumni Data:", similarAlumniData);
+
+  const filteredSimilarMatches = similarAlumniData.filter(
+    (item) => item._id !== state?.alumnus._id
+  );
 
   if (loading) {
     return (
@@ -77,11 +77,17 @@ function AlumniDetailSection() {
 
       {/* Profile Section */}
       <div className="w-full max-w-4xl text-center">
-        <img
-          src={state.alumnus.profilePicture || "/placeholder-profile.jpg"}
-          alt={state.alumnus.name}
-          className="rounded-full w-32 h-32 mx-auto border-4 border-blue-500"
-        />
+        {state.profilePicture ? (
+          <img
+            src={state.alumnus.profilePicture || "/placeholder-profile.jpg"}
+            alt={state.alumnus.name}
+            className="rounded-full w-32 h-32 mx-auto border-4 border-blue-500"
+          />
+        ) : (
+          <div className="flex items-center justify-center rounded-full bg-gray-300 w-20 h-20 mx-auto text-gray-700">
+            No Profile
+          </div>
+        )}
         <h1 className="font-extrabold text-3xl mt-4 text-gray-800">
           {state.alumnus.name}
         </h1>
@@ -115,7 +121,7 @@ function AlumniDetailSection() {
           Similar Alumni
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {similarAlumniData.map((alumni) => (
+          {filteredSimilarMatches.map((alumni) => (
             <div
               key={alumni._id}
               className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow"
@@ -133,7 +139,7 @@ function AlumniDetailSection() {
                 onClick={() =>
                   navigate("/alumni-detail", { state: { alumnus: alumni } })
                 }
-                className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+                className="mt-4 w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
               >
                 View Details
               </button>

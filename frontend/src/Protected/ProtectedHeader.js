@@ -57,7 +57,6 @@ const ProtectedHeader = () => {
     if (user.role === "admin")
       return <Header headerContent={adminHeaderContent} />;
 
-    console.log(user.role);
     return <Header headerContent={studentHeaderContent} />;
   } catch (error) {
     console.error("Invalid JWT Token", error);
