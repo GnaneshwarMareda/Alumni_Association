@@ -9,15 +9,28 @@ function AlumniDetailSection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Ensure state is defined and has required properties
+  const graduationYear = state?.graduationYear;
+  const company = state?.company;
+  const fieldOfStudy = state?.fieldOfStudy;
+
   useEffect(() => {
+    if (!graduationYear || !company || !fieldOfStudy) {
+      setError("Missing required parameters for fetching similar alumni.");
+      setLoading(false);
+      return;
+    }
+
     const fetchData = async () => {
       try {
-        const response = await getAlumniSimilarMatches({
-          graduationYear: state.graduationYear,
-          company: state.company,
-          fieldOfStudy: state.fieldOfStudy,
+        const { data, message } = await getAlumniSimilarMatches({
+          graduationYear,
+          company,
+          fieldOfStudy,
         });
-        setSimilarAlumniData(response || []);
+
+        console.log(message);
+        setSimilarAlumniData(data || []);
       } catch (error) {
         setError(error.message || "Failed to fetch data.");
       } finally {
@@ -26,11 +39,11 @@ function AlumniDetailSection() {
     };
 
     fetchData();
-  }, [state]);
+  }, [graduationYear, company, fieldOfStudy]);
 
-  const alumnus = state?.alumnus;
-
-  console.log(similarAlumniData);
+  // Debugging logs
+  // console.log("State:", state);
+  // console.log("Similar Alumni Data:", similarAlumniData);
 
   if (loading) {
     return (
@@ -44,7 +57,7 @@ function AlumniDetailSection() {
     return <p className="text-red-500 text-center mt-10">{error}</p>;
   }
 
-  if (!alumnus) {
+  if (!state?.alumnus) {
     return (
       <h1 className="text-center text-gray-500 mt-10">
         Alumnus information not available.
@@ -65,30 +78,32 @@ function AlumniDetailSection() {
       {/* Profile Section */}
       <div className="w-full max-w-4xl text-center">
         <img
-          src={alumnus.profilePicture || "/placeholder-profile.jpg"}
-          alt={alumnus.name}
+          src={state.alumnus.profilePicture || "/placeholder-profile.jpg"}
+          alt={state.alumnus.name}
           className="rounded-full w-32 h-32 mx-auto border-4 border-blue-500"
         />
         <h1 className="font-extrabold text-3xl mt-4 text-gray-800">
-          {alumnus.name}
+          {state.alumnus.name}
         </h1>
         <p className="text-indigo-600 text-lg font-medium mt-2">
-          {alumnus.jobRole} at {alumnus.company}
+          {state.alumnus.jobRole} at {state.alumnus.company}
         </p>
         <div className="mt-6 text-gray-600 text-base space-y-2">
           <p>
-            <span className="font-semibold">Location:</span> {alumnus.location}
+            <span className="font-semibold">Location:</span>{" "}
+            {state.alumnus.location}
           </p>
           <p>
             <span className="font-semibold">Graduation Year:</span>{" "}
-            {alumnus.graduationYear}
+            {state.alumnus.graduationYear}
           </p>
           <p>
-            <span className="font-semibold">Degree:</span> {alumnus.degree}
+            <span className="font-semibold">Degree:</span>{" "}
+            {state.alumnus.degree}
           </p>
           <p>
             <span className="font-semibold">Field of Study:</span>{" "}
-            {alumnus.fieldOfStudy}
+            {state.alumnus.fieldOfStudy}
           </p>
         </div>
         <hr className="my-4 border-gray-300" />

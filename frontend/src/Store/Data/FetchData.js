@@ -29,13 +29,15 @@ export const getAlumniSimilarMatches = async ({
 }) => {
   try {
     const url = `${URL}/alumni/simlar-matches?fieldOfStudy=${fieldOfStudy}&graduationYear=${graduationYear}&company=${company}`;
+    console.log(url);
     const response = await fetch(url, options);
     if (response.ok) {
       const { data } = await response.json();
-      return data;
+      console.log(data);
+      return { data, message: "Data Retreived successfully" };
     }
   } catch (error) {
-    console.log("Error");
+    return { message: error.message };
   }
 };
 
