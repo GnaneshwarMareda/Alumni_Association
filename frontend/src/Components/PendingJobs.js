@@ -44,9 +44,25 @@ const PendingJobs = () => {
               className="flex justify-between items-center bg-gray-100 p-4 rounded-lg mb-4 shadow-sm"
             >
               <div>
-                <h3 className="text-lg font-bold text-gray-700">{job.title}</h3>
-                <p className="text-sm text-gray-600">{job.company}</p>
-                <p className="text-sm text-gray-600">{job.location}</p>
+                <p className="text-lg text-gray-600 font-bold">
+                  Company Name : {job.company}
+                </p>
+                <h3 className="text-lg text-gray-700">
+                  Job Role : <span className="font-bold">{job.title}</span>
+                </h3>
+
+                <p className="text-lg text-gray-600">
+                  Location : {job.location}
+                </p>
+                <p className="text-lg text-gray-600">
+                  Job Type : {job.jobType}
+                </p>
+                <a
+                  className="text-sm text-blue-600 underline"
+                  href={job.jobLink}
+                >
+                  Visit Site
+                </a>
               </div>
               <div className="flex space-x-4">
                 <button

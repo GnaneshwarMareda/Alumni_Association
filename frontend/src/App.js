@@ -83,7 +83,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={AlumniDetailSection}
-                requiredRoles={["student", "alumni"]}
+                requiredRoles={["student", "alumni", "admin"]}
               />
             }
           />
