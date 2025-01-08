@@ -63,7 +63,7 @@ const deleteEvent = async (req, res) => {
 const getUpcomingEvents = async (req, res) => {
   try {
     const currentDate = new Date();
-    console.log(currentDate);
+    //console.log(currentDate);
 
     const upcomingEvents = await Events.find({
       dateOfEvent: { $gte: currentDate },
