@@ -74,6 +74,8 @@ const Home = () => {
     },
   ];
 
+  const success_stories = [b13_AEE, b14_AEE, b16_AEE, Maruthi_b14];
+
   return (
     <div className="bg-gray-100">
       {/* Hero Section */}
@@ -149,20 +151,20 @@ const Home = () => {
         <div className="mb-8">
           {stories && stories.length > 0 ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 animate-marquee">
-              {stories.map((event, index) => (
+              {success_stories.map((image, index) => (
                 <li
                   key={index}
                   className="p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105"
                 >
                   <img
-                    src={event.image}
-                    alt={event.title}
+                    src={image}
+                    //alt={event.title}
                     className="w-full h-48 object-cover rounded-t-lg mb-4"
                   />
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                  {/* <h4 className="text-lg font-semibold text-gray-800 mb-2">
                     {event.title}
                   </h4>
-                  <p className="text-gray-600 mb-2">{event.description}</p>
+                  <p className="text-gray-600 mb-2">{event.description}</p> */}
                 </li>
               ))}
             </ul>
