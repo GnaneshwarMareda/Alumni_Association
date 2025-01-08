@@ -1,17 +1,15 @@
 import React from "react";
 import { useEffect, useState } from "react";
-
-import b13_AEE from "../images/success_stories/B13_AEE.jpeg";
-import b14_AEE from "../images/success_stories/B14_AEE.jpeg";
-import b16_AEE from "../images/success_stories/B16_AEE.jpeg";
-import Maruthi_b14 from "../images/success_stories/Maruthi_B14.jpeg";
-import { getSuccessStories } from "../Store/Data/FetchData";
+import { getSuccessStories, getUpcomingEvents } from "../Store/Data/FetchData";
+import DateFormater from "../Store/DateFormater";
+import photos from "../Store/HomeData";
 
 const Home = () => {
   const [stories, setStories] = useState([]);
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchSuccessStories = async () => {
       try {
         const { data } = await getSuccessStories();
         setStories(data);
@@ -19,9 +17,21 @@ const Home = () => {
         console.error("Error fetching events:", error);
       }
     };
-    fetchData();
+
+    const fetchUpComingEvents = async () => {
+      try {
+        const { data } = await getUpcomingEvents();
+        setUpcomingEvents(data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchSuccessStories();
+    fetchUpComingEvents();
   }, []);
 
+<<<<<<< HEAD
   // Dummy data
   const events = [
     {
@@ -76,6 +86,8 @@ const Home = () => {
 
   const success_stories = [b13_AEE, b14_AEE, b16_AEE, Maruthi_b14];
 
+=======
+>>>>>>> bcad3e8c1e2a565a576ce66f1c9506b302f4bc1a
   return (
     <div className="bg-gray-100">
       {/* Hero Section */}
@@ -122,8 +134,8 @@ const Home = () => {
           <div className="flex-1 lg:pl-4">
             <h3 className="text-xl font-bold ml-5 mb-4">Upcoming Events</h3>
             <ul className="divide-y divide-gray-300">
-              {events.map((event) => (
-                <li key={event.id} className="p-4 hover:bg-gray-50">
+              {upcomingEvents.map((event) => (
+                <li key={event._id} className="p-4 hover:bg-gray-50">
                   <a
                     href={event.link}
                     target="_blank"
@@ -133,7 +145,9 @@ const Home = () => {
                     {event.title}
                   </a>
                   <p className="text-sm text-gray-600">{event.description}</p>
-                  <p className="text-sm text-gray-500 mt-1">{event.date}</p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {DateFormater(event.dateOfEvent)}
+                  </p>
                 </li>
               ))}
             </ul>

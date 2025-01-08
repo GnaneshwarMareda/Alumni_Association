@@ -6,16 +6,16 @@ const AdminOverview = ({ changeSlide }) => {
   };
 
   const overviewData = [
-    { id: 1, title: "Jobs to be Approved", count: 124, color: "bg-blue-500" },
-    { id: 2, title: "Pending Events", count: 7, color: "bg-green-500" },
-    { id: 3, title: "Success Stories", count: 15, color: "bg-red-500" },
+    { id: 1, title: "Jobs to be Approved", count: 2, color: "bg-blue-500" },
+    { id: 2, title: "Upcoming Events", count: 2, color: "bg-green-500" },
+    { id: 3, title: "Success Stories", count: 3, color: "bg-red-500" },
     {
       id: 4,
       title: "Academic Year Promotion",
       count: 15,
       color: "bg-green-500",
     },
-    { id: 5, title: "Alumni Requests", count: 15, color: "bg-purple-500" },
+    { id: 5, title: "Alumni Requests", count: 2, color: "bg-purple-500" },
     { id: 6, title: "Raise Fund", count: 15, color: "bg-blue-500" },
   ];
 

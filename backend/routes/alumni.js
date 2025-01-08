@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   verifyAlumniToken,
   verifyStudentToken,
+  verifyAlumniAdminStudent,
 } = require("../middlewares/verifyToken");
 
 const {
@@ -13,9 +14,13 @@ const {
 } = require("../controllers/alumni");
 
 // Alumni routes
-router.get("/directory", verifyStudentToken, getAlumniData);
+router.get("/directory", verifyAlumniAdminStudent, getAlumniData);
 router.get("/profile/:id", verifyAlumniToken, getAlumniProfile);
 router.put("/profile/:id", verifyAlumniToken, updateAlumniProfile);
-router.get("/similar-matches", verifyAlumniToken, getAlumniSimilarMatches);
+router.get(
+  "/similar-matches",
+  verifyAlumniAdminStudent,
+  getAlumniSimilarMatches
+);
 
 module.exports = router;

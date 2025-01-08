@@ -9,15 +9,26 @@ function AlumniDetailSection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const company = state?.alumnus.company;
+  const fieldOfStudy = state?.alumnus.fieldOfStudy;
+
+  //console.log(graduationYear, company, fieldOfStudy);
+
   useEffect(() => {
+    if (!company || !fieldOfStudy) {
+      setError("Missing required parameters for fetching similar alumni.");
+      setLoading(false);
+      return;
+    }
     const fetchData = async () => {
       try {
-        const response = await getAlumniSimilarMatches({
-          graduationYear: state.graduationYear,
-          company: state.company,
-          fieldOfStudy: state.fieldOfStudy,
+        const { data, message } = await getAlumniSimilarMatches({
+          company,
+          fieldOfStudy,
         });
-        setSimilarAlumniData(response || []);
+
+        console.log(message);
+        setSimilarAlumniData(data || []);
       } catch (error) {
         setError(error.message || "Failed to fetch data.");
       } finally {
@@ -26,9 +37,13 @@ function AlumniDetailSection() {
     };
 
     fetchData();
-  }, [state]);
+  }, [company, fieldOfStudy]);
 
-  const alumnus = state?.alumnus;
+  // Debugging logs
+
+  const filteredSimilarMatches = similarAlumniData.filter(
+    (item) => item._id !== state?.alumnus._id
+  );
 
   if (loading) {
     return (
@@ -42,7 +57,7 @@ function AlumniDetailSection() {
     return <p className="text-red-500 text-center mt-10">{error}</p>;
   }
 
-  if (!alumnus) {
+  if (!state?.alumnus) {
     return (
       <h1 className="text-center text-gray-500 mt-10">
         Alumnus information not available.
@@ -62,31 +77,39 @@ function AlumniDetailSection() {
 
       {/* Profile Section */}
       <div className="w-full max-w-4xl text-center">
-        <img
-          src={alumnus.profilePicture || "/placeholder-profile.jpg"}
-          alt={alumnus.name}
-          className="rounded-full w-32 h-32 mx-auto border-4 border-blue-500"
-        />
+        {state.profilePicture ? (
+          <img
+            src={state.alumnus.profilePicture || "/placeholder-profile.jpg"}
+            alt={state.alumnus.name}
+            className="rounded-full w-32 h-32 mx-auto border-4 border-blue-500"
+          />
+        ) : (
+          <div className="flex items-center justify-center rounded-full bg-gray-300 w-20 h-20 mx-auto text-gray-700">
+            No Profile
+          </div>
+        )}
         <h1 className="font-extrabold text-3xl mt-4 text-gray-800">
-          {alumnus.name}
+          {state.alumnus.name}
         </h1>
         <p className="text-indigo-600 text-lg font-medium mt-2">
-          {alumnus.jobRole} at {alumnus.company}
+          {state.alumnus.jobRole} at {state.alumnus.company}
         </p>
         <div className="mt-6 text-gray-600 text-base space-y-2">
           <p>
-            <span className="font-semibold">Location:</span> {alumnus.location}
+            <span className="font-semibold">Location:</span>{" "}
+            {state.alumnus.location}
           </p>
           <p>
             <span className="font-semibold">Graduation Year:</span>{" "}
-            {alumnus.graduationYear}
+            {state.alumnus.graduationYear}
           </p>
           <p>
-            <span className="font-semibold">Degree:</span> {alumnus.degree}
+            <span className="font-semibold">Degree:</span>{" "}
+            {state.alumnus.degree}
           </p>
           <p>
             <span className="font-semibold">Field of Study:</span>{" "}
-            {alumnus.fieldOfStudy}
+            {state.alumnus.fieldOfStudy}
           </p>
         </div>
         <hr className="my-4 border-gray-300" />
@@ -98,7 +121,7 @@ function AlumniDetailSection() {
           Similar Alumni
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {similarAlumniData.map((alumni) => (
+          {filteredSimilarMatches.map((alumni) => (
             <div
               key={alumni._id}
               className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow"
@@ -116,7 +139,7 @@ function AlumniDetailSection() {
                 onClick={() =>
                   navigate("/alumni-detail", { state: { alumnus: alumni } })
                 }
-                className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+                className="mt-4 w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700"
               >
                 View Details
               </button>

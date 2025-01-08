@@ -4,7 +4,7 @@ function About() {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
-      <div className="bg-indigo-600 text-white py-6 px-4 rounded-md shadow-md">
+      <div className="bg-white-900 text-red-600 py-6 px-4 rounded-md shadow-md">
         <h1 className="text-4xl font-bold text-center">
           About RGUKT Alumni Association
         </h1>
@@ -19,7 +19,7 @@ function About() {
         </p>
 
         <div className="mt-6">
-          <h2 className="text-2xl font-semibold text-indigo-600 mb-4">
+          <h2 className="text-2xl font-semibold text-red-600 mb-4">
             Activities and Contributions
           </h2>
           <ul className="list-disc pl-5 text-gray-700 space-y-3">
@@ -58,9 +58,11 @@ function About() {
             Stay connected, inspire the next generation, and contribute to the
             growth of the RGUKT community.
           </p>
-          <button className="mt-4 px-6 py-3 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700">
-            Become a Member
-          </button>
+          <a href="/request-register">
+            <button className="mt-4 px-6 py-3 bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700">
+              Become a Member
+            </button>
+          </a>
         </div>
       </div>
     </div>

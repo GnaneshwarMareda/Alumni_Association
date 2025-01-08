@@ -12,6 +12,7 @@ router.post("/user", async (req, res) => {
     console.log(userId, password, role);
 
     let user = null;
+
     if (role === "student") user = await Student.findOne({ Id: userId });
     else if (role === "admin") user = await Admin.findOne({ Id: userId });
     else if (role === "alumni") user = await Alumni.findOne({ Id: userId });

@@ -1,7 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Header from "./Layouts/Header";
 import Footer from "./Layouts/Footer";
 
 import Register from "./pages/Register";
@@ -31,12 +30,14 @@ import CheckAlreadyLogged from "./Protected/CheckAlreadyLogged";
 import NotFound from "./pages/NotFound";
 import Conferences from "./Components/Conferences";
 import WorkShops from "./Components/WorkShops";
+import ProtectedHeader from "./Protected/ProtectedHeader";
+import OtherEvents from "./Components/OtherEvents";
 
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <ProtectedHeader />
         <Routes>
           {/* Admin Panel */}
           <Route
@@ -72,7 +73,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={AlumniDirectory}
-                requiredRoles={["student", "alumni"]}
+                requiredRoles={["student", "alumni", "admin"]}
               />
             }
           />
@@ -82,7 +83,7 @@ function App() {
             element={
               <ProtectedRoute
                 component={AlumniDetailSection}
-                requiredRoles={["student", "alumni"]}
+                requiredRoles={["student", "alumni", "admin"]}
               />
             }
           />
@@ -161,7 +162,24 @@ function App() {
               />
             }
           />
-          <Route path="/events/workshops" element={<WorkShops />} />
+          <Route
+            path="/events/workshops"
+            element={
+              <ProtectedRoute
+                component={WorkShops}
+                requiredRoles={["student", "alumni"]}
+              />
+            }
+          />
+          <Route
+            path="/events/others"
+            element={
+              <ProtectedRoute
+                component={OtherEvents}
+                requiredRoles={["student", "alumni"]}
+              />
+            }
+          />
 
           {/* Networking Hub */}
           <Route

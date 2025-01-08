@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { addUser } from "../Store/Data/PostData";
 import sendOtp from "../Store/Data/Otp";
-import Cookie from "js-cookie";
 
 const Register = () => {
   const [step, setStep] = useState(1);
@@ -221,9 +220,11 @@ const Register = () => {
                   <span className="font-bold">NOTE : </span>The Registration
                   process requires OTP send to University email. So if you are a
                   Alumni{" "}
-                  <span className="text-blue-400 underline">
-                    try different form.
-                  </span>
+                  <a href="/request-register">
+                    <span className="text-blue-400 underline">
+                      try different form.
+                    </span>
+                  </a>
                 </p>
               </div>
             </>
