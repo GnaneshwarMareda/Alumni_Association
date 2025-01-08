@@ -8,6 +8,7 @@ const Home = () => {
   const [stories, setStories] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
 
+  //Try to fetch dynamic data !! Need to implement with model .
   useEffect(() => {
     const fetchSuccessStories = async () => {
       try {
@@ -31,25 +32,24 @@ const Home = () => {
     fetchUpComingEvents();
   }, []);
 
-<<<<<<< HEAD
-  // Dummy data
+  // Dummy/Static data
   const events = [
     {
-      id: 1,
+      _id: 1,
       title: "Annual Alumni Meet 2024",
       description: "Reconnect with old friends and celebrate achievements.",
       date: "December 15, 2024",
       link: "http://localhost:3000/",
     },
     {
-      id: 2,
+      _id: 2,
       title: "Webinar: Career Growth Tips",
       description: "Learn from experienced alumni in various industries.",
       date: "November 30, 2024",
       link: "http://localhost:3000/",
     },
     {
-      id: 3,
+      _id: 3,
       title: "Sports Day Reunion",
       description: "Relive the glory of your sporting days with a fun event.",
       date: "January 10, 2025",
@@ -57,37 +57,29 @@ const Home = () => {
     },
   ];
 
-  const photos = [
+  const success_stories = [
     {
-      url: "https://scontent.fhyd14-2.fna.fbcdn.net/v/t39.30808-6/324232721_1009332513359590_7648773565822675696_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=2285d6&_nc_ohc=aay6sj9sHnQQ7kNvgFI6Jr4&_nc_zt=23&_nc_ht=scontent.fhyd14-2.fna&_nc_gid=Ayv46tWpvXBts5jdPrNTQyD&oh=00_AYC1h3UjvLs-dn6Vv7E4Z73UlTx4E3ZsdMPkO1T9sqn9RQ&oe=677A6CB9",
-      alt: "Photo 1",
+      id: 1,
+      src: require("../images/success_stories/B13_AEE.jpeg"),
+      alt: "B13_AEE",
     },
     {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdFmbfxkPfDVc-OE5fTKqzPBk9_5SWgb9SEA&s",
-      alt: "Photo 2",
+      id: 2,
+      src: require("../images/success_stories/B14_AEE.jpeg"),
+      alt: "B14_AEE",
     },
     {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWZdoAfPdJPweq8w7Zbgb9oiHNgyMOSDPTEPgPpjpKn8hzzcSbX5VI6RlULYNkSqRvVcs&usqp=CAU",
-      alt: "Photo 3",
+      id: 3,
+      src: require("../images/success_stories/B16_AEE.jpeg"),
+      alt: "B16_AEE",
     },
     {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpwmqapc2J4Dtq7XahnOtvCBdfYqz4JOsBHA&s",
-      alt: "Photo 4",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp5OxI9qwPpuzeOoH6HqaysQwUIn2KOAjPOw&s",
-      alt: "Photo 5",
-    },
-    {
-      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3M8QHxcZzLQCGsXTuE9kPb27OOBISry6d_J0zP7gVdUpm4BKFjlLrhD_b_CSOop8Yt70&usqp=CAU",
-      alt: "Photo 6",
+      id: 4,
+      src: require("../images/success_stories/Maruthi_B14.jpeg"),
+      alt: "Maruthi_B14",
     },
   ];
 
-  const success_stories = [b13_AEE, b14_AEE, b16_AEE, Maruthi_b14];
-
-=======
->>>>>>> bcad3e8c1e2a565a576ce66f1c9506b302f4bc1a
   return (
     <div className="bg-gray-100">
       {/* Hero Section */}
@@ -133,24 +125,28 @@ const Home = () => {
           {/* Events Section */}
           <div className="flex-1 lg:pl-4">
             <h3 className="text-xl font-bold ml-5 mb-4">Upcoming Events</h3>
-            <ul className="divide-y divide-gray-300">
-              {upcomingEvents.map((event) => (
-                <li key={event._id} className="p-4 hover:bg-gray-50">
-                  <a
-                    href={event.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg font-medium text-blue-600 hover:underline cursor-pointer"
-                  >
-                    {event.title}
-                  </a>
-                  <p className="text-sm text-gray-600">{event.description}</p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {DateFormater(event.dateOfEvent)}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            {events && events.length > 0 ? (
+              <ul className="divide-y divide-gray-300">
+                {events.map((event) => (
+                  <li key={event._id} className="p-4 hover:bg-gray-50">
+                    <a
+                      href={event.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-lg font-medium text-blue-600 hover:underline cursor-pointer"
+                    >
+                      {event.title}
+                    </a>
+                    <p className="text-sm text-gray-600">{event.description}</p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {DateFormater(event.date)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">No events available. Add one now!</p>
+            )}
           </div>
         </div>
       </section>
@@ -163,16 +159,16 @@ const Home = () => {
           Success Stories and Achievements
         </h2>
         <div className="mb-8">
-          {stories && stories.length > 0 ? (
+          {success_stories && success_stories.length > 0 ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 animate-marquee">
-              {success_stories.map((image, index) => (
+              {success_stories.map((image) => (
                 <li
-                  key={index}
+                  key={image.id}
                   className="p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105"
                 >
                   <img
-                    src={image}
-                    //alt={event.title}
+                    src={image.src}
+                    alt={image.alt}
                     className="w-full h-48 object-cover rounded-t-lg mb-4"
                   />
                   {/* <h4 className="text-lg font-semibold text-gray-800 mb-2">
@@ -183,7 +179,7 @@ const Home = () => {
               ))}
             </ul>
           ) : (
-            <p className="text-gray-600">No events available. Add one now!</p>
+            <p className="text-gray-600">No Stories available. Add one now!</p>
           )}
         </div>
       </section>
