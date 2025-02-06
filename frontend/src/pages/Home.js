@@ -8,6 +8,7 @@ const Home = () => {
   const [stories, setStories] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
 
+  //Try to fetch dynamic data !! Need to implement with model .
   useEffect(() => {
     const fetchSuccessStories = async () => {
       try {
@@ -30,6 +31,54 @@ const Home = () => {
     fetchSuccessStories();
     fetchUpComingEvents();
   }, []);
+
+  // Dummy/Static data
+  const events = [
+    {
+      _id: 1,
+      title: "Annual Alumni Meet 2024",
+      description: "Reconnect with old friends and celebrate achievements.",
+      date: "December 15, 2024",
+      link: "http://localhost:3000/",
+    },
+    {
+      _id: 2,
+      title: "Webinar: Career Growth Tips",
+      description: "Learn from experienced alumni in various industries.",
+      date: "November 30, 2024",
+      link: "http://localhost:3000/",
+    },
+    {
+      _id: 3,
+      title: "Sports Day Reunion",
+      description: "Relive the glory of your sporting days with a fun event.",
+      date: "January 10, 2025",
+      link: "http://localhost:3000/",
+    },
+  ];
+
+  const success_stories = [
+    {
+      id: 1,
+      src: require("../images/success_stories/B13_AEE.jpeg"),
+      alt: "B13_AEE",
+    },
+    {
+      id: 2,
+      src: require("../images/success_stories/B14_AEE.jpeg"),
+      alt: "B14_AEE",
+    },
+    {
+      id: 3,
+      src: require("../images/success_stories/B16_AEE.jpeg"),
+      alt: "B16_AEE",
+    },
+    {
+      id: 4,
+      src: require("../images/success_stories/Maruthi_B14.jpeg"),
+      alt: "Maruthi_B14",
+    },
+  ];
 
   return (
     <div className="bg-gray-100">
@@ -76,24 +125,28 @@ const Home = () => {
           {/* Events Section */}
           <div className="flex-1 lg:pl-4">
             <h3 className="text-xl font-bold ml-5 mb-4">Upcoming Events</h3>
-            <ul className="divide-y divide-gray-300">
-              {upcomingEvents.map((event) => (
-                <li key={event._id} className="p-4 hover:bg-gray-50">
-                  <a
-                    href={event.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg font-medium text-blue-600 hover:underline cursor-pointer"
-                  >
-                    {event.title}
-                  </a>
-                  <p className="text-sm text-gray-600">{event.description}</p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {DateFormater(event.dateOfEvent)}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            {events && events.length > 0 ? (
+              <ul className="divide-y divide-gray-300">
+                {events.map((event) => (
+                  <li key={event._id} className="p-4 hover:bg-gray-50">
+                    <a
+                      href={event.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-lg font-medium text-blue-600 hover:underline cursor-pointer"
+                    >
+                      {event.title}
+                    </a>
+                    <p className="text-sm text-gray-600">{event.description}</p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {DateFormater(event.date)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600">No events available. Add one now!</p>
+            )}
           </div>
         </div>
       </section>
@@ -106,27 +159,27 @@ const Home = () => {
           Success Stories and Achievements
         </h2>
         <div className="mb-8">
-          {stories && stories.length > 0 ? (
+          {success_stories && success_stories.length > 0 ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 animate-marquee">
-              {stories.map((event, index) => (
+              {success_stories.map((image) => (
                 <li
-                  key={index}
+                  key={image.id}
                   className="p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105"
                 >
                   <img
-                    src={event.image}
-                    alt={event.title}
+                    src={image.src}
+                    alt={image.alt}
                     className="w-full h-48 object-cover rounded-t-lg mb-4"
                   />
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                  {/* <h4 className="text-lg font-semibold text-gray-800 mb-2">
                     {event.title}
                   </h4>
-                  <p className="text-gray-600 mb-2">{event.description}</p>
+                  <p className="text-gray-600 mb-2">{event.description}</p> */}
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-gray-600">No events available. Add one now!</p>
+            <p className="text-gray-600">No Stories available. Add one now!</p>
           )}
         </div>
       </section>
