@@ -1,4 +1,4 @@
 package com.todo.server.model;
 
-public class Student {
+public class AlumniInterests {
 }
