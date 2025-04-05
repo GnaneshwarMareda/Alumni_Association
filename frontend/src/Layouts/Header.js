@@ -46,7 +46,7 @@ const Header = ({ headerContent }) => {
           ))}
         </nav>
 
-        {/* Login Button */}
+        {/* Login/Logout Button */}
         {jwtToken ? (
           <button
             onClick={handleLogout}
@@ -55,12 +55,9 @@ const Header = ({ headerContent }) => {
             Logout
           </button>
         ) : (
-          <a
-            href="/login"
-            className="hidden md:inline-block bg-red-600 px-4 py-2 rounded-md font-semibold hover:bg-red-700 transition duration-300"
-          >
-            Login
-          </a>
+          <button className="hidden md:inline-block bg-red-600 px-4 py-2 rounded-md font-semibold hover:bg-red-700 transition duration-300">
+            <a href="/login">Login</a>
+          </button>
         )}
         {/* Mobile Menu Icon */}
         <div className="md:hidden">

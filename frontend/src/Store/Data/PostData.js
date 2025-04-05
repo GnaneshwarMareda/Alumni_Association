@@ -105,7 +105,6 @@ const addUser = async (userDetails) => {
   };
 
   const response = await fetch(url, options);
-  console.log(response);
   const { message } = await response.json();
   return { message, status: response.ok };
 };

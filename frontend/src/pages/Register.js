@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { addUser } from "../Store/Data/PostData";
 import sendOtp from "../Store/Data/Otp";
 
@@ -43,7 +44,7 @@ const Register = () => {
       userDetails.mobile &&
       userDetails.universityEmail
     ) {
-      // sent OTP
+      // send OTP
       const { status } = await sendOtp(userDetails);
       if (status === 200) setStep(3);
     } else {
@@ -54,11 +55,11 @@ const Register = () => {
   const handleRegister = async (event) => {
     event.preventDefault();
     const { message, status } = await addUser(userDetails);
-    if (status) {
+    if (status === 200) {
       alert(message);
-    } else {
-      alert(message);
+      return <Navigate to="/login" />;
     }
+    alert(message);
   };
 
   return (
@@ -266,7 +267,7 @@ const Register = () => {
                     value={userDetails.mobile}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter your last name"
+                    placeholder="Enter your mobile number"
                     required
                   />
                 </div>
@@ -316,8 +317,13 @@ const Register = () => {
                     <option value="" disabled>
                       Select your field
                     </option>
-                    <option value="ComputerScience">Computer Science</option>
-                    <option value="ECE">ECE</option>
+                    <option value="cse">CSE</option>
+                    <option value="ece">ECE</option>
+                    <option value="eee">EEE</option>
+                    <option value="mech">Mech</option>
+                    <option value="civil">Civil</option>
+                    <option value="chemical">Chem</option>
+                    <option value="mme">MME</option>
                   </select>
                 </div>
               </div>
