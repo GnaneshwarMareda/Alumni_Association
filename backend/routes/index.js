@@ -9,6 +9,7 @@ const studentRouter = require("./student");
 const careersRouter = require("./careers");
 const eventRouter = require("./events");
 const successStoriesRouter = require("./successStories");
+const donationRouter = require("./donation");
 
 router.use("/register", registerRouter);
 router.use("/login", loginRouter);
@@ -24,5 +25,7 @@ router.use("/events", eventRouter);
 router.use("/success-stories", successStoriesRouter);
 
 router.use("/admin", adminRouter);
+
+router.use("/donation", donationRouter);
 
 module.exports = router;

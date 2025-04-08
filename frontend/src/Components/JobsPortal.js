@@ -69,14 +69,12 @@ const JobsPortal = () => {
     alert(`Redirecting to profile of user with job ID ${id}`);
   };
 
-  // const filteredJobs = jobs.filter(
-  //   (job) =>
-  //     job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //     job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //     job.location.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
-
-  const filteredJobs = jobs;
+  const filteredJobs = jobs.filter(
+    (job) =>
+      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      job.location.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Careers>
@@ -180,7 +178,7 @@ const JobsPortal = () => {
           <div className="mt-4 mb-4">
             <input
               type="text"
-              placeholder="Search Jobs"
+              placeholder="Search Jobs by Title, Company, or Location"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"

@@ -25,7 +25,7 @@ const CareerAdvising = () => {
             </p>
             <br />
             <a
-              href="https://hub.rgukt.ac.in/hub/"
+              href="https://www.rgukt.ac.in/alumni.html"
               className="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               Access the Alumni Advisors Hub

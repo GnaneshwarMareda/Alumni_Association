@@ -128,7 +128,10 @@ const Home = () => {
             {events && events.length > 0 ? (
               <ul className="divide-y divide-gray-300">
                 {events.map((event) => (
-                  <li key={event._id} className="p-4 hover:bg-gray-50">
+                  <li
+                    key={event._id}
+                    className="cursor-pointer p-4 hover:bg-gray-50"
+                  >
                     <a
                       href={event.link}
                       target="_blank"

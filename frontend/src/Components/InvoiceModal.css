@@ -1,0 +1,77 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+}
+
+.invoice-container {
+  color: #333;
+}
+
+.invoice-container h2 {
+  color: #2d3748;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.invoice-details {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.invoice-details h3 {
+  margin-top: 0;
+  color: #4a5568;
+  margin-bottom: 15px;
+}
+
+.invoice-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.invoice-row:last-child {
+  border-bottom: none;
+}
+
+.status-success {
+  color: #48bb78;
+  font-weight: 600;
+}
+
+.close-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #4338ca;
+}
