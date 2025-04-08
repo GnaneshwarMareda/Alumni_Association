@@ -1,10 +1,14 @@
 import { useState } from "react";
+import Cookie from "js-cookie";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./PaymentForm.css";
 
-const PaymentForm = ({ onPaymentSuccess, amount }) => {
+const PaymentForm = ({ onPaymentSuccess, amount: defaultAmount }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [amount, setAmount] = useState(defaultAmount || 1000); // default to $10.00
+  const [reason, setReason] = useState("Infrastructure Development");
+  const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
 
@@ -30,9 +34,7 @@ const PaymentForm = ({ onPaymentSuccess, amount }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
+    if (!stripe || !elements) return;
 
     setProcessing(true);
 
@@ -43,10 +45,9 @@ const PaymentForm = ({ onPaymentSuccess, amount }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            authorization: `Bearer ${Cookie.get("jwtToken")}`,
           },
-          body: JSON.stringify({
-            amount: amount,
-          }),
+          body: JSON.stringify({ amount, reason, message }),
         }
       );
 
@@ -63,8 +64,10 @@ const PaymentForm = ({ onPaymentSuccess, amount }) => {
       } else {
         setError(null);
         onPaymentSuccess({
-          amount: amount,
+          amount,
           id: result.paymentIntent.id,
+          reason,
+          message,
         });
       }
     } catch (err) {
@@ -77,15 +80,47 @@ const PaymentForm = ({ onPaymentSuccess, amount }) => {
   return (
     <div className="payment-form-container">
       <div className="payment-form-card">
-        <h2>Complete Your Payment</h2>
-        <div className="price-display">
-          <span>Total Amount:</span>
-          <span className="price">${amount / 100}.00</span>
+        <div>
+          <h2>Complete Your Donation</h2>
+          <img
+            src="https://img.freepik.com/free-vector/pensioners-financial-literacy-finance-education-savings-management-investment-awareness-consultant-explaining-finance-system-basics-elderly-people-vector-isolated-concept-metaphor-illustration_335657-2824.jpg"
+            alt="Alumni Donation"
+          />
         </div>
 
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Amount (in USD)</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(parseInt(e.target.value))}
+              placeholder="Enter amount in cents"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Support Area</label>
+            <select value={reason} onChange={(e) => setReason(e.target.value)}>
+              <option>Infrastructure Development</option>
+              <option>Scholarship Fund</option>
+              <option>Event Sponsorship</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Optional Message</label>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Write a note or message "
+              rows={3}
+            />
+          </div>
+
           <div className="form-row">
-            <label>Card Details</label>
+            <label className="font-bold">Card Details</label>
             <div className="card-element-container">
               <CardElement options={cardStyle} />
             </div>
@@ -101,7 +136,7 @@ const PaymentForm = ({ onPaymentSuccess, amount }) => {
             {processing ? (
               <span className="spinner">Processing...</span>
             ) : (
-              "Pay Now"
+              "Donate Now"
             )}
           </button>
         </form>

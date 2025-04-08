@@ -22,7 +22,7 @@ const studentHeaderContent = [
     link: "/networking-hub",
   },
   {
-    title: "Dontaion Portal",
+    title: "Donate",
     link: "/donation",
   },
   {

@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 
 const paymentSchema = new mongoose.Schema({
   date: { type: Date, required: true },
-  purpose: { type: String, required: true },
-  amount: { type: Number, required: false },
+  amount: { type: Number, required: true },
+  reason: { type: String, required: true },
+  message: { type: String, required: false },
 });
 
 const Payment = mongoose.model("payment", paymentSchema);

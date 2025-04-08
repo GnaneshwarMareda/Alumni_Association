@@ -6,8 +6,9 @@ import { useState } from "react";
 import InvoiceModal from "../Components/InvoiceModal";
 
 const stripePromise = loadStripe(
-  "pk_test_51R7Zjs04Vn5FFRhRXGtafT4TUYewlFMXzAmzqkFNwcH8zf3DbPXdsxAdQ2zxYXX1rIWEmGkG4LzvUFZWlasBaaKx00oZLz9OJP"
+  "pk_test_51RBfHlPD2Ph6rou7pAUwZ3dStzyE4oIQpoObrNz7dadjScm5AAJOU2kKEXgGAbK6flNs6WnZ14PypJc9yoZWBchr0074u95cD0"
 );
+//"pk_test_51R7Zjs04Vn5FFRhRXGtafT4TUYewlFMXzAmzqkFNwcH8zf3DbPXdsxAdQ2zxYXX1rIWEmGkG4LzvUFZWlasBaaKx00oZLz9OJP"; Swapnith's key
 
 function Donation() {
   const [showInvoiceModal, setShowInvoiceModal] = useState(false);
