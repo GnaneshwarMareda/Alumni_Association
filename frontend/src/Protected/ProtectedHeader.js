@@ -9,21 +9,22 @@ const studentHeaderContent = [
     title: "Alumni Directory",
     link: "/alumni-directory",
   },
-  {
-    title: "Events",
-    link: "/events/upcoming-events",
-  },
+
   {
     title: "Careers",
     link: "/careers/career-events",
   },
   {
-    title: "Networking Hub",
-    link: "/networking-hub",
-  },
-  {
     title: "Donate",
     link: "/donation",
+  },
+  {
+    title: "Events",
+    link: "/events/upcoming-events",
+  },
+  {
+    title: "Networking Hub",
+    link: "/networking-hub",
   },
   {
     title: "About",

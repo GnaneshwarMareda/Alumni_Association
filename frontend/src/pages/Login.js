@@ -38,7 +38,7 @@ const Login = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
       <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 space-y-6">
-        <h2 className="text-2xl font-bold text-center text-gray-700">
+        <h2 className="text-2xl font-bold text-center text-red-600">
           Login to AlumniConnect
         </h2>
 
