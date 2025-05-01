@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const generateJwtToken = (userId, role) => {
+const generateJwtToken = (userId, role, name) => {
   const payload = {
     userId,
     role,
+    name,
   };
-  console.log(payload);
   const jwtToken = jwt.sign(payload, "Gnane");
   return jwtToken;
 };

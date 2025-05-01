@@ -63,20 +63,23 @@ const postJob = async (req, res) => {
 //Update Job Reactions (like/dislike)
 const updateJob = async (req, res) => {
   try {
-    const { id, reactionType } = req.body;
-    if (reactionType === "like") {
-      const updatedJob = await Jobs.findByIdAndUpdate(id, {
-        $inc: { likes: 1 },
-      });
-    } else if (reactionType === "dislike") {
-      const updatedJob = await Jobs.findByIdAndUpdate(id, {
-        $inc: { dislikes: 1 },
-      });
+    const { id, action } = req.body;
+
+    const job = await Jobs.findById(id);
+    if (!job) return res.status(404).json({ message: "Job not found." });
+
+    if (action === "like") {
+      job.likes += 1;
+    } else if (action === "unlike" && job.likes > 0) {
+      job.likes -= 1;
     } else {
-      return res.status(400).json({ message: "Invalid reaction type." });
+      return res.status(400).json({ message: "Invalid action." });
     }
+
+    await job.save();
+    res.status(200).json({ message: "Reaction updated", job });
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 

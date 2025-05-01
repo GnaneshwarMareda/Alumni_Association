@@ -10,11 +10,13 @@ const studentSchema = new mongoose.Schema({
   yearOfStudy: { type: String, required: true },
   fieldOfStudy: { type: String, required: true },
   graduationYear: { type: String, required: true },
+  address: String,
+  interests: [String],
 
-  address: { type: String, required: false },
-  interests: { type: Array, required: false },
+  // Networking
+  connections: [{ type: String }],
+  pendingRequests: [{ type: String }],
+  sentRequests: [{ type: String }],
 });
 
-const Student = mongoose.model("student", studentSchema);
-
-module.exports = Student;
+module.exports = mongoose.model("Student", studentSchema);

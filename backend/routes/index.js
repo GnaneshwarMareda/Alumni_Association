@@ -10,11 +10,12 @@ const careersRouter = require("./careers");
 const eventRouter = require("./events");
 const successStoriesRouter = require("./successStories");
 const donationRouter = require("./donation");
+const networkHubRouter = require("./networkHub");
 
 router.use("/register", registerRouter);
 router.use("/login", loginRouter);
 
-//router.use("/admin", adminRouter);
+router.use("/admin", adminRouter);
 router.use("/alumni", alumniRouter);
 router.use("/student", studentRouter);
 
@@ -24,8 +25,8 @@ router.use("/events", eventRouter);
 
 router.use("/success-stories", successStoriesRouter);
 
-router.use("/admin", adminRouter);
-
 router.use("/donation", donationRouter);
+
+router.use("/networkhub", networkHubRouter);
 
 module.exports = router;

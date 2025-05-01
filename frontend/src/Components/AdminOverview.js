@@ -1,10 +1,6 @@
 import React from "react";
 
-const AdminOverview = ({ changeSlide }) => {
-  const handleChangeSlide = (id) => {
-    changeSlide(id);
-  };
-
+const AdminOverview = ({ changeSlide, searchQuery = "" }) => {
   const overviewData = [
     { id: 1, title: "Jobs to be Approved", count: 2, color: "bg-blue-500" },
     { id: 2, title: "Upcoming Events", count: 2, color: "bg-green-500" },
@@ -19,21 +15,44 @@ const AdminOverview = ({ changeSlide }) => {
     { id: 6, title: "Raise Fund", count: 15, color: "bg-blue-500" },
   ];
 
+  const handleChangeSlide = (id) => {
+    changeSlide(id);
+  };
+
+  const matchesSearch = (title) => {
+    if (!searchQuery) return false;
+    return title.toLowerCase().includes(searchQuery.toLowerCase());
+  };
+
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 mb-8">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Overview</h2>
-      <div className="grid grid-cols-3 gap-6">
+    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-8">
+      <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
+        Overview
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {overviewData.map((item) => (
           <div
             key={item.id}
-            className={`${item.color} text-white p-4 rounded-lg shadow-md cursor-pointer hover:opacity-90 transition-opacity`}
             onClick={() => handleChangeSlide(item.id)}
+            className={`${
+              item.color
+            } p-5 rounded-lg cursor-pointer shadow-md transition-all duration-300
+              ${
+                matchesSearch(item.title)
+                  ? "scale-105 ring-4 ring-indigo-400"
+                  : "hover:scale-105"
+              }
+            `}
           >
-            <div>
-              <h3 className="text-xl font-bold">{item.title}</h3>
-              <p className="text-lg">{item.count}</p>
+            <div className="flex flex-col justify-between h-full text-white">
+              <div>
+                <h3 className="text-xl font-bold">{item.title}</h3>
+                <p className="text-lg mt-2">{item.count}</p>
+              </div>
+              <p className="text-right mt-4 font-semibold text-sm opacity-90">
+                View {">>"}
+              </p>
             </div>
-            <p className="text-right">view {">>"}</p>
           </div>
         ))}
       </div>

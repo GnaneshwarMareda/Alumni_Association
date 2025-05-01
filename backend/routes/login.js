@@ -9,7 +9,6 @@ const generateJwtToken = require("../utils/generateJwtToken");
 router.post("/user", async (req, res) => {
   try {
     const { userId, password, role } = req.body;
-    console.log(userId, password, role);
 
     let user = null;
 
@@ -27,7 +26,8 @@ router.post("/user", async (req, res) => {
     const isValidPassword = password === user.password;
 
     if (isValidPassword) {
-      const jwtToken = generateJwtToken(userId, role);
+      const name = user.name;
+      const jwtToken = generateJwtToken(userId, role, name);
       return res.status(201).json({ message: "Login Succesfull!", jwtToken });
     }
 

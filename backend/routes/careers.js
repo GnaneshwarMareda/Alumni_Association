@@ -17,6 +17,6 @@ router.get("/jobs/admin", getUnVerifiedJobs);
 router.get("/jobs/students", verifyStudentToken, getVerifiedJobs);
 router.put("/jobs/admin", updateJobStatus);
 router.post("/jobs/postjob", postJob);
-router.patch("/jobs:id", updateJob);
+router.post("/jobs/react", updateJob);
 
 module.exports = router;

@@ -41,10 +41,10 @@ function AlumniDirectory() {
 
   const filteredAlumni = alumniData.filter((alumnus) => {
     const matchesSearch =
-      alumnus.name.toLowerCase().includes(search.toLowerCase()) ||
-      alumnus.location.toLowerCase().includes(search.toLowerCase()) ||
-      alumnus.job_title.toLowerCase().includes(search.toLowerCase()) ||
-      alumnus.company.toLowerCase().includes(search.toLowerCase());
+      (alumnus.name || "").toLowerCase().includes(search.toLowerCase()) ||
+      (alumnus.location || "").toLowerCase().includes(search.toLowerCase()) ||
+      (alumnus.jobRole || "").toLowerCase().includes(search.toLowerCase()) ||
+      (alumnus.company || "").toLowerCase().includes(search.toLowerCase());
 
     const matchesFilters =
       (!filters.graduationYear ||

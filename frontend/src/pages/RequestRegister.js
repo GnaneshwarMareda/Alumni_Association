@@ -173,8 +173,13 @@ const RequestRegister = () => {
                 <option value="" disabled>
                   Select your field
                 </option>
-                <option value="ComputerScience">Computer Science</option>
-                <option value="ECE">ECE</option>
+                <option value="cse">CSE</option>
+                <option value="ece">ECE</option>
+                <option value="eee">EEE</option>
+                <option value="mech">Mech</option>
+                <option value="civil">Civil</option>
+                <option value="chemical">Chem</option>
+                <option value="mme">MME</option>
               </select>
             </div>
           </div>
@@ -186,7 +191,7 @@ const RequestRegister = () => {
               className="mr-3 h-5 w-5 text-blue-600 focus:ring-2 focus:ring-blue-500 rounded"
               required
             />
-            <label htmlFor="captcha" className="text-gray-700">
+            <label htmlFor="captcha" className="mt-2 text-gray-700">
               I am human
             </label>
           </div>

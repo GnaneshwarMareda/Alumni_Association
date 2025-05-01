@@ -8,17 +8,18 @@ const alumniSchema = new mongoose.Schema({
   mobile: { type: String, required: true },
   graduationYear: { type: String, required: true },
   fieldOfStudy: { type: String, required: true },
+  address: String,
+  degree: String,
+  jobRole: String,
+  company: String,
+  location: String,
+  interests: [String],
+  profilePicture: String,
 
-  address: { type: String, required: false },
-  interests: { type: Array, required: false },
-  degree: { type: String, required: false },
-  interests: { type: Array, required: false },
-  jobRole: { type: String, requried: false },
-  company: { type: String, required: false },
-  location: { type: String, required: false },
-  successStories: { type: Array, required: false },
+  // Networking
+  connections: [{ type: String }],
+  pendingRequests: [{ type: String }],
+  sentRequests: [{ type: String }],
 });
 
-const Alumni = mongoose.model("alumni", alumniSchema);
-
-module.exports = Alumni;
+module.exports = mongoose.model("Alumni", alumniSchema);

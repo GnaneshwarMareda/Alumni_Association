@@ -10,7 +10,6 @@ const jobSchema = new mongoose.Schema({
   posterProfile: { type: String, default: "https://via.placeholder.com/50" },
   postedAt: { type: Date, default: Date.now() },
   likes: { type: Number, default: 0 },
-  dislikes: { type: Number, default: 0 },
   status: { type: String },
 });
 
