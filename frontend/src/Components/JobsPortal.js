@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { ThumbUpIcon, ThumbDownIcon } from "@heroicons/react/solid";
-import {
-  LocationMarkerIcon,
-  OfficeBuildingIcon,
-} from "@heroicons/react/outline";
+import { ThumbUpIcon } from "@heroicons/react/solid";
+import { LocationMarkerIcon } from "@heroicons/react/outline";
 import Careers from "../pages/Careers";
 import { getVerifiedJobs } from "../Store/Data/FetchData";
-import { updateJob } from "../Store/Data/UpdateData";
 import { postJob } from "../Store/Data/PostData";
+import URL from "../Store/Url";
 
 const JobsPortal = () => {
   const [jobs, setJobs] = useState([]);

@@ -1,0 +1,542 @@
+[
+  {
+    "_id": {
+      "$oid": "b038a380a6185bb6059e12a3"
+    },
+    "Id": "B047326",
+    "password": "FA&V_2Wz",
+    "name": "Derek Osborn",
+    "personalEmail": "velazquezmackenzie@yahoo.com",
+    "mobile": "6447258045",
+    "graduationYear": "2012",
+    "fieldOfStudy": "Civil",
+    "address": "133 Jones Knoll\nCartershire, IA 95325",
+    "degree": "B.Tech",
+    "jobRole": "Music tutor",
+    "company": "Sullivan-Patel",
+    "location": "Wadehaven",
+    "interests": [
+      "Startups",
+      "AI",
+      "UI/UX"
+    ],
+    "profilePicture": "https://placekitten.com/782/208",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5cf6d9ab5623e60fd59c4239"
+    },
+    "Id": "B295046",
+    "password": "+6gS5bp9",
+    "name": "Chelsea Bauer",
+    "personalEmail": "kristina53@hotmail.com",
+    "mobile": "7767067340",
+    "graduationYear": "2021",
+    "fieldOfStudy": "ECE",
+    "address": "78326 Megan Tunnel\nLake Jason, AK 13367",
+    "degree": "MBA",
+    "jobRole": "Private music teacher",
+    "company": "Shepard-Smith",
+    "location": "East David",
+    "interests": [
+      "IoT",
+      "Startups",
+      "AI"
+    ],
+    "profilePicture": "https://dummyimage.com/653x901",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "ff2a8b92c60f663382aaf20c"
+    },
+    "Id": "B013787",
+    "password": "w^f$m3Qg",
+    "name": "Cassandra Scott",
+    "personalEmail": "kfox@yahoo.com",
+    "mobile": "7223019529",
+    "graduationYear": "2019",
+    "fieldOfStudy": "CSE",
+    "address": "980 Garza Green Apt. 551\nPort Sandra, KS 19035",
+    "degree": "MBA",
+    "jobRole": "Horticulturist, commercial",
+    "company": "Santos, Rogers and Brown",
+    "location": "East Kristenhaven",
+    "interests": [
+      "IoT",
+      "Data Analysis",
+      "DevOps"
+    ],
+    "profilePicture": "https://dummyimage.com/986x670",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "25e77301c16a5de7106ffb25"
+    },
+    "Id": "B186791",
+    "password": "$7%c2Jan",
+    "name": "Sara Garcia",
+    "personalEmail": "karen62@ryan.com",
+    "mobile": "2304881442",
+    "graduationYear": "2020",
+    "fieldOfStudy": "CSE",
+    "address": "PSC 5211, Box 2014\nAPO AP 72078",
+    "degree": "M.Tech",
+    "jobRole": "Geographical information systems officer",
+    "company": "Frederick-Mullins",
+    "location": "West Cristian",
+    "interests": [
+      "DevOps",
+      "AI",
+      "UI/UX"
+    ],
+    "profilePicture": "https://www.lorempixel.com/482/763",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "b50c7dcdb0ec940e6ce3aa3e"
+    },
+    "Id": "B247839",
+    "password": "c)5Y_V3p",
+    "name": "Michelle Oneal",
+    "personalEmail": "ryanbrown@jordan-taylor.net",
+    "mobile": "5900514042",
+    "graduationYear": "2018",
+    "fieldOfStudy": "Mechanical",
+    "address": "Unit 6087 Box 4820\nDPO AA 98015",
+    "degree": "B.Tech",
+    "jobRole": "General practice doctor",
+    "company": "Bradley LLC",
+    "location": "East Marilyn",
+    "interests": [
+      "UI/UX",
+      "AI",
+      "Data Analysis"
+    ],
+    "profilePicture": "https://placeimg.com/594/401/any",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6c7832510dbbc3e8b3d2d29a"
+    },
+    "Id": "B081200",
+    "password": "n$4rXcu8",
+    "name": "Ray Rollins",
+    "personalEmail": "hernandezwilliam@mathis.net",
+    "mobile": "8651555099",
+    "graduationYear": "2012",
+    "fieldOfStudy": "Biotechnology",
+    "address": "23730 Sean Fall\nBowmanport, KS 69361",
+    "degree": "M.Tech",
+    "jobRole": "Claims inspector/assessor",
+    "company": "Barnett-Williams",
+    "location": "Nicholasfurt",
+    "interests": [
+      "Startups",
+      "IoT",
+      "Data Analysis"
+    ],
+    "profilePicture": "https://dummyimage.com/63x545",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "ba4da3887c6d711892d010a5"
+    },
+    "Id": "B136342",
+    "password": "H!#8nVt1",
+    "name": "Thomas Richards",
+    "personalEmail": "hgamble@hotmail.com",
+    "mobile": "1234423419",
+    "graduationYear": "2020",
+    "fieldOfStudy": "CSE",
+    "address": "07356 Frank Viaduct\nNew Heather, CA 36255",
+    "degree": "MBA",
+    "jobRole": "Chartered management accountant",
+    "company": "Holland, Wright and Johnson",
+    "location": "South Shannonshire",
+    "interests": [
+      "Data Analysis",
+      "UI/UX",
+      "AI"
+    ],
+    "profilePicture": "https://placeimg.com/935/142/any",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "7edacd0de647ba7af1e58594"
+    },
+    "Id": "B145204",
+    "password": "tF)6I&id",
+    "name": "Dana Johnson",
+    "personalEmail": "lindacruz@gmail.com",
+    "mobile": "0405213363",
+    "graduationYear": "2021",
+    "fieldOfStudy": "ECE",
+    "address": "539 Drew Ridges\nEast Davidville, VT 48118",
+    "degree": "MBA",
+    "jobRole": "Optometrist",
+    "company": "Sawyer-Barron",
+    "location": "Nelsontown",
+    "interests": [
+      "DevOps",
+      "AI",
+      "Startups"
+    ],
+    "profilePicture": "https://placeimg.com/558/649/any",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "f6be61d38356f8600439dae6"
+    },
+    "Id": "B294586",
+    "password": "F%2*xZks",
+    "name": "Amanda Campbell",
+    "personalEmail": "connor03@velazquez.org",
+    "mobile": "0421509291",
+    "graduationYear": "2022",
+    "fieldOfStudy": "Mechanical",
+    "address": "USS Moore\nFPO AE 80574",
+    "degree": "B.Tech",
+    "jobRole": "Administrator, Civil Service",
+    "company": "White, Gordon and Reynolds",
+    "location": "Rogersfort",
+    "interests": [
+      "UI/UX",
+      "AI",
+      "Startups"
+    ],
+    "profilePicture": "https://placeimg.com/810/893/any",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "d783d876f6e42ce4f84faadb"
+    },
+    "Id": "B023485",
+    "password": "&fM9F8Xl",
+    "name": "William Thomas",
+    "personalEmail": "sheltonlori@hall.info",
+    "mobile": "9630221434",
+    "graduationYear": "2012",
+    "fieldOfStudy": "ECE",
+    "address": "88098 Walton Plaza\nPort Sherrishire, MD 29863",
+    "degree": "MBA",
+    "jobRole": "Careers adviser",
+    "company": "Santiago LLC",
+    "location": "Williamshaven",
+    "interests": [
+      "AI",
+      "IoT",
+      "Startups"
+    ],
+    "profilePicture": "https://placekitten.com/637/800",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "dd43eb54bb250e575b62967e"
+    },
+    "Id": "B232711",
+    "password": "4@8Ga+la",
+    "name": "Betty Russo",
+    "personalEmail": "barbara41@hotmail.com",
+    "mobile": "1292558767",
+    "graduationYear": "2020",
+    "fieldOfStudy": "Biotechnology",
+    "address": "04878 Christopher Locks Apt. 966\nWest Crystalfort, WI 37925",
+    "degree": "MBA",
+    "jobRole": "Advertising copywriter",
+    "company": "Lowe LLC",
+    "location": "East Barbarashire",
+    "interests": [
+      "AI",
+      "IoT",
+      "Data Analysis"
+    ],
+    "profilePicture": "https://www.lorempixel.com/443/315",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "9692a1e07e0dfee4e5ae4586"
+    },
+    "Id": "B233651",
+    "password": "E%o3RObf",
+    "name": "Candice Jacobs",
+    "personalEmail": "parsonsbrian@leonard.com",
+    "mobile": "4649366350",
+    "graduationYear": "2015",
+    "fieldOfStudy": "Civil",
+    "address": "2830 Raymond River\nSouth Cliffordshire, RI 28729",
+    "degree": "B.Tech",
+    "jobRole": "Police officer",
+    "company": "Payne Group",
+    "location": "Lauraborough",
+    "interests": [
+      "DevOps",
+      "UI/UX",
+      "IoT"
+    ],
+    "profilePicture": "https://dummyimage.com/482x761",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6cb044869dde5c925a9514bd"
+    },
+    "Id": "B179911",
+    "password": ")U12XT$r",
+    "name": "Sandra Johns",
+    "personalEmail": "iblackwell@garza.com",
+    "mobile": "3739497325",
+    "graduationYear": "2021",
+    "fieldOfStudy": "Mechanical",
+    "address": "5222 Christopher Lake\nNorth Lindaton, NE 21612",
+    "degree": "B.Tech",
+    "jobRole": "Financial planner",
+    "company": "Elliott, Kaufman and Ferguson",
+    "location": "Stephanietown",
+    "interests": [
+      "IoT",
+      "Startups",
+      "Data Analysis"
+    ],
+    "profilePicture": "https://dummyimage.com/850x686",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "09ece834b79efe7e16624b54"
+    },
+    "Id": "B219990",
+    "password": "m%721DKl",
+    "name": "Michael West",
+    "personalEmail": "jacobswendy@hudson-harris.com",
+    "mobile": "0065348455",
+    "graduationYear": "2014",
+    "fieldOfStudy": "Mechanical",
+    "address": "952 Tracy Crossing Apt. 845\nNew Jimmy, VA 15455",
+    "degree": "B.Tech",
+    "jobRole": "Catering manager",
+    "company": "Benton Ltd",
+    "location": "Jessicabury",
+    "interests": [
+      "UI/UX",
+      "DevOps",
+      "IoT"
+    ],
+    "profilePicture": "https://www.lorempixel.com/404/61",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "be081683fa3f37037c9fbf8e"
+    },
+    "Id": "B263851",
+    "password": "M&23uFLj",
+    "name": "Amy Jones",
+    "personalEmail": "xramirez@gmail.com",
+    "mobile": "9145135097",
+    "graduationYear": "2009",
+    "fieldOfStudy": "CSE",
+    "address": "594 Yoder Turnpike\nLake Emilyshire, ME 75503",
+    "degree": "M.Tech",
+    "jobRole": "Rural practice surveyor",
+    "company": "Walsh-Munoz",
+    "location": "New Timothy",
+    "interests": [
+      "DevOps",
+      "AI",
+      "Startups"
+    ],
+    "profilePicture": "https://www.lorempixel.com/517/891",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "0f53f929f1ce1f9348f75b6c"
+    },
+    "Id": "B174945",
+    "password": "(2wSQ6g(",
+    "name": "Hannah Pruitt",
+    "personalEmail": "wolfeamy@blevins.com",
+    "mobile": "4943343940",
+    "graduationYear": "2015",
+    "fieldOfStudy": "Mechanical",
+    "address": "7950 Frank Oval\nSpencermouth, SD 94933",
+    "degree": "MBA",
+    "jobRole": "Marine scientist",
+    "company": "Nguyen LLC",
+    "location": "Michelleland",
+    "interests": [
+      "AI",
+      "IoT",
+      "Startups"
+    ],
+    "profilePicture": "https://www.lorempixel.com/410/128",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "b8b436cb1afc0dce74fb319b"
+    },
+    "Id": "B238377",
+    "password": "&0EEiZn2",
+    "name": "Cynthia Reed",
+    "personalEmail": "kristopher06@dixon-king.com",
+    "mobile": "5182539510",
+    "graduationYear": "2018",
+    "fieldOfStudy": "CSE",
+    "address": "06040 Miranda Parkways Suite 113\nRaymondchester, FL 83883",
+    "degree": "B.Tech",
+    "jobRole": "Futures trader",
+    "company": "Rodriguez Inc",
+    "location": "Andersonstad",
+    "interests": [
+      "UI/UX",
+      "IoT",
+      "AI"
+    ],
+    "profilePicture": "https://placekitten.com/377/212",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "494357633a2990197157561e"
+    },
+    "Id": "B073101",
+    "password": "!H52PwXy",
+    "name": "Ashley Edwards",
+    "personalEmail": "jmarshall@soto-myers.com",
+    "mobile": "7796812152",
+    "graduationYear": "2011",
+    "fieldOfStudy": "Civil",
+    "address": "893 Margaret Circle\nBranchview, MA 08034",
+    "degree": "B.Tech",
+    "jobRole": "Public relations officer",
+    "company": "Singleton and Sons",
+    "location": "North Katieburgh",
+    "interests": [
+      "DevOps",
+      "Startups",
+      "AI"
+    ],
+    "profilePicture": "https://www.lorempixel.com/852/549",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "48075ac51f9e5e6e2b554c85"
+    },
+    "Id": "B059225",
+    "password": "b*K_2Rpe",
+    "name": "Michael Morales",
+    "personalEmail": "peckkathryn@watson-walton.com",
+    "mobile": "3043209131",
+    "graduationYear": "2006",
+    "fieldOfStudy": "Biotechnology",
+    "address": "008 Keith Plaza\nSouth Sherri, ME 76576",
+    "degree": "MBA",
+    "jobRole": "Politician's assistant",
+    "company": "Spencer and Sons",
+    "location": "East Kim",
+    "interests": [
+      "Startups",
+      "UI/UX",
+      "DevOps"
+    ],
+    "profilePicture": "https://www.lorempixel.com/229/424",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "15ac2ef5365e0dd52e2893fc"
+    },
+    "Id": "B236549",
+    "password": "XuDm#9Mp",
+    "name": "Bradley Santana",
+    "personalEmail": "beckmatthew@yahoo.com",
+    "mobile": "1948880808",
+    "graduationYear": "2006",
+    "fieldOfStudy": "Biotechnology",
+    "address": "289 Fisher Union Apt. 180\nChristopherburgh, TN 92325",
+    "degree": "M.Tech",
+    "jobRole": "Engineer, structural",
+    "company": "Bright-Kelly",
+    "location": "Bellfort",
+    "interests": [
+      "UI/UX",
+      "DevOps",
+      "IoT"
+    ],
+    "profilePicture": "https://dummyimage.com/394x923",
+    "connections": [],
+    "pendingRequests": [],
+    "sentRequests": [],
+    "__v": 0
+  }
+]

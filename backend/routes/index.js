@@ -3,6 +3,7 @@ const router = express.Router();
 
 const registerRouter = require("./register");
 const loginRouter = require("./login");
+const profileRouter = require("./profile");
 const adminRouter = require("./admin");
 const alumniRouter = require("./alumni");
 const studentRouter = require("./student");
@@ -14,6 +15,7 @@ const networkHubRouter = require("./networkHub");
 
 router.use("/register", registerRouter);
 router.use("/login", loginRouter);
+router.use("/profile", profileRouter);
 
 router.use("/admin", adminRouter);
 router.use("/alumni", alumniRouter);

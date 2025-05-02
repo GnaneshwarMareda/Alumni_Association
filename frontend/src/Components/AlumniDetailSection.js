@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getAlumniSimilarMatches } from "../Store/Data/FetchData";
+import URL from "../Store/Url";
+import Cookie from "js-cookie";
 
 function AlumniDetailSection() {
   const { state } = useLocation();
@@ -9,41 +10,47 @@ function AlumniDetailSection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const company = state?.alumnus.company;
-  const fieldOfStudy = state?.alumnus.fieldOfStudy;
-
-  //console.log(graduationYear, company, fieldOfStudy);
+  const alumnus = state?.alumnus;
 
   useEffect(() => {
-    if (!company || !fieldOfStudy) {
-      setError("Missing required parameters for fetching similar alumni.");
-      setLoading(false);
-      return;
-    }
-    const fetchData = async () => {
+    const fetchSimilarAlumni = async () => {
+      if (!alumnus || !alumnus.company || !alumnus.fieldOfStudy) {
+        setError("Missing alumnus data.");
+        setLoading(false);
+        return;
+      }
+
       try {
-        const { data, message } = await getAlumniSimilarMatches({
-          company,
-          fieldOfStudy,
+        const similarProfiles = await fetch(`${URL}/alumni/similar-matches`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${Cookie.get("jwtToken")}`,
+          },
+          body: JSON.stringify({
+            company: alumnus.company,
+            fieldOfStudy: alumnus.fieldOfStudy,
+            graduationYear: alumnus.graduationYear,
+          }),
         });
 
-        console.log(message);
-        setSimilarAlumniData(data || []);
-      } catch (error) {
-        setError(error.message || "Failed to fetch data.");
+        const result = await similarProfiles.json();
+
+        if (result.success && Array.isArray(result.data)) {
+          const data = result.data.filter((item) => item._id !== alumnus._id);
+          setSimilarAlumniData(data);
+        } else {
+          setSimilarAlumniData([]); // fallback
+        }
+      } catch (err) {
+        setError(err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
-  }, [company, fieldOfStudy]);
-
-  // Debugging logs
-
-  const filteredSimilarMatches = similarAlumniData.filter(
-    (item) => item._id !== state?.alumnus._id
-  );
+    fetchSimilarAlumni();
+  }, [alumnus]);
 
   if (loading) {
     return (
@@ -57,7 +64,7 @@ function AlumniDetailSection() {
     return <p className="text-red-500 text-center mt-10">{error}</p>;
   }
 
-  if (!state?.alumnus) {
+  if (!alumnus) {
     return (
       <h1 className="text-center text-gray-500 mt-10">
         Alumnus information not available.
@@ -67,7 +74,6 @@ function AlumniDetailSection() {
 
   return (
     <div className="w-full min-h-screen bg-gray-50 flex flex-col items-center p-6">
-      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
         className="self-start bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full hover:shadow-lg mb-4"
@@ -75,53 +81,43 @@ function AlumniDetailSection() {
         Back
       </button>
 
-      {/* Profile Section */}
       <div className="w-full max-w-4xl text-center">
-        {state.profilePicture ? (
-          <img
-            src={state.alumnus.profilePicture || "/placeholder-profile.jpg"}
-            alt={state.alumnus.name}
-            className="rounded-full w-32 h-32 mx-auto border-4 border-blue-500"
-          />
-        ) : (
-          <div className="flex items-center justify-center rounded-full bg-gray-300 w-20 h-20 mx-auto text-gray-700">
-            No Profile
-          </div>
-        )}
+        <img
+          src={alumnus.profilePicture || "/placeholder-profile.jpg"}
+          alt={alumnus.name}
+          className="rounded-full w-32 h-32 mx-auto border-4 border-blue-500"
+        />
         <h1 className="font-extrabold text-3xl mt-4 text-gray-800">
-          {state.alumnus.name}
+          {alumnus.name}
         </h1>
         <p className="text-indigo-600 text-lg font-medium mt-2">
-          {state.alumnus.jobRole} at {state.alumnus.company}
+          {alumnus.jobRole} at {alumnus.company}
         </p>
         <div className="mt-6 text-gray-600 text-base space-y-2">
           <p>
-            <span className="font-semibold">Location:</span>{" "}
-            {state.alumnus.location}
+            <span className="font-semibold">Location:</span> {alumnus.location}
           </p>
           <p>
             <span className="font-semibold">Graduation Year:</span>{" "}
-            {state.alumnus.graduationYear}
+            {alumnus.graduationYear}
           </p>
           <p>
-            <span className="font-semibold">Degree:</span>{" "}
-            {state.alumnus.degree}
+            <span className="font-semibold">Degree:</span> {alumnus.degree}
           </p>
           <p>
             <span className="font-semibold">Field of Study:</span>{" "}
-            {state.alumnus.fieldOfStudy}
+            {alumnus.fieldOfStudy}
           </p>
         </div>
         <hr className="my-4 border-gray-300" />
       </div>
 
-      {/* Similar Alumni Section */}
       <div className="mt-8 w-full">
         <h2 className="text-xl font-semibold mb-4 text-center">
           Similar Alumni
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredSimilarMatches.map((alumni) => (
+          {similarAlumniData.map((alumni) => (
             <div
               key={alumni._id}
               className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow"

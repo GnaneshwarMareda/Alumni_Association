@@ -5,6 +5,7 @@ import Footer from "./Layouts/Footer";
 
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ProfilePage from "./pages/ProfilePage";
 import Home from "./pages/Home";
 
 import AdminControlPanel from "./pages/AdminControlPanel";
@@ -59,6 +60,16 @@ function App() {
           />
           <Route path="/register" element={<Register />} />
 
+          {/* Profile Page */}
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute
+                component={ProfilePage}
+                requiredRoles={["student", "alumni"]}
+              />
+            }
+          />
           <Route
             path="/donation"
             element={

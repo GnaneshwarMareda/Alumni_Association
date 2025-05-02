@@ -22,18 +22,18 @@ export const getAlumniData = async () => {
   }
 };
 
-export const getAlumniSimilarMatches = async ({ graduationYear, company }) => {
-  try {
-    const url = `${URL}/alumni/similar-matches?graduationYear=${graduationYear}&company=${company}`;
-    const response = await fetch(url, options);
-    if (response.ok) {
-      const { data, message } = await response.json();
-      return { data, message };
-    }
-  } catch (error) {
-    return { message: error.message };
-  }
-};
+// export const getAlumniSimilarMatches = async ({ graduationYear, company }) => {
+//   try {
+//     const url = `${URL}/alumni/similar-matches?graduationYear=${graduationYear}&company=${company}`;
+//     const response = await fetch(url, options);
+//     if (response.ok) {
+//       const { data, message } = await response.json();
+//       return { data, message };
+//     }
+//   } catch (error) {
+//     return { message: error.message };
+//   }
+// };
 
 export const getVerifiedJobs = async () => {
   const url = `${URL}/careers/jobs/students`;

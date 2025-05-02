@@ -17,7 +17,7 @@ const {
 router.get("/directory", verifyAlumniAdminStudent, getAlumniData);
 router.get("/profile/:id", verifyAlumniToken, getAlumniProfile);
 router.put("/profile/:id", verifyAlumniToken, updateAlumniProfile);
-router.get(
+router.post(
   "/similar-matches",
   verifyAlumniAdminStudent,
   getAlumniSimilarMatches

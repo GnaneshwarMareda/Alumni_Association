@@ -1,4 +1,5 @@
 const Alumni = require("../models/alumni");
+const axios = require("axios");
 
 const getAlumniData = async (req, res) => {
   try {
@@ -18,24 +19,32 @@ const getAlumniData = async (req, res) => {
 };
 
 const getAlumniSimilarMatches = async (req, res) => {
+  const { graduationYear, company, fieldOfStudy } = req.body;
+
   try {
-    const { fieldOfStudy, graduationYear, company } = req.query;
+    // Send input to ML service
+    const response = await axios.post("http://localhost:8001/predict", {
+      graduationYear,
+      company,
+      fieldOfStudy,
+    });
 
-    console.log(req.body);
-    const filter = [];
-    if (fieldOfStudy) filter.push({ fieldOfStudy });
-    if (graduationYear) filter.push({ graduationYear });
-    if (company) filter.push({ company });
+    const ids = response.data.similar_alumni_ids;
+    //console.log("ML response:", ids);
 
-    const query = filter.length > 0 ? { $or: filter } : {};
+    if (!ids || !Array.isArray(ids)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid ML response" });
+    }
 
-    const data = await Alumni.find(query).limit(10);
+    // Fetch matching alumni profiles
+    const similarAlumni = await Alumni.find({ _id: { $in: ids } });
 
-    return res
-      .status(200)
-      .json({ message: "Data retrieved successfully", data });
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
+    res.json({ success: true, data: similarAlumni });
+  } catch (err) {
+    console.error("Error fetching similar alumni:", err.message);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 
